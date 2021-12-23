@@ -24,11 +24,13 @@ To decide whether problem can be solved by applying Dynamic programming we check
 - **Optimal Substructure**: If a problem can be solved by using the solutions of the sub problems.
 
 ### Dynamic Programming Approaches:
+Giả sử cần giải bài toán ở vị trí thứ n: f(n)
 - **Top-Down** (Memoization: ghi nhớ):
-	+ Chia bài toán lớn thành nhiều subproblem.
-	+ Nếu subproblem đã được giải quyết (đã tồn tại trong lookup table), chỉ cần sử dụng lại câu trả lời
-	+ Nếu không, giải subproblem và lưu trữ kết quả trong lookup table
-- **Bottom-Up** (Tabulation: lập bảng): Bắt đầu tính toán kết quả cho subproblem. Sử dụng kết quả subproblem giải quyết một subproblem khác và cuối cùng giải quyết toàn bộ vấn đề
+	+ Tính toán từ trên xuống, tức là muốn tính f(n), ta sẽ lần lượt tính f(n-1) (thường là gọi đệ quy). Để tính f(n-1), ta lại tính f(n-2) (gọi đệ quy tiếp)... Cứ như vậy cho tới khi bài toán quay về f(0)
+	+ Cách làm: chia bài toán lớn thành nhiều subproblem. Nếu subproblem đã được giải quyết (đã tồn tại trong lookup table), chỉ cần sử dụng lại câu trả lời. Nếu không, giải subproblem và lưu trữ kết quả trong lookup table
+- **Bottom-Up** (Tabulation: lập bảng):
+	+ Tính toán từ dưới lên, tức là muốn tính f(n), ta sẽ lần lượt tính f(0) -> f(1) -> ... -> f(n)
+	+ Cách làm: bắt đầu tính toán từ subproblem base. Sử dụng kết quả subproblem giải quyết một subproblem khác và cuối cùng giải quyết toàn bộ bài toán
 
 Fibonacci problem using Top-Down: starts breaking the problem. Like:
 - If we want to compute Fibonacci(4), the top-down approach will do the following
