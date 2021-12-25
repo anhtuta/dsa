@@ -1,4 +1,4 @@
-package practice.hackerrank.gots;
+package practice.hackerrank.stack.gots;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -138,7 +138,7 @@ public class GameOfTwoStacks {
 
     public static void main(String[] args) throws IOException {
         // change this according to your local machine
-        String currFolder = System.getProperty("user.dir") + "/src/practice/hackerrank/gots/";
+        String currFolder = System.getProperty("user.dir") + "/src/practice/hackerrank/stack/gots/";
         BufferedReader bufferedReader =
                 new BufferedReader(new FileReader(currFolder + "input.txt"));
         BufferedWriter bufferedWriter =
