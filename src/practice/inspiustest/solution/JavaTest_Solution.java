@@ -57,44 +57,41 @@ class NodeLinker {
         while (currNode != null) {
             List<Node> currChildren = currNode.children;
 
-            // 7. Nếu node hiện tại ko có con, chuyển sang node tiếp theo
-            // để connect các con của chúng
-            if (currChildren == null) {
-                currNode = currNode.right;
-                continue;
+            // 1. Nếu node hiện tại có con, connect các con đó lại.
+            // Nếu ko, chuyển sang node tiếp theo (bước 4)
+            if (currChildren != null) {
+                // 6. Nếu như chưa có prevChild, tức là currNode là node đầu tiên trong level đang
+                // duyệt, khởi tạo firstChild tại đây
+                if (prevChild == null) {
+                    firstChild = currChildren.get(0);
+                } else {
+                    // 7. currNode ko phải là node đầu tiên trong level đang duyệt, cần
+                    // connect node con cuối cùng của node trước đó (prevChild)
+                    // với con đầu tiên của nó
+                    prevChild.right = currChildren.get(0);
+                }
+
+                // 2. Connect từng thằng con của node hiện tại với nhau
+                for (int i = 0; i < currChildren.size() - 1; i++) {
+                    currChildren.get(i).right = currChildren.get(i + 1);
+                }
+
+                // 3. Dùng prevChild để connect thằng con cuối cùng của node hiện tại
+                // với thằng con đầu tiên của node tiếp theo
+                prevChild = currChildren.get(currChildren.size() - 1);
             }
 
-            // 5. Nếu như chưa có prevChild, tức là currNode là node đầu tiên trong level đang
-            // duyệt, khởi tạo firstChild tại đây
-            if (prevChild == null) {
-                firstChild = currChildren.get(0);
-            } else {
-                // 6. currNode ko phải là node đầu tiên trong level đang duyệt, cần
-                // connect node con cuối cùng của node trước đó (prevChild)
-                // với con đầu tiên của nó
-                prevChild.right = currChildren.get(0);
-            }
-
-            // 1. Connect từng thằng con của node hiện tại với nhau
-            for (int i = 0; i < currChildren.size() - 1; i++) {
-                currChildren.get(i).right = currChildren.get(i + 1);
-            }
-
-            // 2. Dùng prevChild để connect thằng con cuối cùng của node hiện tại
-            // với thằng con đầu tiên của node tiếp theo
-            prevChild = currChildren.get(currChildren.size() - 1);
-
-            // 3. Chuyển đến node tiếp theo trong level hiện tại để bắt đầu connect các
+            // 4. Chuyển đến node tiếp theo trong level hiện tại để bắt đầu connect các
             // node con của nó
             currNode = currNode.right;
 
-            // 4. Nếu như node tiếp theo ko còn nữa, chuyển sang duyệt level thấp hơn
+            // 5. Nếu như node tiếp theo ko còn nữa, chuyển sang duyệt level thấp hơn
             if (currNode == null) {
                 currNode = firstChild;
                 prevChild = null; // nhớ phải reset prevChild, vì xuống level dưới mà
+                firstChild = null;
             }
         }
-
     }
 
     ////////////////////////////
@@ -127,6 +124,8 @@ public class JavaTest_Solution {
         Node N = new Node("N");
         Node O = new Node("O");
         Node P = new Node("P");
+        Node Q = new Node("Q");
+        Node R = new Node("R");
 
         A.children = new ArrayList<>();
         A.children.add(B);
@@ -159,6 +158,12 @@ public class JavaTest_Solution {
         L.children = new ArrayList<>();
         L.children.add(P);
 
+        N.children = new ArrayList<>();
+        N.children.add(Q);
+
+        P.children = new ArrayList<>();
+        P.children.add(R);
+
         NodeLinker nodeLinker = new NodeLinker();
         nodeLinker.linkNodes(A);
 
@@ -166,7 +171,8 @@ public class JavaTest_Solution {
                 E.right == F && F.right == G && G.right == null && //
                 H.right == I && I.right == J && J.right == K && K.right == L && //
                 L.right == M && M.right == null && //
-                N.right == O && O.right == P && P.right == null)
+                N.right == O && O.right == P && P.right == null && //
+                Q.right == R && R.right == null)
             System.out.println("Test Successful!");
         else
             System.out.println("Test failed!");
