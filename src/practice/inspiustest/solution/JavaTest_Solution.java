@@ -5,7 +5,17 @@ import java.util.List;
 
 class Node {
     public List<Node> children;
+    public String name;
     public Node right = null;
+
+    public Node(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
 
 
@@ -32,10 +42,59 @@ class NodeLinker {
         ////////////////////////////
         if (rootNode.children == null)
             return;
+
+        // Đầu tiên connect các node con của node root trước, sau đó duyệt sẽ đơn giản hơn
         for (int i = 0; i < rootNode.children.size() - 1; i++) {
             rootNode.children.get(i).right = rootNode.children.get(i + 1);
-            linkNodes(rootNode.children.get(i));
         }
+
+        // Khởi tạo các biến cần dùng trong quá trình duyệt
+        Node firstChild = rootNode.children.get(0);
+        Node currNode = rootNode.children.get(0);
+        Node prevChild = null;
+
+        // Duyệt từng level, tại mỗi level sẽ connect các node con lại với nhau
+        while (currNode != null) {
+            List<Node> currChildren = currNode.children;
+
+            // 7. Nếu node hiện tại ko có con, chuyển sang node tiếp theo
+            // để connect các con của chúng
+            if (currChildren == null) {
+                currNode = currNode.right;
+                continue;
+            }
+
+            // 5. Nếu như chưa có prevChild, tức là currNode là node đầu tiên trong level đang
+            // duyệt, khởi tạo firstChild tại đây
+            if (prevChild == null) {
+                firstChild = currChildren.get(0);
+            } else {
+                // 6. currNode ko phải là node đầu tiên trong level đang duyệt, cần
+                // connect node con cuối cùng của node trước đó (prevChild)
+                // với con đầu tiên của nó
+                prevChild.right = currChildren.get(0);
+            }
+
+            // 1. Connect từng thằng con của node hiện tại với nhau
+            for (int i = 0; i < currChildren.size() - 1; i++) {
+                currChildren.get(i).right = currChildren.get(i + 1);
+            }
+
+            // 2. Dùng prevChild để connect thằng con cuối cùng của node hiện tại
+            // với thằng con đầu tiên của node tiếp theo
+            prevChild = currChildren.get(currChildren.size() - 1);
+
+            // 3. Chuyển đến node tiếp theo trong level hiện tại để bắt đầu connect các
+            // node con của nó
+            currNode = currNode.right;
+
+            // 4. Nếu như node tiếp theo ko còn nữa, chuyển sang duyệt level thấp hơn
+            if (currNode == null) {
+                currNode = firstChild;
+                prevChild = null; // nhớ phải reset prevChild, vì xuống level dưới mà
+            }
+        }
+
     }
 
     ////////////////////////////
@@ -52,13 +111,22 @@ public class JavaTest_Solution {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Node A = new Node();
-        Node B = new Node();
-        Node C = new Node();
-        Node D = new Node();
-        Node E = new Node();
-        Node F = new Node();
-        Node G = new Node();
+        Node A = new Node("A");
+        Node B = new Node("B");
+        Node C = new Node("C");
+        Node D = new Node("D");
+        Node E = new Node("E");
+        Node F = new Node("F");
+        Node G = new Node("G");
+        Node H = new Node("H");
+        Node I = new Node("I");
+        Node J = new Node("J");
+        Node K = new Node("K");
+        Node L = new Node("L");
+        Node M = new Node("M");
+        Node N = new Node("N");
+        Node O = new Node("O");
+        Node P = new Node("P");
 
         A.children = new ArrayList<>();
         A.children.add(B);
@@ -72,11 +140,33 @@ public class JavaTest_Solution {
         D.children = new ArrayList<>();
         D.children.add(G);
 
+        E.children = new ArrayList<>();
+        E.children.add(H);
+        E.children.add(I);
+        E.children.add(J);
+
+        F.children = new ArrayList<>();
+        F.children.add(K);
+
+        G.children = new ArrayList<>();
+        G.children.add(L);
+        G.children.add(M);
+
+        J.children = new ArrayList<>();
+        J.children.add(N);
+        J.children.add(O);
+
+        L.children = new ArrayList<>();
+        L.children.add(P);
+
         NodeLinker nodeLinker = new NodeLinker();
         nodeLinker.linkNodes(A);
 
-        if (A.right == null && B.right == C && C.right == D && D.right == null && E.right == F
-                && F.right == G && G.right == null)
+        if (A.right == null && B.right == C && C.right == D && D.right == null && //
+                E.right == F && F.right == G && G.right == null && //
+                H.right == I && I.right == J && J.right == K && K.right == L && //
+                L.right == M && M.right == null && //
+                N.right == O && O.right == P && P.right == null)
             System.out.println("Test Successful!");
         else
             System.out.println("Test failed!");
