@@ -40,17 +40,10 @@ class NodeLinker {
         // tree in the given
         // problem.
         ////////////////////////////
-        if (rootNode.children == null)
-            return;
-
-        // Đầu tiên connect các node con của node root trước, sau đó duyệt sẽ đơn giản hơn
-        for (int i = 0; i < rootNode.children.size() - 1; i++) {
-            rootNode.children.get(i).right = rootNode.children.get(i + 1);
-        }
 
         // Khởi tạo các biến cần dùng trong quá trình duyệt
-        Node firstChild = rootNode.children.get(0);
-        Node currNode = rootNode.children.get(0);
+        Node currNode = rootNode;
+        Node firstChild = null;
         Node prevChild = null;
 
         // Duyệt từng level, tại mỗi level sẽ connect các node con lại với nhau
