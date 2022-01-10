@@ -41,47 +41,45 @@ class NodeLinker {
         // problem.
         ////////////////////////////
 
-        // Khởi tạo các biến cần dùng trong quá trình duyệt
+        // Initialize
         Node currNode = rootNode;
         Node firstChild = null;
         Node prevChild = null;
 
-        // Duyệt từng level, tại mỗi level sẽ connect các node con lại với nhau
+        // Traverse each level and connect their children
         while (currNode != null) {
             List<Node> currChildren = currNode.children;
 
-            // 1. Nếu node hiện tại có con, connect các con đó lại.
-            // Nếu ko, chuyển sang node tiếp theo (bước 4)
+            // 1. If current node has children, then connect all these children.
+            // If not, then move to step 4
             if (currChildren != null) {
-                // 6. Nếu như chưa có prevChild, tức là currNode là node đầu tiên trong level đang
-                // duyệt, khởi tạo firstChild tại đây
+                // 6. If prevChild is null, then current node is the first node at current level,
+                // we should initialize firstChild here
                 if (prevChild == null) {
                     firstChild = currChildren.get(0);
                 } else {
-                    // 7. currNode ko phải là node đầu tiên trong level đang duyệt, cần
-                    // connect node con cuối cùng của node trước đó (prevChild)
-                    // với con đầu tiên của nó
+                    // 7. Else, current Node is not the first node at current level, we need to
+                    // connect last child of previous node to first child of this current node
                     prevChild.right = currChildren.get(0);
                 }
 
-                // 2. Connect từng thằng con của node hiện tại với nhau
+                // 2. Connect all children of current node
                 for (int i = 0; i < currChildren.size() - 1; i++) {
                     currChildren.get(i).right = currChildren.get(i + 1);
                 }
 
-                // 3. Dùng prevChild để connect thằng con cuối cùng của node hiện tại
-                // với thằng con đầu tiên của node tiếp theo
+                // 3. Use prevChild to connect the last child of current node to the first child of
+                // next node at current level
                 prevChild = currChildren.get(currChildren.size() - 1);
             }
 
-            // 4. Chuyển đến node tiếp theo trong level hiện tại để bắt đầu connect các
-            // node con của nó
+            // 4. Move to next node at current level and start connecting its children
             currNode = currNode.right;
 
-            // 5. Nếu như node tiếp theo ko còn nữa, chuyển sang duyệt level thấp hơn
+            // 5. If there is no node left at this level, move down to next level
             if (currNode == null) {
                 currNode = firstChild;
-                prevChild = null; // nhớ phải reset prevChild, vì xuống level dưới mà
+                prevChild = null; // we need to reset prevChild each time we move down to next level
                 firstChild = null;
             }
         }
