@@ -75,16 +75,16 @@ public class PickingNumbers {
         }
 
         int max = cntArr[0];
-        int maxIndex = 0;
         for (int i = 1; i < cntArr.length; i++) {
             if (cntArr[i] >= max) {
                 max = cntArr[i];
-                maxIndex = i;
 
-                if (maxIndex == 0)
-                    res = cntArr[maxIndex] + cntArr[maxIndex + 1];
+                if (i == 0)
+                    res = cntArr[i] + cntArr[i + 1];
                 else
-                    res = cntArr[maxIndex] + max(cntArr[maxIndex - 1], cntArr[maxIndex + 1]);
+                    // Chưa xét trường hợp i = cntArr.length - 1 à?
+                    // Nếu muốn bỏ qua case này thì chọn cntArr = new int[102] là được
+                    res = cntArr[i] + max(cntArr[i - 1], cntArr[i + 1]);
 
                 // Trường họp trong mảng counting có 2 số cùng xuất hiện nhiều nhất,
                 // (giống ex3, số 2 và 4) ta phải so sánh xem trường hợp nào tốt hơn
@@ -108,5 +108,14 @@ public class PickingNumbers {
         List<Integer> arr3 = Arrays.asList(1, 2, 2, 3, 1, 2, 4, 5, 4, 4, 5, 5, 6);
         result = PickingNumbers.pickingNumbers(arr3);
         System.out.println(result);
+
+        // test case 3 trên Hackerrank (sau khi unlock bằng 5 hackos :v)
+        List<Integer> arr4 = Arrays.asList(4, 2, 3, 4, 4, 9, 98, 98, 3, 3, 3, 4, 2, 98, 1, 98, 98,
+                1, 1, 4, 98, 2, 98, 3, 9, 9, 3, 1, 4, 1, 98, 9, 9, 2, 9, 4, 2, 2, 9, 98, 4, 98, 1,
+                3, 4, 9, 1, 98, 98, 4, 2, 3, 98, 98, 1, 99, 9, 98, 98, 3, 98, 98, 4, 98, 2, 98, 4,
+                2, 1, 1, 9, 2, 4);
+        result = PickingNumbers.pickingNumbers(arr4);
+        System.out.println(result); // expected: 22
+
     }
 }
