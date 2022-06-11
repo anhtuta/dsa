@@ -70,8 +70,8 @@ public class LargestRectangle2 {
     }
 
     public static void main(String[] args) {
-        // List<Integer> h = Arrays.asList(1, 3, 5, 9, 11);
-        // System.out.println(LargestRectangle2.largestRectangle(h));
+        List<Integer> h1 = Arrays.asList(1, 3, 5, 9, 11);
+        System.out.println(LargestRectangle2.largestRectangle(h1));
         List<Integer> h2 = Arrays.asList(11, 11, 10, 10, 10);
         System.out.println(LargestRectangle2.largestRectangle(h2));
     }

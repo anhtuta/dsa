@@ -10,6 +10,9 @@ import java.util.List;
  * Hiểu đơn giản như này: có n tòa nhà liền kề nhau với width = nhau và = 1. Chiều cao các
  * tòa nhà lưu trong mảng h[i], với 1 <= h[i] <= n. Tính diện tích hình chữ nhật lớn nhất tạo bởi
  * các tòa nhà liên tiếp nhau.
+ * Diện tích HCN tạo bởi k tòa nhà kề nhau = k * minHk;
+ * Trong đó minHk = chiều cao nhỏ nhất trong k tòa nhà đó = min(h[i] -> h[i + k-1])
+ * 
  * Một số trang web khác có cách diễn đạt khác bằng cách thay tòa nhà = cột bar trong 1 biểu đồ
  * (histogram) (xem hình vẽ)
  * 
