@@ -28,6 +28,14 @@ import java.util.List;
  * Từ mảng này ta thấy số 2 xuất hiện nhiều nhất, nên chỉ cần lấy 1 số cạnh nó là được, và phải chọn
  * số xuất hiện nhiều hơn. Do 2 > 1 nên số 1 xuất hiện nhiều hơn số 3
  * 
+ * => Tư duy này SAI nhé, xét mảng counting sau:
+ * [0 6 7 1 0 9 2 1]
+ * Nếu theo tư duy trên, số 5 xuất hiện nhiều nhất (9 lần), chọn số cạnh nó là 6 (2 lần), ta thu
+ * được dãy con gồm 11 phần tử, trong khi đáp án đúng phải là 6+7 = 13 phần tử
+ * (dãy con gồm các số 1 và 2)
+ * 
+ * => Solution đúng là phải tìm tổng lớn nhất của 2 số kề nhau trong mảng counting
+ * 
  * Ex3
  * Input: [1 2 2 3 1 2 4 5 4 4 5 5 6]
  * Output: 6
@@ -67,6 +75,10 @@ public class PickingNumbers {
 
     }
 
+    /**
+     * Cách này thiếu case (xem comment tư duy sai ở đầu class), nhưng ko hiểu sao vẫn pass được
+     * hackerrank
+     */
     public static int pickingNumbers(List<Integer> a) {
         int[] cntArr = new int[100 + 1];    // because a[i] < 100
         int maxRes = 0, res = 0;
@@ -96,6 +108,32 @@ public class PickingNumbers {
         return maxRes;
     }
 
+    /**
+     * Đây mới là cách đúng và đơn giản nhất: đầu tiên counting sort,
+     * sau đó tìm tổng lớn nhất của 2 phần tử kề nhau trong mảng counting
+     * 
+     * Chọn cntArr = 102 vì giá trị lớn nhất là số 100,
+     * và tại index 100 cần dùng số cntArr[101]
+     */
+    public static int pickingNumbers_correct(List<Integer> a) {
+        int[] cntArr = new int[102];
+        int max = 0, sum = 0;
+
+        // counting sort
+        a.stream().forEach(item -> {
+            cntArr[item]++;
+        });
+
+        // find max sum of two adjacent numbers
+        for (int i = 0; i < cntArr.length - 1; i++) {
+            sum = cntArr[i] + cntArr[i + 1];
+            if (sum > max)
+                max = sum;
+        }
+
+        return max;
+    }
+
     public static void main(String[] args) {
         List<Integer> arr1 = Arrays.asList(4, 6, 5, 3, 3, 1);
         int result = PickingNumbers.pickingNumbers(arr1);
@@ -115,6 +153,8 @@ public class PickingNumbers {
                 3, 4, 9, 1, 98, 98, 4, 2, 3, 98, 98, 1, 99, 9, 98, 98, 3, 98, 98, 4, 98, 2, 98, 4,
                 2, 1, 1, 9, 2, 4);
         result = PickingNumbers.pickingNumbers(arr4);
+        System.out.println(result); // expected: 22
+        result = PickingNumbers.pickingNumbers_correct(arr4);
         System.out.println(result); // expected: 22
 
     }
