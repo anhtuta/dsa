@@ -64,6 +64,9 @@ public class Heaviest_Subsequence {
      * 
      * Note: tìm được dãy con đó rồi, phải return trọng lượng của nó chứ ko phải các phần tử nhé!
      * 
+     * Điểm khó nhất của cách này là tìm ra vị trí bắt đầu của dãy con để tính và so sánh trọng
+     * lượng
+     * 
      * Độ phức tạp = O(nlogn)
      */
     public static int maxSub_Recursion(int[] a, int s, int e) {
