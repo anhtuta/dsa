@@ -1,4 +1,4 @@
-package practice.codility.lessons;
+package practice.codility.lessons.l3;
 
 /**
  * A small frog wants to get to the other side of the road. The frog is currently located at
