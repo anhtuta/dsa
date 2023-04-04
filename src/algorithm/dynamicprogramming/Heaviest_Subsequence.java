@@ -159,14 +159,21 @@ public class Heaviest_Subsequence {
      * - Dãy con lớn nhất của s[i] và phải chứa a[i]
      * 
      * Giải thích cách khác đơn giản hơn: duyệt từ đầu đến cuối, tại mỗi vòng lặp i, cần tìm giá trị
-     * mEH (mEH đại diện cho khối lượng lớn nhất của dãy con kết thúc tại phần tử a[i]).
+     * mEH (mEH đại diện cho khối lượng lớn nhất của dãy con KẾT THÚC tại phần tử a[i]).
+     * 
      * Chú ý rằng tại đầu vòng lặp, mEH là khối lượng lớn nhất của vòng trước đó, tức là dãy con kết
      * thúc tại phần tử a[i-1], và tại vòng lặp hiện tại:
      * - Nếu như mEH trước đó > 0, thì mEH hiện tại = mEH trước đó + a[i]
      * - Nếu như mEH trước đó < 0, thì mEH hiện tại = a[i]
+     * 
      * Note: mEH bắt buộc phải chứa a[i] nhé, do đó ý tưởng lại được phát biểu đơn giản hơn là:
      * Tìm tất cả các mEH của các dãy con kết thúc tại a[k], và return biến mEH lớn nhất
      * (k = 0 -> n-1)
+     * 
+     * Nhận xét: cách này cũng giống với cách naive đầu tiên, chỉ khác ở chỗ thay vì duyệt tất cả các
+     * dãy bắt đầu tại a[i], thì cách này duyệt tất cả các dãy KẾT THÚC tại a[i]
+     * Và bởi vì trọng lượng dãy kết thúc tại a[i] có thể tính được từ trọng lượng dãy kết thúc tại
+     * a[i-1], do đó cách này dùng được kq trước đó mà ko cần lặp for lồng nhau
      */
     public static int maxSub_DP(int[] a) {
         int smax = a[0]; // Trọng lượng của dãy con lớn nhất
