@@ -20,3 +20,12 @@ Note: các bài nếu ko ghi level thì default là Easy
   bị timeout, cần tìm công thức để tính toán đơn giản hơn
 
 - Mấy bài toán đếm, mà nói nếu như số lượng đếm được vượt quá 10 triệu phần tử thì return -1: thì chắc chắn phải DUYỆT từng phần tử để đếm, chứ KHÔNG có công thức toán học nào như case trên, bởi vì đếm từng thằng mới biết khi nào đếm tới 10 kq thì mới return được -1 chứ
+
+## 2. 1 số test case đặc biệt
+
+- Mảng gồm toàn các số giống nhau
+- Mảng gồm toàn số 0
+- Mảng gồm toàn số Integer.MAX_VALUE
+- Mảng rỗng
+- Mảng gồm toàn số âm
+- Input = max giới hạn cho trong đề bài
