@@ -26,8 +26,10 @@ Cách solution trong file pdf có vẻ như được viết = python
 ## 2. 1 số test case đặc biệt
 
 - Mảng gồm toàn các số giống nhau
+- Mảng gồm toàn các số khác nhau
 - Mảng gồm toàn số 0
 - Mảng gồm toàn số Integer.MAX_VALUE
-- Mảng rỗng
 - Mảng gồm toàn số âm
+- Mảng rỗng
+- Mảng gồm duy nhất 1 phần tử
 - Input = max giới hạn cho trong đề bài
