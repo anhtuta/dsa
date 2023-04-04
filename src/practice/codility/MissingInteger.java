@@ -3,6 +3,7 @@ package practice.codility;
 import java.util.Arrays;
 
 /**
+ * https://app.codility.com/demo/take-sample-test/
  * https://app.codility.com/c/run/demoC74CD4-749/
  * 
  * This is a demo task.
