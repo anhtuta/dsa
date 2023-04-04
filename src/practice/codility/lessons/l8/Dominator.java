@@ -35,7 +35,7 @@ import java.util.Stack;
  * - each element of array A is an integer within the range [−2,147,483,648..2,147,483,647].
  * 
  * =====
- * Bài này khó vãi, mãi ko pass 100%
+ * Bài này khó vãi, mãi mới pass 100%
  */
 public class Dominator {
     /**

@@ -14,6 +14,8 @@ package algorithm.dynamicprogramming;
  * Bản pdf của cuốn sách, xem tại đây:
  * https://drive.google.com/file/d/1AIksqPQyMqCH0FotrqwbvF8w4xEwFOZz/view
  * 
+ * Bài này giống bài MaxSliceSum trên Codility
+ * 
  * @author AnhTu
  */
 public class Heaviest_Subsequence {
@@ -174,6 +176,8 @@ public class Heaviest_Subsequence {
      * dãy bắt đầu tại a[i], thì cách này duyệt tất cả các dãy KẾT THÚC tại a[i]
      * Và bởi vì trọng lượng dãy kết thúc tại a[i] có thể tính được từ trọng lượng dãy kết thúc tại
      * a[i-1], do đó cách này dùng được kq trước đó mà ko cần lặp for lồng nhau
+     * => SAI, việc duyệt tất cả các dãy BẮT ĐẦU tại a[i] cũng có thể được thực hiện tương tự nếu duyệt
+     * từ CUỐI DÃY
      */
     public static int maxSub_DP(int[] a) {
         int smax = a[0]; // Trọng lượng của dãy con lớn nhất
@@ -182,11 +186,13 @@ public class Heaviest_Subsequence {
         int i;
 
         for (i = 1; i < a.length; i++) {
+            // Sao ko dùng max cho ngắn gọn: mEH = Math.max(mEH + a[i], a[i]);
             if (mEH + a[i] > a[i])  // if (mEH > 0)
                 mEH = mEH + a[i];
             else
                 mEH = a[i];
 
+            // Tương tự, có thể dùng Math.max trông ngắn gọn hơn, nhưng muốn tìm cả index nữa nên thôi
             if (mEH > smax) {
                 smax = mEH;
                 imax = i;

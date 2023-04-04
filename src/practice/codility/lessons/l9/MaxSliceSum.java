@@ -50,7 +50,23 @@ public class MaxSliceSum {
         return smax;
     }
 
+    /**
+     * Cách này giống cách trên, nhưng trình bày ngắn hơn
+     */
+    public int solution_concise(int[] a) {
+        int smax = a[0];
+        int mEH = a[0];
+
+        for (int i = 1; i < a.length; i++) {
+            mEH = Math.max(mEH + a[i], a[i]); // mEH = tổng lớn nhất của slice KẾT THÚC tại a[i]
+            smax = Math.max(smax, mEH);
+        }
+
+        return smax;
+    }
+
     public static void main(String[] args) {
         System.out.println(new MaxSliceSum().solution(new int[] {3, 2, -6, 4, 0}));
+        System.out.println(new MaxSliceSum().solution_concise(new int[] {3, 2, -6, 4, 0}));
     }
 }
