@@ -237,6 +237,8 @@ public class Heaviest_Subsequence {
         System.out.println(maxSub_DP(a));
         System.out.println("Thời gian thực hiện khi dùng maxSub_BottomUp là: "
                 + (System.currentTimeMillis() - curr) + "(ms)");
+
+        System.out.println("Max slice = " + maxSub_DP(new int[] {-21, -3, -10, -5, -9})); // -3
     }
 }
 /*
