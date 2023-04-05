@@ -269,7 +269,7 @@ public class FibFrog {
      * Improve: tại mỗi vị trí tiếp theo, check nếu như totalStep > minStep thì KHÔNG nhảy nữa!
      * Improve2: for loop mảng Fib từ cuối dãy, để chọn các step lớn hơn trước
      * 
-     * Timeout: score = 58%
+     * Timeout: score = 66%
      */
     private void recursion_improve2(int[] a, int[] F, int n, int currPos, int totalStep) {
         // System.out.printf("currPos = %d, totalStep = %d%n", currPos, totalStep);
@@ -287,8 +287,6 @@ public class FibFrog {
         // Nhét các vị trí tiếp theo có thể nhảy tới vào queue
         for (int i = F.length - 1; i >= 2; i--) {
             int nextPos = currPos + F[i];
-            if (nextPos > n)
-                continue;
             if (isValidPosition(a, nextPos)) {
                 // System.out.printf("Fib = %d, nextPos = %d%n", F[i], nextPos);
                 recursion_improve2(a, F, n, nextPos, totalStep + 1);
@@ -296,14 +294,90 @@ public class FibFrog {
         }
     }
 
+    int res = -1;
+
+    /**
+     * Ý tưởng: cách đệ quy ở trên duyệt tất cả các bước tiếp theo của vị trí hiện tại. Cách này thì
+     * duyệt từ cuối: tại vị trí i, tìm số bước ngắn nhất đến bờ bên kia (i = n-1 -> 0)
+     * 
+     * Sau đó, lưu giá trị này vào bảng minSteps[]
+     * 
+     * Cứ thể duyệt i, và tại mỗi nextStep, check xem bảng minSteps có giá trị chưa, nếu có rồi thì dùng
+     * luôn, chưa có thì mới đệ quy
+     * 
+     * Hiện tại chưa xong!!! Vẫn đang debug dở
+     */
+    private int solution_recursion_DP(int[] a) {
+        // Calculate Fib sequence first
+        int[] F = new int[26]; // because F[26] = 121393 > maximum of N, so we only need first 25 Fib numbers
+        F[0] = 0;
+        F[1] = 1;
+        for (int i = 2; i < F.length; i++) {
+            F[i] = F[i - 1] + F[i - 2];
+        }
+        // printArray(F);
+
+        int[] minSteps = new int[a.length];
+
+        for (int i = a.length - 1; i >= 0; i--) {
+            if (isValidPosition(a, i)) {
+                this.minStep = Integer.MAX_VALUE;
+                recursion_improve3(a, F, minSteps, i, i, 0);
+                minSteps[i] = this.minStep;
+                printArray(minSteps);
+            }
+        }
+
+        System.out.println("i = -1");
+        recursion_improve3(a, F, minSteps, -1, -1, 0);
+        // return reachedOtherBank ? this.minStep : -1;
+        // return this.minStep;
+        return this.res;
+    }
+
+    private void recursion_improve3(int[] a, int[] F, int[] minSteps, int startIndex, int currPos, int totalStep) {
+        System.out.printf("currPos = %d, totalStep = %d%n", currPos, totalStep);
+        if (currPos == a.length) {
+            System.out.println("Reached other bank, totalStep = " + totalStep + "\n");
+            if (totalStep < this.minStep)
+                this.minStep = totalStep;
+            if (startIndex == -1) {
+                reachedOtherBank = true;
+                this.res = this.minStep;
+            }
+            System.out.printf("res = %d, this.minStep = %d%n", this.res, this.minStep);
+            return;
+        }
+
+        // if (totalStep >= minStep)
+        // return;
+
+        if (currPos >= 0 && minSteps[currPos] > 0) {
+            recursion_improve3(a, F, minSteps, startIndex, a.length, totalStep + minSteps[currPos]);
+            return;
+        }
+
+        // duyệt từ 2, vì F[0] = 0, F[1] = F[2] = 1, do đó skip F[1], F[1]
+        // Nhét các vị trí tiếp theo có thể nhảy tới vào queue
+        for (int i = F.length - 1; i >= 2; i--) {
+            int nextPos = currPos + F[i];
+            if (isValidPosition(a, nextPos)) {
+                System.out.printf("Fib = %d, nextPos = %d%n", F[i], nextPos);
+                recursion_improve3(a, F, minSteps, startIndex, nextPos, totalStep + 1);
+            }
+        }
+    }
+
+
     public int solution(int[] a) {
         return solution_recursion(a);
+        // return solution_recursion_DP(a);
     }
 
     // 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1
     // 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
     public static void main(String[] args) {
-        // System.out.println(new FibFrog().solution(new int[] {0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0})); // 3
+        System.out.println(new FibFrog().solution(new int[] {0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0})); // 3
         System.out.println(new FibFrog().solution(new int[] {0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1})); // 3
         System.out.println(new FibFrog().solution(new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})); // -1
     }
