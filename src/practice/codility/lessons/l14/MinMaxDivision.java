@@ -70,6 +70,8 @@ package practice.codility.lessons.l14;
  * - Nếu số lượng block = k: OK (dù ko dùng tới block empty). Tương tự, cũng cần giảm Large sum và
  * tiếp tục tìm giá trị tối ưu hơn
  * - Nếu số lượng block > k: cần tăng largeSum lên
+ * 
+ * Ref: https://stackoverflow.com/a/69910576/7688028
  */
 public class MinMaxDivision {
     /**
