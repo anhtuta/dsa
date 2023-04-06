@@ -32,6 +32,7 @@ Cách solution trong file pdf có vẻ như được viết = python
 - Mảng gồm toàn số âm
 - Mảng rỗng
 - Mảng gồm duy nhất 1 phần tử
+- Mảng gồm duy nhất 1 phần tử = 0
 - Input = max giới hạn cho trong đề bài
 
 Nếu input là mảng, khi duyệt vòng for cần chú ý các giá trị đầu, cuối dãy (a[0], a[n-1]). Cẩn thận lỗi `ArrayIndexOutOfBoundsException`
