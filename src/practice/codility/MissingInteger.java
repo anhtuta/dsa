@@ -6,6 +6,12 @@ import java.util.Arrays;
  * https://app.codility.com/demo/take-sample-test/
  * https://app.codility.com/c/run/demoC74CD4-749/
  * 
+ * Note: this problem belongs to lesson 4 Counting Elements:
+ * https://app.codility.com/programmers/lessons/4-counting_elements/
+ * 
+ * Level: Medium
+ * Đây là bài level medium dễ nhất!
+ * 
  * This is a demo task.
  * 
  * Write a function:
@@ -41,6 +47,8 @@ public class MissingInteger {
      * 
      * Cách làm: sort xong duyệt từ đầu và tìm số dương bé nhất ko có trong dãy.
      * Cứ check kiểu vét cạn thôi, chú ý mấy case đặc biệt như trong hàm main
+     * 
+     * Score: 100%
      */
     public int solution(int[] a) {
         Arrays.sort(a);
@@ -58,6 +66,25 @@ public class MissingInteger {
             return a[i] + 1;
         }
         return a[a.length - 1] >= 0 ? a[a.length - 1] + 1 : 1;
+    }
+
+    /**
+     * Cách này dùng counting element giống như lesson 4
+     * 
+     * Score: 100%
+     */
+    public int solution_counting(int[] a) {
+        byte[] cntArr = new byte[1_000_001];
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] < 0 || cntArr[a[i]] > 0)
+                continue;
+            cntArr[a[i]]++;
+        }
+        for (int i = 1; i < cntArr.length; i++) {
+            if (cntArr[i] == 0)
+                return i;
+        }
+        return a[a.length - 1] + 1;
     }
 
     public static void main(String[] args) {
