@@ -11,11 +11,11 @@ public class Test2 {
             case "U":
                 return theta >= 0.25 * Math.PI && theta <= 0.75 * Math.PI;
             case "L":
-                return theta >= 0.75 * Math.PI && theta >= -0.25 * Math.PI;
+                return theta >= 0.75 * Math.PI && theta <= -0.75 * Math.PI;
             case "D":
-                return theta <= -0.25 * Math.PI && theta >= -0.75 * Math.PI;
+                return theta >= -0.75 * Math.PI && theta <= -0.25 * Math.PI;
             case "R":
-                return theta <= -0.75 * Math.PI && theta <= 0.25 * Math.PI;
+                return theta >= -0.25 * Math.PI && theta <= 0.25 * Math.PI;
             default:
                 break;
         }
@@ -41,6 +41,10 @@ public class Test2 {
      * 
      * Example test: ('R', 3, [-2, 3], [0, 1])
      * OK
+     * 
+     * Score:
+     * Correctness test cases
+     * Passed 2 out of 8
      */
     public static void main(String[] args) {
 
