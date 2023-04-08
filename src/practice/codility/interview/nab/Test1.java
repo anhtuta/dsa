@@ -26,6 +26,9 @@ public class Test1 {
         return min(resA, resB, resN);
     }
 
+    /**
+     * Score: 100%
+     */
     public static void main(String[] args) {
         System.out.println(new Test1().solution("NAABXXAN")); // 1
         System.out.println(new Test1().solution("NAANAAXNABABYNNBZ")); // 2
