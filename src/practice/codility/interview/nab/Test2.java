@@ -47,6 +47,13 @@ public class Test2 {
      * Passed 2 out of 8
      */
     public static void main(String[] args) {
+        Test2 t2 = new Test2();
+        System.out.println(t2.solution("U", 5,
+                new int[] {-1, -2, 4, 1, 3, 0}, new int[] {5, 4, 3, 3, 1, -1})); // 2
+        System.out.println(t2.solution("D", 10,
+                new int[] {0, -3, 2, 0}, new int[] {-10, -3, -7, -5})); // 4
+        System.out.println(t2.solution("R", 3,
+                new int[] {-2, 3}, new int[] {0, 1})); // 0
 
         // System.out.println(Math.atan2(3, 1) / Math.PI);
         // System.out.println(Math.atan2(3, 0) / Math.PI);
