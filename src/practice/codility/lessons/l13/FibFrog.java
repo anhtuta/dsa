@@ -3,6 +3,7 @@ package practice.codility.lessons.l13;
 import java.util.Queue;
 import java.util.Stack;
 import java.util.concurrent.ArrayBlockingQueue;
+import practice.codility.Utils;
 
 /**
  * The Fibonacci sequence is defined using the following recursive formula:
@@ -85,14 +86,6 @@ public class FibFrog {
         return (position < a.length && a[position] == 1) || position == a.length;
     }
 
-    private void printArray(int[] a) {
-        System.out.print("Array [");
-        for (int i = 0; i < a.length - 1; i++) {
-            System.out.print(a[i] + " ");
-        }
-        System.out.println(a[a.length - 1] + "]");
-    }
-
     /**
      * This solution using BFS, not done yet, wrong answer
      */
@@ -104,7 +97,7 @@ public class FibFrog {
         for (int i = 2; i < F.length; i++) {
             F[i] = F[i - 1] + F[i - 2];
         }
-        printArray(F);
+        Utils.printArray(F);
 
         // Init queue
         Queue<Integer> queue = new ArrayBlockingQueue<>(26);
@@ -153,7 +146,7 @@ public class FibFrog {
         for (int i = 2; i < F.length; i++) {
             F[i] = F[i - 1] + F[i - 2];
         }
-        printArray(F);
+        Utils.printArray(F);
 
         // Init queue
         Stack<Integer> stack = new Stack<>();
@@ -200,7 +193,7 @@ public class FibFrog {
         for (int i = 2; i < F.length; i++) {
             F[i] = F[i - 1] + F[i - 2];
         }
-        // printArray(F);
+        // Utils.printArray(F);
 
         // recursion(a, F, minStep, minStep, minStep);
         // recursion_improve(a, F, a.length, -1, 0);
@@ -315,7 +308,7 @@ public class FibFrog {
         for (int i = 2; i < F.length; i++) {
             F[i] = F[i - 1] + F[i - 2];
         }
-        // printArray(F);
+        // Utils.printArray(F);
 
         int[] minSteps = new int[a.length];
 
@@ -324,7 +317,7 @@ public class FibFrog {
                 this.minStep = Integer.MAX_VALUE;
                 recursion_improve3(a, F, minSteps, i, i, 0);
                 minSteps[i] = this.minStep;
-                printArray(minSteps);
+                Utils.printArray(minSteps);
             }
         }
 
