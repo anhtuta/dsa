@@ -9,6 +9,7 @@ public class Test1 {
 
     public int solution(String s) {
         char[] cArray = s.toCharArray();
+        // Tại sao phải sort làm gì???
         Arrays.sort(cArray);
         int cntA = 0, cntB = 0, cntN = 0;
         for (int i = 0; i < cArray.length; i++) {

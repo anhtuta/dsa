@@ -11,7 +11,9 @@ public class Test2 {
             case "U":
                 return theta >= 0.25 * Math.PI && theta <= 0.75 * Math.PI;
             case "L":
-                return theta >= 0.75 * Math.PI && theta <= -0.75 * Math.PI;
+                // riêng case này phải dùng || nhé, nếu dùng && là sai,
+                // vì làm gì có số nào vừa >= một số dương, vừa <= một số âm
+                return theta >= 0.75 * Math.PI || theta <= -0.75 * Math.PI;
             case "D":
                 return theta >= -0.75 * Math.PI && theta <= -0.25 * Math.PI;
             case "R":
@@ -54,6 +56,10 @@ public class Test2 {
                 new int[] {0, -3, 2, 0}, new int[] {-10, -3, -7, -5})); // 4
         System.out.println(t2.solution("R", 3,
                 new int[] {-2, 3}, new int[] {0, 1})); // 0
+        System.out.println(t2.solution("R", 3,
+                new int[] {-2, 3, 2}, new int[] {0, 1, 1})); // 1
+        System.out.println(t2.solution("L", 3,
+                new int[] {-2, 3}, new int[] {0, 1})); // 1
 
         // System.out.println(Math.atan2(3, 1) / Math.PI);
         // System.out.println(Math.atan2(3, 0) / Math.PI);
