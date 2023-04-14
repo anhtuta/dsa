@@ -1,4 +1,4 @@
-package practice.leetcode.dp;
+package practice.leetcode.easy;
 
 /**
  * Problem: https://leetcode.com/problems/climbing-stairs/

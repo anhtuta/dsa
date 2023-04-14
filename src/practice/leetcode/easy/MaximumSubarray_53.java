@@ -1,4 +1,4 @@
-package practice.leetcode.dc;
+package practice.leetcode.easy;
 
 /**
  * Problem: https://leetcode.com/problems/maximum-subarray/

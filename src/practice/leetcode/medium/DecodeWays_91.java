@@ -1,4 +1,4 @@
-package practice.leetcode.dp;
+package practice.leetcode.medium;
 
 /**
  * Problem: https://leetcode.com/problems/decode-ways/
