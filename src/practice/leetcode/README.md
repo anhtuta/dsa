@@ -6,11 +6,19 @@ This folder contains leetcode problems organized by level, and some coding patte
 
 Vocab:
 
-- slice/sub-array/subsequence: dãy con, mảng con
+- slice/subarray/substring: dãy con, mảng con, string con: là một phần của dãy chứa các phần tử LIÊN TIẾP ( **contiguous section of an array or string**)
+- subsequence: 1 tập hợp 1 vài phần tử của mảng/string KHÔNG cần liên tiếp nhau, chỉ cần đúng thứ tự (portion of an array/string that keeps the same order but **doesn't need to be contiguous**)
+  - Ex: subsequences of `[1, 2, 3, 4]` include: `[1, 3], [4], [], [2, 3]`, but not `[3, 2], [5], [4, 1]`.
+- subset: tập hợp 1 vài phần tử của mảng/string KHÔNG cần liên tiếp nhau, KHÔNG cần đúng thứ tự
+  - Ex: given `[1, 2, 3, 4]`, all of these are subsets: `[3, 2], [4, 1, 2], [1]`. Note: subsets that contain the same elements are considered the same, so `[1, 2, 4]` is the same subset as `[4, 1, 2]`.
 
 ## 1. Cheatsheets
 
 https://leetcode.com/explore/interview/card/cheatsheets/720/resources/4725/
+
+General DS/A flowchart: here's a flowchart that can help you figure out which data structure or algorithm should be used. Note that this flowchart is very **general** as it would be impossible to cover every single scenario
+
+![](./flowchart.png)
 
 ## 2. Two pointers
 
@@ -182,3 +190,17 @@ function fn(arr, k):
     Update ans
     return ans // Alternatively, you could do something like return max(ans, curr) if the problem is asking for a maximum value and curr is tracking that.
 ```
+
+## 4. More common patterns
+
+https://leetcode.com/explore/interview/card/leetcodes-interview-crash-course-data-structures-and-algorithms/703/arraystrings/4504/
+
+- O(n) string building: nên dùng StringBuilder để concatenate chuỗi, test performance tại dây: https://github.com/anhtuta/spring/blob/master/Demo/src/main/java/hello/StringBuilderDemo.java
+- Subarrays/substrings, subsequences, and subsets
+  - Subarrays/substrings: có thể dùng các pattern **sliding window**, **prefix sum**
+  - Subsequences:
+    - KHÔNG thể dùng được các pattern **sliding window**, **prefix sum**
+    - Nếu như bài toán KHÔNG quan tâm đến order của các phần tử bên trong subsequence (chẳng hạn tính tổng của subsequence), thì có thể sort input và làm như subsets bên dưới
+  - Subsets:
+    - Do ko quan tâm đến order nên có thể **sort** input
+    - Sau khi sort có thể dùng các pattern: two pointers, sliding window, greedy, backtracking...
