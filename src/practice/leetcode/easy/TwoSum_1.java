@@ -1,7 +1,7 @@
 package practice.leetcode.easy;
 
 import java.util.Arrays;
-import practice.codility.Utils;
+import util.Utils;
 
 /**
  * https://leetcode.com/problems/two-sum/

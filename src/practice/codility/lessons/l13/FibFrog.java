@@ -3,7 +3,7 @@ package practice.codility.lessons.l13;
 import java.util.Queue;
 import java.util.Stack;
 import java.util.concurrent.ArrayBlockingQueue;
-import practice.codility.Utils;
+import util.Utils;
 
 /**
  * The Fibonacci sequence is defined using the following recursive formula:

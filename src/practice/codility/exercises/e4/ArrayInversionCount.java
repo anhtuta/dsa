@@ -1,7 +1,7 @@
 package practice.codility.exercises.e4;
 
 import java.util.Arrays;
-import practice.codility.Utils;
+import util.Utils;
 
 /**
  * Level: Medium
