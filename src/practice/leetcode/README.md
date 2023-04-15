@@ -1,0 +1,184 @@
+# Leetcode
+
+This folder contains leetcode problems organized by level, and some coding patterns
+
+# Leetcode patterns
+
+Vocab:
+
+- slice/sub-array/subsequence: dãy con, mảng con
+
+## 1. Cheatsheets
+
+https://leetcode.com/explore/interview/card/cheatsheets/720/resources/4725/
+
+## 2. Two pointers
+
+https://leetcode.com/explore/interview/card/leetcodes-interview-crash-course-data-structures-and-algorithms/703/arraystrings/4501/
+
+Áp dụng cho: Array, String
+
+Idea cho 1 mảng/string: sử dụng 2 pointer i,j chạy từ 2 phía của mảng arr[] và duyệt. Sau mỗi bước duyệt có thể sẽ tăng i hoặc giảm j hoặc cả 2, tới khi i == j thì stop
+
+```
+function fn(arr):
+    left = 0
+    right = arr.length - 1
+
+    while left < right:
+        Do some logic here depending on the problem
+        Do some more logic here to decide on one of the following:
+            1. left++
+            2. right--
+            3. Both left++ and right--
+```
+
+Idea cho 2 mảng: sử dụng 2 pointer i,j chạy từ 2 đầu của 2 mảng arr1[] và arr2[] và duyệt. Sau mỗi bước sẽ tăng i hoặc tăng j, tới khi 1 trong 2 mảng duyệt xong thì **vẫn phải duyệt nốt mảng còn lại**
+
+```
+function fn(arr1, arr2):
+    i = j = 0
+    while i < arr1.length AND j < arr2.length:
+        Do some logic here depending on the problem
+        Do some more logic here to decide on one of the following:
+            1. i++
+            2. j++
+            3. Both i++ and j++
+
+    // Step 4: make sure both iterables are exhausted
+    while i < arr1.length:
+        Do some logic here depending on the problem
+        i++
+
+    while j < arr2.length:
+        Do some logic here depending on the problem
+        j++
+```
+
+Example problems:
+
+- [Two Sum](./easy/TwoSum_1.java)
+- [Is Subsequence](./easy/IsSubsequence_392.java)
+
+## 3. Sliding window
+
+https://leetcode.com/explore/interview/card/leetcodes-interview-crash-course-data-structures-and-algorithms/703/arraystrings/4502/
+
+Áp dụng cho: Array, String
+
+Idea:
+
+- A sliding window is actually implemented using two pointers
+- Sử dụng 2 pointer `left`, `right` chạy từ 1 phía của mảng arr[] và duyệt. Dãy con từ `left` -> `right` chính là window
+- Ta cần tìm window tối ưu nhất
+- Duyệt bằng cách tăng con trỏ `right` để **tăng** kích thước window mà vẫn thoả mãn điều kiện của bài toán (constraint)
+- Tới khi **constraint bị phá vỡ**, **giảm** kích thước window = cách tăng con trỏ `left` tới khi constraint is satisfied again.
+- Khi cả 2 con trỏ đều tới cuối dãy thì stop
+
+```
+function fn(arr):
+    left = 0
+    for right in [0, arr.length - 1]:
+        Do some logic to "add" element at arr[right] to window (ex: curr += arr[right])
+
+        while left < right AND condition from problem not met:
+            Do some logic to "remove" element at arr[left] from window (ex: curr -= arr[left])
+            left++
+
+        Do some logic to update the answer
+        (sau khi thoái khỏi vòng while, lúc này điều kiện bài toán lại được thoả mãn, ta cần update answer)
+```
+
+Nhận xét:
+
+- Nếu như Two Pointers sử dụng 2 con trỏ chạy từ 2 phía của 1 mảng, thì Sliding window lại sử dụng 2 con trỏ chạy từ 1 phía của mảng
+- Ta cần dùng 2 vòng for/while lồng nhau, tuy vậy độ phức tạp vẫn là O(2n) = O(n)
+  - 1 vòng for để tăng kích thước window (right++)
+  - 1 vòng while để giảm kích thước window (left++)
+- Giống với kỹ thuật [Caterpillar method](https://app.codility.com/programmers/lessons/15-caterpillar_method/) bên Codility
+
+Example 1: cho dãy `nums` và số `k`, tìm độ dài của slice lớn nhất của `nums` có tổng ko vượt quá k. Ex: `nums = [3, 1, 2, 7, 4, 2, 1, 1, 5]` và `k = 8` => ans = 4 (là length của slice [4, 2, 1, 1])
+
+```java
+public int findLength(int[] nums, int k) {
+    int left = 0;
+    int currSum = 0;
+    int ans = 0;
+
+    for (int right = 0; right < nums.length; right++) {
+        currSum += nums[right];
+        while (currSum > k) {
+            currSum -= nums[left]; // "remove" element at arr[left] from window
+            left++;
+        }
+
+        // update the answer when condition is satisfied again
+        ans = Math.max(ans, right - left + 1);
+    }
+
+    return ans;
+}
+```
+
+Example 2: Cho 1 binary string chỉ gồm 2 ký tự '0' và '1'. Một hành động **flipping** là việc biến 1 ký tự '0' thành '1'. Tìm độ dài của substring lớn nhất mà chỉ chứa ký tự '1' sau khi thực thi TỐI ĐA 1 lần flipping. Ex: s = "1101100111" => ans = 5 (flipping tại index 2)
+
+Nhận xét: bài toán có thể phát biểu lại thành: tìm độ dài của substring lớn nhất mà chỉ chứa TỐI ĐA 1 ký tự '0'
+
+```java
+public int findLength(String s) {
+    int left = 0;
+    int curr = 0;
+    int ans = 0;
+
+    for (int right = 0; right < s.length(); right++) {
+        if (s.charAt(right) == '0') {
+            curr++;
+        }
+
+        while (curr > 1) {
+            if (s.charAt(left) == '0') {
+                curr--;
+            }
+
+            left++;
+        }
+
+        ans = Math.max(ans, right - left + 1);
+    }
+
+    return ans;
+}
+```
+
+Fixed window size: window sẽ ko thay đổi size trong quá trình duyệt, case này thì dễ hơn.
+
+```
+// first approach
+function fn(arr, k):
+    curr = some data type to track the window
+
+    // build the first window
+    for i in [0, k - 1]:
+        Do something with curr or other variables to build first window
+
+    ans = answer variable, might be equal to curr here depending on the problem
+    for i in [k, arr.length - 1]:
+        Add arr[i] to window
+        Remove arr[i - k] from window
+        Update ans
+
+    return ans
+
+// second approach
+function fn(arr, k):
+    curr = some data type to track the window
+    ans = answer variable
+    for i in range(len(arr)):
+        if i >= k:
+            Update ans
+            Remove arr[i - k] from window
+        Add arr[i] to window
+
+    Update ans
+    return ans // Alternatively, you could do something like return max(ans, curr) if the problem is asking for a maximum value and curr is tracking that.
+```
