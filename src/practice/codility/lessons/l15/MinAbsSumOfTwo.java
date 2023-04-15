@@ -3,6 +3,8 @@ package practice.codility.lessons.l15;
 import java.util.Arrays;
 
 /**
+ * Level: Medium
+ * 
  * Let A be a non-empty array consisting of N integers.
  * 
  * The abs sum of two for a pair of indices (P, Q) is the absolute value |A[P] + A[Q]|, for 0 ≤ P ≤
@@ -70,6 +72,8 @@ public class MinAbsSumOfTwo {
     /**
      * Ref: https://github.com/ZRonchy/Codility/blob/master/Lesson13/MinAbsSumOfTwo.java
      * Cách giải này đúng là phải dùng Caterpillar Method
+     * Phương pháp này giống với Two Pointers pattern bên leetcode:
+     * https://leetcode.com/explore/interview/card/leetcodes-interview-crash-course-data-structures-and-algorithms/703/arraystrings/4501/
      * O(n * log(n))
      */
     public int solution(int[] a) {
