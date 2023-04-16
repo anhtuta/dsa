@@ -24,7 +24,7 @@ General DS/A flowchart: here's a flowchart that can help you figure out which da
 
 https://leetcode.com/explore/interview/card/leetcodes-interview-crash-course-data-structures-and-algorithms/703/arraystrings/4501/
 
-Áp dụng cho: Array, String
+DS involved: Array, String
 
 Idea cho 1 mảng/string: sử dụng 2 pointer i,j chạy từ 2 phía của mảng arr[] và duyệt. Sau mỗi bước duyệt có thể sẽ tăng i hoặc giảm j hoặc cả 2, tới khi i == j thì stop
 
@@ -72,7 +72,7 @@ Example problems:
 
 https://leetcode.com/explore/interview/card/leetcodes-interview-crash-course-data-structures-and-algorithms/703/arraystrings/4502/
 
-Áp dụng cho: Array, String
+DS involved: Array, String
 
 Idea:
 
@@ -204,3 +204,23 @@ https://leetcode.com/explore/interview/card/leetcodes-interview-crash-course-dat
   - Subsets:
     - Do ko quan tâm đến order nên có thể **sort** input
     - Sau khi sort có thể dùng các pattern: two pointers, sliding window, greedy, backtracking...
+
+## 5. Fast and slow pointers
+
+Do pattern này ở leetcode yêu cầu account premium, nên từ nay về sau, pattern nào trên đó premium thì sẽ dùng link khác để tham khảo
+
+https://emre.me/coding-patterns/fast-slow-pointers/
+
+DS involved: LinkedList
+
+AKA: Floyd's Tortoise and Hare Algorithm
+
+Idea:
+
+- Dùng 2 con trỏ fast, slow cùng chạy từ đầu list.
+- Con trỏ fast sẽ chạy nhanh hơn slow. Tới khi 2 con trỏ gặp nhau thì chứng tỏ list này là DSLK vòng (cyclic linked list), tức là sẽ detect được **cyclic loop**
+
+Example problems:
+
+- [LinkedListCycle_141](./easy/LinkedListCycle_141.java)
+- [LinkedListCycleII_142](./medium/LinkedListCycleII_142.java)
