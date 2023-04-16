@@ -211,7 +211,7 @@ Do pattern này ở leetcode yêu cầu account premium, nên từ nay về sau,
 
 https://emre.me/coding-patterns/fast-slow-pointers/
 
-DS involved: LinkedList
+DS involved: LinkedList, Array, String
 
 AKA: Floyd's Tortoise and Hare Algorithm
 
@@ -224,3 +224,36 @@ Example problems:
 
 - [LinkedListCycle_141](./easy/LinkedListCycle_141.java)
 - [LinkedListCycleII_142](./medium/LinkedListCycleII_142.java)
+
+## 6. Merge intervals
+
+https://emre.me/coding-patterns/merge-intervals/
+
+Các interval ở đây có 2 thuộc tính là start và end. Có thể dùng mảng 2 chiều để lưu chúng, chẳng hạn:
+
+```java
+int[][] intervals = {{2, 6}, {15, 18}, {1, 3}, {8, 10}};
+```
+
+Đề bài sẽ yêu cầu merge các interval bị overlap nhau (ex: [2, 6] + [1, 3] -> [1, 6])
+
+DS involved: Array, Heap
+
+![](./images/2019-10-27-merge-intervals.png)
+
+Idea:
+
+- Đầu tiên **sort** các interval đó theo thứ tự tăng dần của `interval.start`
+- Sau khi sort xong, chỉ cần set các case 1,2,3 ở hình trên
+- Init interval A là phần tử đầu tiên của dãy, index 0
+- Duyệt B từ index 1
+  - B overlap với A khi: `B.start <= A.end`
+  - Nếu B overlap với A: merge B với A bằng cách: `A.end = max(A.end, B.end)`, sau đó tiếp tục duyệt B ở vòng for tiếp theo
+  - Nếu B ko overlap với A:
+    - Interval A lúc này đã merge xong, add A hiện tại vào ans (kết quả của bài toán)
+    - Gán cho A là interval hiện tại và duyệt tới hết dãy
+  - Sau khi duyệt tới hết dãy, nhớ add nốt A vào ans
+
+Example problems:
+
+- [MergeIntervals_56](./medium/MergeIntervals_56.java)
