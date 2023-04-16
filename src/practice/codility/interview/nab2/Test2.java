@@ -1,5 +1,9 @@
 package practice.codility.interview.nab2;
 
+/**
+ * Thực sự thì, bản thân t vẫn chưa có idea nào cho bài toán này, dù là vét cạn (brute force), cũng
+ * ko biết phải implement như nào
+ */
 public class Test2 {
     public int solution_wrong(String s) {
         int cntA = 0, cntB = 0;
@@ -137,9 +141,41 @@ public class Test2 {
         return Math.min(minNumAB, deleted + minWrong);
     }
 
+    /**
+     * Solution from Nam Anh
+     */
+    public int secondSolution(String s) {
+        char[] chars = s.toCharArray();
+
+        boolean foundFirstA = false;
+        int deletedPreB = 0;
+        int deletedBA = 0;
+        for (int i = 0; i < chars.length; i++) {
+            if (foundFirstA == false) {
+                if (chars[i] == 'A') {
+                    foundFirstA = true;
+                } else {
+                    deletedPreB++;
+                }
+            } else {
+                if (chars[i - 1] == 'B' && chars[i] == 'A') {
+                    deletedBA++;
+                }
+            }
+        }
+
+        // System.out.println(deletedPreB);
+        // System.out.println(deletedBA);
+
+        return deletedBA + deletedPreB;
+    }
+
     public static void main(String[] args) {
         System.out.println(new Test2().solution("BAAABAB")); // 2
         System.out.println(new Test2().solution("BBABAA")); // 3
         System.out.println(new Test2().solution("AABBBB")); // 0
+        System.out.println(new Test2().secondSolution("BAAABAB")); // 2
+        System.out.println(new Test2().secondSolution("BBABAA")); // 3
+        System.out.println(new Test2().secondSolution("AABBBB")); // 0
     }
 }
