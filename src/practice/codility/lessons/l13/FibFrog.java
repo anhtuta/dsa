@@ -89,7 +89,7 @@ public class FibFrog {
     /**
      * This solution using BFS, not done yet, wrong answer
      */
-    private int solution_BFS(int[] a) {
+    public int solution_BFS(int[] a) {
         // Calculate Fib sequence first
         int[] F = new int[26]; // because F[26] = 121393 > maximum of N, so we only need first 25 Fib numbers
         F[0] = 0;
@@ -138,7 +138,7 @@ public class FibFrog {
      * This solution using DFS, nhưng reset được totalStep sau khi đến bờ bên kìa và quay lại đếm
      * solution khác
      */
-    private int solution_DFS(int[] a) {
+    public int solution_DFS(int[] a) {
         // Calculate Fib sequence first
         int[] F = new int[26]; // because F[26] = 121393 > maximum of N, so we only need first 25 Fib numbers
         F[0] = 0;
@@ -185,7 +185,7 @@ public class FibFrog {
         return minStep;
     }
 
-    private int solution_recursion(int[] a) {
+    public int solution_recursion(int[] a) {
         // Calculate Fib sequence first
         int[] F = new int[26]; // because F[26] = 121393 > maximum of N, so we only need first 25 Fib numbers
         F[0] = 0;
@@ -207,7 +207,7 @@ public class FibFrog {
      * 
      * Cách giải này bị timeout, chỉ được 41%
      */
-    private void recursion(int[] a, int[] F, int n, int currPos, int totalStep) {
+    public void recursion(int[] a, int[] F, int n, int currPos, int totalStep) {
         // System.out.printf("currPos = %d, totalStep = %d%n", currPos, totalStep);
         if (currPos == n) {
             // System.out.println("Reached other bank, totalStep = " + totalStep + "\n");
@@ -234,7 +234,7 @@ public class FibFrog {
      * đếm tổng số bước
      * Improve: tại mỗi vị trí tiếp theo, check nếu như totalStep > minStep thì KHÔNG nhảy nữa!
      */
-    private void recursion_improve(int[] a, int[] F, int n, int currPos, int totalStep) {
+    public void recursion_improve(int[] a, int[] F, int n, int currPos, int totalStep) {
         // System.out.printf("currPos = %d, totalStep = %d%n", currPos, totalStep);
         if (currPos == n) {
             // System.out.println("Reached other bank, totalStep = " + totalStep + "\n");
@@ -264,7 +264,7 @@ public class FibFrog {
      * 
      * Timeout: score = 66%
      */
-    private void recursion_improve2(int[] a, int[] F, int n, int currPos, int totalStep) {
+    public void recursion_improve2(int[] a, int[] F, int n, int currPos, int totalStep) {
         // System.out.printf("currPos = %d, totalStep = %d%n", currPos, totalStep);
         if (currPos == n) {
             // System.out.println("Reached other bank, totalStep = " + totalStep + "\n");
@@ -300,7 +300,7 @@ public class FibFrog {
      * 
      * Hiện tại chưa xong!!! Vẫn đang debug dở
      */
-    private int solution_recursion_DP(int[] a) {
+    public int solution_recursion_DP(int[] a) {
         // Calculate Fib sequence first
         int[] F = new int[26]; // because F[26] = 121393 > maximum of N, so we only need first 25 Fib numbers
         F[0] = 0;
