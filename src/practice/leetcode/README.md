@@ -257,3 +257,20 @@ Idea:
 Example problems:
 
 - [MergeIntervals_56](./medium/MergeIntervals_56.java)
+
+## 7. Cyclic sort
+
+https://emre.me/coding-patterns/cyclic-sort/
+
+DS involved: Array
+
+Idea:
+
+- Chỉ dùng cho mảng a[] gồm các phần tử range từ 0 -> n (n = a.length), và chúng phải khác nhau
+- Bởi vì các phần tử là unique, ta có thể exchange vị trí của chúng để chúng ở đúng vị trí
+- Ex: [8, 6, 4, 2, 3, 5, 7, 0, 1] -> [0 1 2 3 4 5 6 7 8]
+- Dùng với các bài toán: find missing number, duplicate numbers
+
+Example problems:
+
+- [MissingNumber_268](./easy/MissingNumber_268.java)
