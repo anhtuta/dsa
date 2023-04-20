@@ -274,3 +274,19 @@ Idea:
 Example problems:
 
 - [MissingNumber_268](./easy/MissingNumber_268.java)
+
+## 8. In-place Reversal of a Linked List
+
+https://emre.me/coding-patterns/in-place-reversal-of-a-linked-list/
+
+DS involved: LinkedList
+
+Idea: dùng 3 con trỏ curr, prev, next để thực hiện việc reverse 1 LinkedList mà ko cần thêm bộ nhớ ngoài
+
+Example problem:
+
+- [ReverseLinkedList_206 and ReverseLinkedListII_92](./medium/ReverseLinkedList_206_92.java)
+
+# Ref
+
+- https://levelup.gitconnected.com/dont-just-leetcode-follow-the-coding-patterns-instead-4beb6a197fdb
