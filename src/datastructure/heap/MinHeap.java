@@ -62,7 +62,13 @@ public class MinHeap<T extends Comparable<T>> {
         return heap.get(0);
     }
 
+    public int getSize() {
+        return heap.size();
+    }
+
     public void print() {
+        if (heap.size() <= 0)
+            return;
         System.out.print("MinHeap [");
         for (int i = 0; i < heap.size() - 1; i++) {
             System.out.print(heap.get(i) + " ");
