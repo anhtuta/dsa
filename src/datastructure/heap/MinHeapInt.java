@@ -22,7 +22,7 @@ public class MinHeapInt {
         buildHeap();
     }
 
-    public int pop() {
+    public int remove() {
         int res = heap[0];
         swap(0, size - 1);
         size--;
@@ -100,9 +100,9 @@ public class MinHeapInt {
         heap.add(2);
         heap.print();
 
-        heap.pop();
+        heap.remove();
         heap.print();
-        heap.pop();
+        heap.remove();
         heap.print();
     }
 }

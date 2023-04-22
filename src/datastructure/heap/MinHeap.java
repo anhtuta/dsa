@@ -17,6 +17,10 @@ import java.util.List;
  * Ref:
  * - https://emre.me/data-structures/heaps/
  * - CTDL&GT, Nguyễn Đức Nghĩa
+ * 
+ * Note: trong Java có thể dùng PriorityQueue nếu muốn sử dụng heap:
+ * PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+ * PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
  */
 public class MinHeap<T extends Comparable<T>> {
     List<T> heap;
@@ -47,7 +51,7 @@ public class MinHeap<T extends Comparable<T>> {
      * - Hoán vị root với phần tử cuối cùng
      * - Vun lại đống tại root
      */
-    public T pop() {
+    public T remove() {
         T res = heap.get(0);
         swap(0, heap.size() - 1);
         heap.remove(heap.size() - 1);
@@ -136,9 +140,9 @@ public class MinHeap<T extends Comparable<T>> {
         heap.add(2);
         heap.print();
 
-        heap.pop();
+        heap.remove();
         heap.print();
-        heap.pop();
+        heap.remove();
         heap.print();
     }
 }

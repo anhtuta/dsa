@@ -24,7 +24,7 @@ public class MaxHeapInt {
         buildHeap();
     }
 
-    public int pop() {
+    public int remove() {
         int res = heap[0];
         swap(0, size - 1);
         size--;
