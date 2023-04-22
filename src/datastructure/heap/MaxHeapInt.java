@@ -21,14 +21,14 @@ public class MaxHeapInt {
         }
 
         heap[size++] = data;
-        buildHeap();
+        heapifyUp(size - 1);
     }
 
     public int remove() {
         int res = heap[0];
         swap(0, size - 1);
         size--;
-        heapify(0);
+        heapifyDown(0);
         return res;
     }
 
@@ -50,14 +50,26 @@ public class MaxHeapInt {
         System.out.println(heap[size - 1] + "]");
     }
 
+    private int parentIndex(int pos) {
+        if (pos <= 0)
+            return -1;
+        return (pos - 1) / 2;
+    }
+
+    private int parent(int pos) {
+        if (pos <= 0)
+            throw new ArrayIndexOutOfBoundsException("Cannot get parent of root");
+        return heap[(pos - 1) / 2];
+    }
+
     private void buildHeap() {
         // Bởi vì các node từ n/2 -> n-1 đều là lá nên chỉ cần vun đống cho các node trước đó (ko phải lá)
         for (int i = size / 2 - 1; i >= 0; i--) {
-            heapify(i);
+            heapifyDown(i);
         }
     }
 
-    private void heapify(int i) {
+    private void heapifyDown(int i) {
         if (i < 0)
             return;
         int left = 2 * i + 1;
@@ -75,8 +87,18 @@ public class MaxHeapInt {
         // đống cho thằng con đó, tới khi nào toàn bộ node ko vi phạm tính chất đống nữa thì thôi
         if (i != largest) {
             swap(i, largest);
-            heapify(largest);
+            heapifyDown(largest);
         }
+    }
+
+    private void heapifyUp(int i) {
+        int curr = heap[i];
+        // i == 0 là root rồi, break
+        while (i > 0 && curr > parent(i)) {
+            heap[i] = parent(i);
+            i = parentIndex(i);
+        }
+        heap[i] = curr;
     }
 
     private void swap(int i, int j) {

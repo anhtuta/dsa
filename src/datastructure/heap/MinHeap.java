@@ -14,7 +14,10 @@ import java.util.List;
  * Node phải của i là 2*i + 2
  * Các node từ n/2 -> n-1 đều là lá
  * 
+ * Update: việc implement theo sách của thầy Nghĩa khá lằng nhằng và dài dòng, cần implement lại
+ * 
  * Ref:
+ * - https://www.digitalocean.com/community/tutorials/max-heap-java
  * - https://emre.me/data-structures/heaps/
  * - CTDL&GT, Nguyễn Đức Nghĩa
  * 
@@ -40,9 +43,7 @@ public class MinHeap<T extends Comparable<T>> {
 
     public void add(T data) {
         heap.add(data);
-        // Phải build lại heap, nhưng việc build này khá ko tối ưu, cần tìm các chỉ vun đống lại những node
-        // liên quan
-        buildHeap();
+        heapifyUp(heap.size() - 1);
     }
 
     /**
@@ -55,7 +56,7 @@ public class MinHeap<T extends Comparable<T>> {
         T res = heap.get(0);
         swap(0, heap.size() - 1);
         heap.remove(heap.size() - 1);
-        heapify(0);
+        heapifyDown(0);
         return res;
     }
 
@@ -80,12 +81,24 @@ public class MinHeap<T extends Comparable<T>> {
         System.out.println(heap.get(heap.size() - 1) + "]");
     }
 
+    private int parentIndex(int pos) {
+        if (pos <= 0)
+            return -1;
+        return (pos - 1) / 2;
+    }
+
+    private T parent(int pos) {
+        if (pos <= 0)
+            throw new ArrayIndexOutOfBoundsException("Cannot get parent of root");
+        return heap.get((pos - 1) / 2);
+    }
+
     private void buildHeap() {
         int n = heap.size();
 
         // Bởi vì các node từ n/2 -> n-1 đều là lá nên chỉ cần vun đống cho các node trước đó (ko phải lá)
         for (int i = n / 2 - 1; i >= 0; i--) {
-            heapify(i);
+            heapifyDown(i);
         }
     }
 
@@ -93,9 +106,12 @@ public class MinHeap<T extends Comparable<T>> {
      * Vun đống tại node i. Hiện tại node i ko thoả mãn tính chất đống (node i > node con), ta cần tìm
      * con bé nhất trong 2 con trái phải, rồi đổi chỗ i với thằng con đó. Sau đó lại tiếp tục vun đống
      * cho thằng con đó, tới khi nào toàn bộ node ko vi phạm tính chất đống nữa thì thôi
+     * 
+     * Node: đây là kỹ thuật vun đống từ trên xuống, bắt đầu tại node có vị trí i. Ta chỉ thực hiện
+     * method này đối với các node ko phải lá.
      */
-    private void heapify(int i) {
-        if (i < 0)
+    private void heapifyDown(int i) {
+        if (i < 0 || i >= heap.size() / 2)
             return;
         int left = 2 * i + 1;
         int right = 2 * i + 2;
@@ -113,8 +129,24 @@ public class MinHeap<T extends Comparable<T>> {
         // đống cho thằng con đó, tới khi nào toàn bộ node ko vi phạm tính chất đống nữa thì thôi
         if (i != smallest) {
             swap(i, smallest);
-            heapify(smallest);
+            heapifyDown(smallest);
         }
+    }
+
+    /**
+     * Vun đống từ dưới lên tại node i: chỉ cần đi ngược lên cha và tổ tiên, nếu thấy ko thoả mãn tính
+     * chất đống thì gán cho node hiện tại = cha (KHÔNG swap lúc này). Tới tổ tiên nào mà thoả mãn tính
+     * chất đống thì gán tổ tiên đó = node hiện tại (hơi hại não xíu, nhưng tiết kiệm được nhiều phép
+     * swap)
+     */
+    private void heapifyUp(int i) {
+        T curr = heap.get(i);
+        // i == 0 là root rồi, break
+        while (i > 0 && curr.compareTo(parent(i)) < 0) {
+            heap.set(i, parent(i));
+            i = parentIndex(i);
+        }
+        heap.set(i, curr);
     }
 
     private void swap(int i, int j) {

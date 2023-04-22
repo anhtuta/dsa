@@ -1,5 +1,8 @@
 package practice.leetcode.hard;
 
+import datastructure.heap.MaxHeapInt;
+import datastructure.heap.MinHeapInt;
+
 /**
  * https://leetcode.com/problems/find-median-from-data-stream/
  * 
@@ -12,11 +15,15 @@ package practice.leetcode.hard;
  * Solution này có kết quả chạy: 20 / 21 testcases passed. Case cuối bị timeout, chứng tỏ solution
  * đúng rồi. Bây giờ chỉ cần tối ưu thêm đoạn vun đống lúc add mới phần tử cho heap là được
  * 
+ * Update: sau khi tối ưu lại heap thì solution này đã được accepted! Note: nếu submit trên leetcode
+ * thì phải copy 2 class MinHeapInt và MaxHeapInt vào bên trong class MedianFinder (nên dùng inner
+ * static class)
+ * 
  * Ref: https://emre.me/coding-patterns/two-heaps/
  */
 public class FindMedianFromDataStream_295 {
-    MinHeapInt minHeap;
-    MaxHeapInt maxHeap;
+    private MinHeapInt minHeap;
+    private MaxHeapInt maxHeap;
 
     public FindMedianFromDataStream_295() {
         minHeap = new MinHeapInt(50_001);
@@ -24,25 +31,21 @@ public class FindMedianFromDataStream_295 {
     }
 
     public void addNum(int num) {
-        if (maxHeap.size == 0 || maxHeap.peak() >= num) {
+        if (maxHeap.getSize() == 0 || maxHeap.peak() >= num) {
             maxHeap.add(num);
         } else {
             minHeap.add(num);
         }
 
-        if (maxHeap.size > minHeap.size + 1) {
-            minHeap.add(maxHeap.pop());
-        } else if (maxHeap.size < minHeap.size) {
-            maxHeap.add(minHeap.pop());
+        if (maxHeap.getSize() > minHeap.getSize() + 1) {
+            minHeap.add(maxHeap.remove());
+        } else if (maxHeap.getSize() < minHeap.getSize()) {
+            maxHeap.add(minHeap.remove());
         }
-
-        maxHeap.print();
-        minHeap.print();
-        System.out.println();
     }
 
     public double findMedian() {
-        if (maxHeap.size == minHeap.size) {
+        if (maxHeap.getSize() == minHeap.getSize()) {
             return (double) (maxHeap.peak() + minHeap.peak()) / 2;
         } else {
             return maxHeap.peak();
@@ -57,168 +60,6 @@ public class FindMedianFromDataStream_295 {
         System.out.println("Median = " + app.findMedian());
         app.addNum(4);
         System.out.println("Median = " + app.findMedian());
-    }
-
-    static class MinHeapInt {
-        private int[] heap;
-        private int size;
-
-        public MinHeapInt(int maxCapacity) {
-            heap = new int[maxCapacity];
-            size = 0;
-        }
-
-        public void add(int data) {
-            if (size == heap.length) {
-                System.out.println("Heap is full!");
-                return;
-            }
-
-            heap[size++] = data;
-            buildHeap();
-        }
-
-        public int pop() {
-            int res = heap[0];
-            swap(0, size - 1);
-            size--;
-            heapify(0);
-            return res;
-        }
-
-        public int peak() {
-            return heap[0];
-        }
-
-        public int getSize() {
-            return size;
-        }
-
-        public void print() {
-            if (size <= 0)
-                return;
-            System.out.print("MinHeapInt [");
-            for (int i = 0; i < size - 1; i++) {
-                System.out.print(heap[i] + " ");
-            }
-            System.out.println(heap[size - 1] + "]");
-        }
-
-        private void buildHeap() {
-            // Bởi vì các node từ n/2 -> n-1 đều là lá nên chỉ cần vun đống cho các node trước đó (ko phải lá)
-            for (int i = size / 2 - 1; i >= 0; i--) {
-                heapify(i);
-            }
-        }
-
-        private void heapify(int i) {
-            if (i < 0)
-                return;
-            int left = 2 * i + 1;
-            int right = 2 * i + 2;
-            int smallest = i;
-
-            if (left < size && heap[left] < heap[i]) {
-                smallest = left;
-            }
-            if (right < size && heap[right] < heap[smallest]) {
-                smallest = right;
-            }
-
-            // Nếu node i hiện tại < 1 trong 2 node con, thì ta hoán vị i với node con đó rồi lại tiếp tục vun
-            // đống cho thằng con đó, tới khi nào toàn bộ node ko vi phạm tính chất đống nữa thì thôi
-            if (i != smallest) {
-                swap(i, smallest);
-                heapify(smallest);
-            }
-        }
-
-        private void swap(int i, int j) {
-            int temp = heap[i];
-            heap[i] = heap[j];
-            heap[j] = temp;
-        }
-    }
-
-    static class MaxHeapInt {
-        private int[] heap;
-        private int size;
-
-        public MaxHeapInt(int maxCapacity) {
-            heap = new int[maxCapacity];
-            size = 0;
-        }
-
-        public void add(int data) {
-            if (size == heap.length) {
-                System.out.println("Heap is full!");
-                return;
-            }
-
-            heap[size++] = data;
-            buildHeap();
-        }
-
-        public int pop() {
-            int res = heap[0];
-            swap(0, size - 1);
-            size--;
-            heapify(0);
-            return res;
-        }
-
-        public int peak() {
-            return heap[0];
-        }
-
-        public int getSize() {
-            return size;
-        }
-
-        public void print() {
-            if (size <= 0)
-                return;
-            System.out.print("MaxHeapInt [");
-            for (int i = 0; i < size - 1; i++) {
-                System.out.print(heap[i] + " ");
-            }
-            System.out.println(heap[size - 1] + "]");
-        }
-
-        private void buildHeap() {
-            // Bởi vì các node từ n/2 -> n-1 đều là lá nên chỉ cần vun đống cho các node trước đó (ko phải lá)
-            for (int i = size / 2 - 1; i >= 0; i--) {
-                heapify(i);
-            }
-        }
-
-        private void heapify(int i) {
-            if (i < 0)
-                return;
-            int left = 2 * i + 1;
-            int right = 2 * i + 2;
-            int largest = i;
-
-            if (left < size && heap[left] > heap[i]) {
-                largest = left;
-            }
-            if (right < size && heap[right] > heap[largest]) {
-                largest = right;
-            }
-
-            // Nếu node i hiện tại < 1 trong 2 node con, thì ta hoán vị i với node con đó rồi lại tiếp tục vun
-            // đống cho thằng con đó, tới khi nào toàn bộ node ko vi phạm tính chất đống nữa thì thôi
-            if (i != largest) {
-                swap(i, largest);
-                heapify(largest);
-            }
-        }
-
-        private void swap(int i, int j) {
-            int temp = heap[i];
-            heap[i] = heap[j];
-            heap[j] = temp;
-        }
     }
 
 }
