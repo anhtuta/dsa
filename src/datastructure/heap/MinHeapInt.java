@@ -2,6 +2,7 @@ package datastructure.heap;
 
 /**
  * Clone từ class MinHeap. Nếu sửa gì thì phải sửa cả 2
+ * Có thể xem thêm comment bên class MinHeap để hiểu rõ hơn
  */
 public class MinHeapInt {
     private int[] heap;
@@ -58,13 +59,6 @@ public class MinHeapInt {
         if (pos <= 0)
             throw new ArrayIndexOutOfBoundsException("Cannot get parent of root");
         return heap[(pos - 1) / 2];
-    }
-
-    private void buildHeap() {
-        // Bởi vì các node từ n/2 -> n-1 đều là lá nên chỉ cần vun đống cho các node trước đó (ko phải lá)
-        for (int i = size / 2 - 1; i >= 0; i--) {
-            heapifyDown(i);
-        }
     }
 
     private void heapifyDown(int i) {

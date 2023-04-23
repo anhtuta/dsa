@@ -15,6 +15,13 @@ import java.util.List;
  * Các node từ n/2 -> n-1 đều là lá
  * 
  * Update: việc implement theo sách của thầy Nghĩa khá lằng nhằng và dài dòng, cần implement lại
+ * -> Đã implement lại thành công, theo trang digitalocean.com
+ * 
+ * Time complexity:
+ * Search: O(n)
+ * Insert: O(log n)
+ * Delete: O(log n)
+ * Peek: O(1)
  * 
  * Ref:
  * - https://www.digitalocean.com/community/tutorials/max-heap-java
@@ -26,7 +33,7 @@ import java.util.List;
  * PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
  */
 public class MinHeap<T extends Comparable<T>> {
-    List<T> heap;
+    private List<T> heap;
 
     /**
      * @param initCapacity là capacity ban đầu chứ ko phải max capacity, khi heap full mà vẫn add thêm

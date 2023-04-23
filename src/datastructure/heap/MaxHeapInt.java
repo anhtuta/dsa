@@ -62,13 +62,6 @@ public class MaxHeapInt {
         return heap[(pos - 1) / 2];
     }
 
-    private void buildHeap() {
-        // Bởi vì các node từ n/2 -> n-1 đều là lá nên chỉ cần vun đống cho các node trước đó (ko phải lá)
-        for (int i = size / 2 - 1; i >= 0; i--) {
-            heapifyDown(i);
-        }
-    }
-
     private void heapifyDown(int i) {
         if (i < 0)
             return;
