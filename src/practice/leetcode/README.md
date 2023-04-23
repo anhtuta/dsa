@@ -97,6 +97,24 @@ function fn(arr):
         (sau khi thoái khỏi vòng while, lúc này điều kiện bài toán lại được thoả mãn, ta cần update answer)
 ```
 
+Alternative implementation (my opinion): có thể dùng vòng while thay cho for (Xem ví dụ bài LongestSubstringWithoutRepeatingCharacters_3):
+
+```java
+void solution(int[] arr) {
+    int left = 0, right = 0;
+    while (right < arr.length) {
+        if condition from problem is met:
+            "add" element at arr[right] to window (ex: curr += arr[right])
+            Increase window size: right++
+            Update the answer
+        else (condition from problem is NOT met):
+            "remove" element at arr[left] from window (ex: curr -= arr[left])
+            Decrease window size: left++
+    }
+    Update the answer if needed
+}
+```
+
 Nhận xét:
 
 - Nếu như Two Pointers sử dụng 2 con trỏ chạy từ 2 phía của 1 mảng, thì Sliding window lại sử dụng 2 con trỏ chạy từ 1 phía của mảng
@@ -190,6 +208,10 @@ function fn(arr, k):
     Update ans
     return ans // Alternatively, you could do something like return max(ans, curr) if the problem is asking for a maximum value and curr is tracking that.
 ```
+
+Example problems:
+
+- [3. Longest Substring Without Repeating Characters](./medium/LongestSubstringWithoutRepeatingCharacters_3.java)
 
 ## 4. More common patterns
 
