@@ -2,6 +2,12 @@
 
 This folder contains leetcode problems organized by level, and some coding patterns
 
+Note: memory complexity ở leetcode nhiều khi ko đúng lắm, bằng chứng là 1 solution submit 2 lần nhưng có 2 kq khác nhau:
+
+![](./images/leetcode-memory1.png)
+
+![](./images/leetcode-memory2.png)
+
 # Leetcode patterns
 
 Vocab:
