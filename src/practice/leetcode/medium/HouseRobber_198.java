@@ -73,6 +73,14 @@ public class HouseRobber_198 {
         return memo[pos];
     }
 
+    /**
+     * Để tối ưu DP_topDown, ta cần phải khử đệ quy. Top down sẽ tính toán theo thứ tự:
+     * rob(n-1) -> rob(n-2) -> ... -> rob(0). Với bottom up, ta sẽ tính toán ngược lại:
+     * rob(0) -> rob(1) -> ... -> rob(n-1)
+     * 
+     * Khá giống với bài fibonacci, xem thêm tại
+     * {@link algorithm.dynamicprogramming.fibo.Fibonacci_BottomUp Fibonacci_BottomUp}
+     */
     public int rob_DP_bottomUp(int[] a) {
         int memo_1 = 0, memo_2 = 0; // memo_1 đại diện cho a[i-1], memo_2 đại diện cho a[i-2]
         int ans = 0;

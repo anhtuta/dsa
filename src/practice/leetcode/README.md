@@ -8,6 +8,10 @@ Note: memory complexity ở leetcode nhiều khi ko đúng lắm, bằng chứng
 
 ![](./images/leetcode-memory2.png)
 
+Với mỗi bài leetcode, nên vào tab Solutions, dù lời giải đã được accepted. Tại sao? Vì đôi khi sẽ thấy 1 comment rất tâm huyết như này, hướng dẫn cách tiếp cận chi tiết từ naive tới pro:
+
+https://leetcode.com/problems/house-robber/solutions/156523/from-good-to-great-how-to-approach-most-of-dp-problems/
+
 # Leetcode patterns
 
 Vocab:
@@ -458,6 +462,10 @@ Nếu duyệt từ đầu, quyết định quan trọng nhất là khi duyệt �
 > Divide and conquer approaches can be parallelized while dynamic programming approaches cannot (actually DP cannot be easily parallelized)
 
 This is because the subproblems in divide an conquer approaches are independent of one another (they do NOT overlap) while in dynamic programming, the subproblems do overlap
+
+### Example problems
+
+- [HouseRobber_198](./medium/HouseRobber_198.java)
 
 # Ref
 
