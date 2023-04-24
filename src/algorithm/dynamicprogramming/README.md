@@ -69,3 +69,4 @@ Another example of Top Down vs Bottom up:
 - https://www.geeksforgeeks.org/overlapping-subproblems-property-in-dynamic-programming-dp-1/
 - https://www.quora.com/How-should-I-explain-dynamic-programming-to-a-4-year-old/answer/Jonathan-Paulson
 - https://www.log2base2.com/algorithms/dynamic-programming/dynamic-programming.html
+- DP trên leetcode, có note [tại đây](../../practice/leetcode/README.md#10-dynamic-programming)

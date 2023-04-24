@@ -16,7 +16,22 @@ Vocab:
 
 https://leetcode.com/explore/interview/card/cheatsheets/720/resources/4725/
 
-General DS/A flowchart: here's a flowchart that can help you figure out which data structure or algorithm should be used. Note that this flowchart is very **general** as it would be impossible to cover every single scenario
+### Input sizes vs time complexity
+
+- n <= 10: `O(n^2 * n!)` or `O(4^n)`: You should think about backtracking or any brute-force recursive algorithm
+- 10 < n <= 20: `O(2^n)`: Consider brute-force, backtracking and recursion
+- 20 < n <= 100: `O(n^3)`: Consider brute force solutions, and try to improve on "slow" steps using tools like hash maps or heaps.
+- 100 < n <= 1,000: `O(n^2)`: Consider nested loops
+- 1,000 < n < 100,000 = 10^5: `O(n⋅logn)`:
+  - Ask yourself if sorting the input or using a heap can be helpful
+  - Nested loops that run in `O(n^2)` are unacceptable
+  - Consider make use of the following techniques: hash map, two pointer, sliding window, binary search, heap
+- 100,000 < n < 1,000,000 = 10^6: `O(n)`, but sometimes `O(n⋅logn)` is safe: Consider using above techniques with a hash map
+- n > 1,000,000 = 10^6: `O(logn)` or `O(1)`: Consider use binary search, hash map
+
+### General DS/A flowchart
+
+Here's a flowchart that can help you figure out which data structure or algorithm should be used. Note that this flowchart is very **general** as it would be impossible to cover every single scenario
 
 ![](./flowchart.png)
 
@@ -308,6 +323,109 @@ Idea: dùng 3 con trỏ curr, prev, next để thực hiện việc reverse 1 Li
 Example problem:
 
 - [ReverseLinkedList_206 and ReverseLinkedListII_92](./medium/ReverseLinkedList_206_92.java)
+
+## 9. Binary search
+
+https://leetcode.com/explore/learn/card/binary-search/125/template-i/938/
+
+Node: nên dùng `int mid = left + (right - left) / 2;` thay vì `int mid = (left + right) / 2`, để tránh bị overflow
+
+Template I
+
+```java
+int binarySearch(int[] nums, int target){
+  if(nums == null || nums.length == 0)
+    return -1;
+
+  int left = 0, right = nums.length - 1;
+  while(left <= right){
+    // Prevent (left + right) overflow
+    int mid = left + (right - left) / 2;
+    if(nums[mid] == target){ return mid; }
+    else if(nums[mid] < target) { left = mid + 1; }
+    else { right = mid - 1; }
+  }
+
+  // End Condition: left > right
+  return -1;
+}
+```
+
+Template II
+
+```java
+int binarySearch(int[] nums, int target){
+  if(nums == null || nums.length == 0)
+    return -1;
+
+  int left = 0, right = nums.length - 1;
+  while(left < right){
+    // Prevent (left + right) overflow
+    int mid = left + (right - left) / 2;
+    if(nums[mid] == target){ return mid; }
+    else if(nums[mid] < target) { left = mid + 1; }
+    else { right = mid; }
+  }
+
+  // Post-processing:
+  // End Condition: left == right
+  if(nums[left] == target) return left;
+  return -1;
+}
+```
+
+Template III
+
+```java
+int binarySearch(int[] nums, int target) {
+    if (nums == null || nums.length == 0)
+        return -1;
+
+    int left = 0, right = nums.length - 1;
+    while (left + 1 < right){
+        // Prevent (left + right) overflow
+        int mid = left + (right - left) / 2;
+        if (nums[mid] == target) {
+            return mid;
+        } else if (nums[mid] < target) {
+            left = mid;
+        } else {
+            right = mid;
+        }
+    }
+
+    // Post-processing:
+    // End Condition: left + 1 == right
+    if(nums[left] == target) return left;
+    if(nums[right] == target) return right;
+    return -1;
+}
+```
+
+Thực sự chưa từng dùng template II và III, bao giờ dùng sẽ update thêm
+
+## 10. Dynamic Programming
+
+https://leetcode.com/explore/featured/card/dynamic-programming/630/an-introduction-to-dynamic-programming/4035/
+
+Đã từng viết 1 ghi chú về algorithm này rồi, xem thêm [tại đây](../../algorithm/dynamicprogramming/README.md)
+
+### Top-down vs Bottom-up
+
+Top-down (Memoization)
+
+- Sử dụng recursion
+- Sử dụng thêm biến để memoization (ghi nhớ), thường dùng array hoặc hashmap
+- Memoizing a result means to **store the result of a function call**, usually in a hashmap or an array, so that **when the same function call is made again, we can simply return the memoized result** instead of recalculating the result
+- Thường dễ viết hơn Bottom-up, bởi vì with recursion, the **ordering** of subproblems does not matter, whereas with tabulation, we need to go through a logical ordering of solving subproblems.
+
+Bottom-up (Tabulation)
+
+- Sử dụng iteration
+- Bắt đầu từ base case F(0), sau đó tính toán các case sau dựa theo case trước: F(0) -> F(1) -> F(2)
+- Thường nhanh hơn Top-down bởi vì ko bị overhead giống như đệ quy
+
+Chốt lại: **top-down uses recursion, and bottom-up uses iteration**
 
 # Ref
 
