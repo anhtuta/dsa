@@ -10,6 +10,8 @@ package practice.leetcode.medium;
  * From good to great. How to approach most of DP problems: Bài post sau sẽ hướng dẫn chi tiết cách
  * tiếp cận từ đệ quy -> DP. Một bài post rất hay và đáng để học hỏi:
  * https://leetcode.com/problems/house-robber/solutions/156523/from-good-to-great-how-to-approach-most-of-dp-problems/
+ * 
+ * What's next: {@link UniquePaths_62}
  */
 public class HouseRobber_198 {
     private int[] memo;
@@ -28,8 +30,13 @@ public class HouseRobber_198 {
         // }
         // ans = rob_DP_topDown(a, a.length - 1);
 
-        // Step 3: tối ưu hơn nữa bằng việc dùng DP bottom up thay cho top down
-        ans = rob_DP_bottomUp(a);
+        // Step 3: khử đệ quy bằng cách dùng DP bottom up + memo
+        // memo = new int[a.length];
+        // ans = rob_DP_bottomUp_memo(a);
+
+        // Step 4: tối ưu hơn nữa (tối ưu memory) bằng việc dùng DP bottom up without memo
+        ans = rob_DP_bottomUp_noMemo(a);
+
         return ans;
     }
 
@@ -78,14 +85,35 @@ public class HouseRobber_198 {
      * rob(n-1) -> rob(n-2) -> ... -> rob(0). Với bottom up, ta sẽ tính toán ngược lại:
      * rob(0) -> rob(1) -> ... -> rob(n-1)
      * 
+     * Chú ý: do rob(i) được tính toán từ rob(i-1) và rob(i-2), nên cần xét case đặc biệt là
+     * input size < 2
+     */
+    public int rob_DP_bottomUp_memo(int[] a) {
+        if (a == null || a.length == 0)
+            return 0;
+        if (a.length < 2)
+            return a[0];
+
+        memo[0] = a[0];
+        memo[1] = Math.max(a[0], a[1]);
+        for (int i = 2; i < a.length; i++) {
+            memo[i] = Math.max(memo[i - 1], a[i] + memo[i - 2]);
+        }
+        return memo[a.length - 1];
+    }
+
+    /**
+     * Để tối ưu bottom up hơn nữa (tối ưu bộ nhớ chứ time thì ko tối ưu được nữa), ta sẽ thay thế mảng
+     * memo bằng 2 biến.
+     * 
      * Để ý rằng, với rob_DP_topDown, tại mỗi lần tính rob(k), ta chỉ quan tâm đến rob(k-1) và rob(k-2),
      * do đó có thể chỉ cần sử dụng 2 biến tạm để tính toán
      * 
      * Khá giống với bài fibonacci, xem thêm tại
      * {@link algorithm.dynamicprogramming.fibo.Fibonacci_BottomUp Fibonacci_BottomUp}
      */
-    public int rob_DP_bottomUp(int[] a) {
-        int memo_1 = 0, memo_2 = 0; // memo_1 đại diện cho a[i-1], memo_2 đại diện cho a[i-2]
+    public int rob_DP_bottomUp_noMemo(int[] a) {
+        int memo_1 = 0, memo_2 = 0; // memo_1 đại diện cho memo[i-1], memo_2 đại diện cho memo[i-2]
         int ans = 0;
         for (int i = 0; i < a.length; i++) {
             ans = Math.max(memo_1, a[i] + memo_2);

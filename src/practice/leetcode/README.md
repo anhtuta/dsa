@@ -475,9 +475,12 @@ Most of DP problems can be approached using the following sequence:
 
 Hãy xem bài [HouseRobber_198](./medium/HouseRobber_198.java) để hiểu
 
+Note: không phải bài nào cũng dùng được tới bước 5, tức là dùng bottom-up với N biến, mà chỉ tối ưu được đến step 4, dùng bottom up + mảng memo. Cụ thể là bài [UniquePaths_62](./medium/UniquePaths_62.java)
+
 ### Example problems
 
 - [HouseRobber_198](./medium/HouseRobber_198.java)
+- [UniquePaths_62](./medium/UniquePaths_62.java)
 
 # Ref
 
