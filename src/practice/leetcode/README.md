@@ -463,6 +463,18 @@ Nếu duyệt từ đầu, quyết định quan trọng nhất là khi duyệt �
 
 This is because the subproblems in divide an conquer approaches are independent of one another (they do NOT overlap) while in dynamic programming, the subproblems do overlap
 
+### From good to great. How to approach most of DP problems
+
+Most of DP problems can be approached using the following sequence:
+
+1. Find recursive relation
+2. Recursive (top-down)
+3. Recursive + memo (top-down)
+4. Iterative + memo (bottom-up)
+5. Iterative + N variables (bottom-up)
+
+Hãy xem bài [HouseRobber_198](./medium/HouseRobber_198.java) để hiểu
+
 ### Example problems
 
 - [HouseRobber_198](./medium/HouseRobber_198.java)

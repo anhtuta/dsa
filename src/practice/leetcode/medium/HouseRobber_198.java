@@ -78,6 +78,9 @@ public class HouseRobber_198 {
      * rob(n-1) -> rob(n-2) -> ... -> rob(0). Với bottom up, ta sẽ tính toán ngược lại:
      * rob(0) -> rob(1) -> ... -> rob(n-1)
      * 
+     * Để ý rằng, với rob_DP_topDown, tại mỗi lần tính rob(k), ta chỉ quan tâm đến rob(k-1) và rob(k-2),
+     * do đó có thể chỉ cần sử dụng 2 biến tạm để tính toán
+     * 
      * Khá giống với bài fibonacci, xem thêm tại
      * {@link algorithm.dynamicprogramming.fibo.Fibonacci_BottomUp Fibonacci_BottomUp}
      */
