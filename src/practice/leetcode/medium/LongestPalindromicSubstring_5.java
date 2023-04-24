@@ -6,7 +6,8 @@ package practice.leetcode.medium;
 public class LongestPalindromicSubstring_5 {
     /**
      * Idea: do input size <= 1000 nên có thể dùng 2 vòng for, O(n^2) được
-     * Cứ duyệt từ đầu, tại mỗi vị trí charAt của string s, cần xét cả 2 case sau:
+     * Brute-force: tìm tất cả các Palindromic Substring và so sánh. Cứ duyệt từ đầu, tại mỗi vị trí
+     * charAt của string s, cần xét cả 2 case sau:
      * - len của Palindromic = số chẵn, ex: bb, xảy ra khi cs[i] = cs[i+1]
      * - len của Palindromic = số lẻ, ex: bab, luôn xảy ra
      * (cs ở đây là mảng char, cs = s.toCharArray())

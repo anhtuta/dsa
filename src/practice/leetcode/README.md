@@ -427,6 +427,32 @@ Bottom-up (Tabulation)
 
 Chốt lại: **top-down uses recursion, and bottom-up uses iteration**
 
+### When to Use DP
+
+Here are some common characteristics of DP problems that are easy to identify:
+
+- The problem will ask for the optimum value (maximum or minimum) of something, or the number of ways there are to do something (but only this characteristic is NOT sufficient!):
+  - What is the minimum cost of doing...
+  - What is the maximum profit from...
+  - How many ways are there to do...
+  - What is the longest possible...
+  - Is it possible to reach a certain point...
+- Future "decisions" depend on earlier decisions: deciding to do something at one step may affect the ability to do something in a later step
+
+VD1: bài toán [House robber](https://leetcode.com/problems/house-robber/): cho mảng arr đại diện cho số tiền của các ngôi nhà trên 1 con phố, nhiệm vụ của bạn là cướp nhiều tiền nhất có thể, nhưng ko được cướp 2 nhà liên tiếp. Chẳng hạn, với arr = [2,7,9,3,1], bạn sẽ cướp nhà có số tiền = 2,9,1. Tổng số tiền tối đa có thể cướp được = 2+9+1 = 13
+
+Nếu duyệt từ đầu, ta có thể xem xét có nên cướp nhà đầu tiên hoặc nhà thứ hai (2 và 7). Nếu dùng greedy, ta sẽ chọn nhà thứ hai (7 tiền), nhưng sẽ bỏ lỡ nhà thứ 3 (có 9 tiền). Rõ ràng: việc chọn nhà đầu tiên hay thứ hai sẽ ảnh hưởng tới quyết định chọn các nhà sau đó (decision between robbing the first or second house affects which options are available for future decisions)
+
+VD2: bài toán [Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/): cho mảng số nguyên arr, tìm độ dài Subsequence tăng dần lớn nhất. Chẳng hạn arr = [10,9,2,5,3,7,101,18], thì đáp án là subsequence [2,3,7,101], hoặc [2,5,7,18], có độ dài = 4. Với arr = [1, 2, 6, 3, 5], thì subsequence phải tìm là [1,2,3,5]
+
+Nếu duyệt từ đầu, quyết định quan trọng nhất là khi duyệt đến số 6, ta sẽ lấy hay ko lấy. Nếu lấy 6 thì ko thể lấy 3,5 nữa. Rõ ràng quyết định tại số 6 sẽ ảnh hưởng tới các quyết định sau đó
+
+> When you're solving a problem on your own and trying to decide if the second characteristic is applicable, assume it isn't, then try to think of a counterexample that proves a greedy algorithm won't work. If you can think of an example where earlier decisions affect future decisions, then DP is applicable
+
+> Divide and conquer approaches can be parallelized while dynamic programming approaches cannot (actually DP cannot be easily parallelized)
+
+This is because the subproblems in divide an conquer approaches are independent of one another (they do NOT overlap) while in dynamic programming, the subproblems do overlap
+
 # Ref
 
 - https://levelup.gitconnected.com/dont-just-leetcode-follow-the-coding-patterns-instead-4beb6a197fdb
