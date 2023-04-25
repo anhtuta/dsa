@@ -20,10 +20,10 @@ public class HouseRobber_198 {
     // [2,7,9,3,1,10] => 2 + 9 + 10 = 21
     public int rob(int[] a) {
         int ans;
-        // Step 1: recursion nhưng bị timeout
+        // Step 1: recursion top down nhưng bị timeout
         // ans = rob_recursion(a, a.length - 1);
 
-        // Step 2: tối ưu recursion bằng cách dùng bảng memo
+        // Step 2: tối ưu recursion bằng cách dùng DP top down + memo
         // memo = new int[a.length];
         // for (int i = 0; i < memo.length; i++) {
         // memo[i] = -1;
@@ -43,10 +43,13 @@ public class HouseRobber_198 {
     /**
      * Đầu tiên hãy nghĩ đến solution dùng đệ quy. Tại ngôi nhà i, ta có 2 option:
      * - Cướp nhà này => phải ko được cướp nhà i-1
-     * - KHÔNG cướp nhà này => có thể cướp nhà i-1
+     * - KHÔNG cướp nhà này => có thể cướp nhà i-1 hoặc ko
      * => Chỉ cần tìm max từ 2 option này là sẽ thu được đáp án bài toán rồi (tại i = n-1):
-     * maxLoot = rob(i) = max(rob(i-1), a[i] + rob(i-2))
+     * maxLoot = rob(i) = max(ko cướp nhà i, có cướp nhà i) = max(rob(i-1), a[i] + rob(i-2))
      * => Đây là recursion top down
+     * 
+     * Note: tại nhà i, nếu ko cướp, ta ko cần quan tâm đến việc có cướp nhà i-1 hay ko, bởi vì việc đó
+     * là bài toán tại nhà i-1 rồi, chỉ cần dùng rob(i-1) là được
      * 
      * Result:
      * Solution này lại giống với fibonacci_naive: nó phải tính toán rob(k) rất nhiều lần.
@@ -117,6 +120,7 @@ public class HouseRobber_198 {
         int ans = 0;
         for (int i = 0; i < a.length; i++) {
             ans = Math.max(memo_1, a[i] + memo_2);
+            // System.out.printf("maxLoot at house %d = %d%n", i, ans);
             memo_2 = memo_1;
             memo_1 = ans;
         }
@@ -127,5 +131,6 @@ public class HouseRobber_198 {
         HouseRobber_198 app = new HouseRobber_198();
         System.out.println(app.rob(new int[] {1, 2, 3, 1})); // 4
         System.out.println(app.rob(new int[] {2, 7, 9, 3, 1})); // 12
+        System.out.println(app.rob(new int[] {2, 7, 9, 3, 1, 10})); // 21
     }
 }

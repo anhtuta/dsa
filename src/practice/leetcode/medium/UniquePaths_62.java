@@ -20,10 +20,10 @@ public class UniquePaths_62 {
     public int uniquePaths(int m, int n) {
         int ans;
 
-        // Step 1: recursion nhưng bị timeout
+        // Step 1: recursion top down nhưng bị timeout
         // ans = uniquePaths_recursion(m, n, m - 1, n - 1);
 
-        // Step 2: tối ưu recursion bằng cách dùng bảng memo
+        // Step 2: tối ưu recursion bằng cách dùng DP top down + memo
         // initMemo(m, n);
         // ans = uniquePaths_DP_topDown(m, n, m - 1, n - 1);
 
