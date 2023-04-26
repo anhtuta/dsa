@@ -4,6 +4,8 @@ package practice.leetcode.medium;
  * https://leetcode.com/problems/unique-paths/
  * 
  * Bài này tương tự bài {@link HouseRobber_198}, nên đọc bài đó trước khi đọc bài này
+ * 
+ * What's next: {@link LongestPalindromicSubsequence_516}, cũng dùng DP với mảng 2 chiều
  */
 public class UniquePaths_62 {
     private int[][] memo;
@@ -90,6 +92,12 @@ public class UniquePaths_62 {
 
     /**
      * Khử đệ quy bằng cách dùng DP bottom up + memo
+     * Do 2 con trỏ i,j đều chạy từ 0,0 đến cuối mảng, và cũng dựa theo DP top down, ta thấy memo[i][j]
+     * sẽ phụ thuộc vào những thằng sau:
+     * - memo[i-1][j]
+     * - memo[i][j-1]
+     * Đây đều là những thằng đứng trước nó trong mảng 2 chiều, do đó việc tính toán khá đơn giản, chỉ
+     * hơi khó hơn việc tính toán Fibonacci 1 xíu
      */
     public int uniquePaths_DP_bottomUp_memo(int m, int n) {
         for (int i = 0; i < m; i++) {

@@ -2,7 +2,7 @@
 
 This folder contains leetcode problems organized by level, and some coding patterns
 
-Note: memory complexity ở leetcode nhiều khi ko đúng lắm, bằng chứng là 1 solution submit 2 lần nhưng có 2 kq khác nhau:
+Note: memory complexity ở leetcode nhiều khi ko đúng lắm (time complexity cũng tương tự, nhưng chênh lệch nhau ít hơn), bằng chứng là 1 solution submit 2 lần nhưng có 2 kq khác nhau:
 
 ![](./images/leetcode-memory1.png)
 
@@ -481,6 +481,7 @@ Note: không phải bài nào cũng dùng được tới bước 5, tức là d�
 
 - [HouseRobber_198](./medium/HouseRobber_198.java)
 - [UniquePaths_62](./medium/UniquePaths_62.java)
+- [LongestPalindromicSubsequence_516](./medium/LongestPalindromicSubsequence_516.java)
 
 # Ref
 
