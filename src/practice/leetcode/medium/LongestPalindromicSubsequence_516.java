@@ -5,6 +5,8 @@ package practice.leetcode.medium;
  * 
  * Cách tiếp cận tự đệ quy -> DP, tham khảo bài {@link HouseRobber_198} và:
  * https://emre.me/coding-patterns/palindromes/
+ * 
+ * What's next: {@link LongestCommonSubsequence_1143}
  */
 public class LongestPalindromicSubsequence_516 {
     private int[][] memo;
