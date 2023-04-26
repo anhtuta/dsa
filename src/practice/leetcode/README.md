@@ -483,6 +483,10 @@ Note: không phải bài nào cũng dùng được tới bước 5, tức là d�
 - [UniquePaths_62](./medium/UniquePaths_62.java)
 - [LongestPalindromicSubsequence_516](./medium/LongestPalindromicSubsequence_516.java)
 
+So sánh:
+
+- `LongestPalindromicSubsequence_516` giống với `UniquePaths_62` ở chỗ: tại mỗi vị trí i, ta chỉ có 1 case là sẽ lấy i, nên việc tính toán khá đơn giản. Trong khi đó bài `HouseRobber_198` sẽ có 2 case là có lấy i hay ko lấy i, do đó phải xét cả 2 case xong tìm max value giữa chúng
+
 # Ref
 
 - https://levelup.gitconnected.com/dont-just-leetcode-follow-the-coding-patterns-instead-4beb6a197fdb

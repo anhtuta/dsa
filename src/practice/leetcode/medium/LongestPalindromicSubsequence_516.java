@@ -63,6 +63,11 @@ public class LongestPalindromicSubsequence_516 {
      * Cơ mà, bài này duyệt từ 2 phía đầu và cuối của string, chứ có phải duyệt từ 1 phía cuối của
      * string đâu mà gọi là top down được nhỉ?
      * 
+     * Đúng là top down. Bởi vì top down KHÔNG có nghĩa là duyệt từ cuối mảng/string, mà là duyệt từ bài
+     * toán tổng quát nhất, sau đó nó sẽ gọi đệ quy đến bài toán bé hơn, rồi lại đệ quy. Lần gọi đệ quy
+     * cuối cùng sẽ là base case, thường là tại index = 0. Trong bài toán này, base case là vị trí 2 con
+     * trỏ gặp nhau
+     * 
      * Result:
      * Accepted. Runtime: 39 ms
      * Time complexity: O(n^2), because we're using two pointers, and memo is an 2-D array
