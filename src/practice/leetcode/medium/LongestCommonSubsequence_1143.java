@@ -26,6 +26,10 @@ public class LongestCommonSubsequence_1143 {
         memo = new int[text1.length() + 1][text2.length() + 1];
         ans = longestCommonSubsequence_DP_bottomUp_memo(text1, text2);
 
+        // Có thể duyệt ngược lại nếu thích =))
+        // memo = new int[text1.length() + 1][text2.length() + 1];
+        // ans = longestCommonSubsequence_DP_bottomUp_memo_reverseOrder(text1, text2);
+
         // Step 4: tối ưu hơn nữa (tối ưu memory) bằng việc dùng DP bottom up without memo
         // Khả năng cao bài này cũng ko làm được bằng bottom up + N variables, giống bài UniquePaths_62
 
@@ -86,6 +90,10 @@ public class LongestCommonSubsequence_1143 {
      * - memo[i1][i2+1]
      * Tức là sẽ phụ thuộc vào các phần tử đứng sau nó trong mảng 2 chiều, do đó để implement bottom up,
      * ta sẽ tính các phần tử phía sau đó trước, tức là ta sẽ tính toán từ memo[n-1][m-1] -> memo[0][0]
+     * 
+     * Chú ý là memo[n-1][m-1] sẽ phụ thuộc vào memo[n][m], vượt quá index của text1, và text2, nên ta
+     * sẽ tăng kích thước của memo lúc init: memo = new int[n+1][m+1], và hiển nhiên, memo[n][m] = 0,
+     * và toàn bộ các memo[n][x1] = 0, memo[x2][m] = 0, với x1 < n, x2 < m
      */
     public int longestCommonSubsequence_DP_bottomUp_memo(String text1, String text2) {
         for (int i1 = text1.length() - 1; i1 >= 0; i1--) {
@@ -95,9 +103,35 @@ public class LongestCommonSubsequence_1143 {
                 } else {
                     memo[i1][i2] = Math.max(memo[i1 + 1][i2], memo[i1][i2 + 1]);
                 }
+                // System.out.printf("memo[%d][%d] = %d%n", i1, i2, memo[i1][i2]);
             }
         }
         return memo[0][0];
+    }
+
+    /**
+     * Có thể dùng bottom up theo chiều ngược lại, bởi vì bài này là đếm common subsequence nên thứ tự
+     * duyệt ko quan trọng, nếu duyệt ngược thì memo[i1][i2] sẽ phụ thuộc vào:
+     * - memo[i1-1][i2-1]
+     * - memo[i1-1][i2]
+     * - memo[i1][i2-1]
+     * Do đó memo[0][0] sẽ bị index = -1, do đó mảng memo, ta sẽ dùng từ index 1 -> n,m
+     */
+    public int longestCommonSubsequence_DP_bottomUp_memo_reverseOrder(String text1, String text2) {
+        int x1, x2; // duyệt text1, text2 = i1,i2 nhưng duyệt mảng memo = x1,x2 cho đỡ bị index của memo = -1
+        for (int i1 = 0; i1 < text1.length(); i1++) {
+            for (int i2 = 0; i2 < text2.length(); i2++) {
+                x1 = i1 + 1;
+                x2 = i2 + 1;
+                if (text1.charAt(i1) == text2.charAt(i2)) {
+                    memo[x1][x2] = 1 + memo[x1 - 1][x2 - 1];
+                } else {
+                    memo[x1][x2] = Math.max(memo[x1 - 1][x2], memo[x1][x2 - 1]);
+                }
+                // System.out.printf("memo[%d][%d] = %d%n", x1, x2, memo[x1][x2]);
+            }
+        }
+        return memo[text1.length()][text2.length()];
     }
 
     public static void main(String[] args) {
