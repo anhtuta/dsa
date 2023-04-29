@@ -7,6 +7,9 @@ import util.Utils;
 
 /**
  * https://leetcode.com/problems/3sum/
+ * 
+ * Đôi khi chỉ cần thay đổi cách tính toán là pass được luôn, trong khi cách tính cũ có quá nhiều
+ * case đặc biệt bị fail
  */
 public class ThreeSum_15 {
     /**
