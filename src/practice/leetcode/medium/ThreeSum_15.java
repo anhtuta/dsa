@@ -85,10 +85,12 @@ public class ThreeSum_15 {
      * lại trở thành Two sum rồi, chỉ khác ở chỗ tổng = -a[i] thay vì = 0.
      * Sau khi tìm được left, right thì vẫn phải nhảy qua các phần tử a[left], a[right] trùng nhau
      * 
+     * Result: accepted
+     * 
      * Ref:
      * https://leetcode.com/problems/3sum/solutions/7402/share-my-ac-c-solution-around-50ms-o-n-n-with-explanation-and-comments/
      */
-    public List<List<Integer>> threeSum(int[] a) {
+    public List<List<Integer>> threeSum_ok(int[] a) {
         Arrays.sort(a);
 
         System.out.print("Input: ");
@@ -116,6 +118,57 @@ public class ThreeSum_15 {
                     while (left < right && a[right] == curr)
                         right--;
                 } else if (sum < target) {
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+
+            // Skip toàn bộ các phần tử a[i] giống nhau
+            while (i < a.length - 2 && a[i + 1] == a[i]) {
+                i++;
+            }
+        }
+
+        return res;
+    }
+
+    /**
+     * Giống threeSum_ok, nhưng bỏ biến curr và target đi. Tuy sum = a[i] + a[left] + a[right], nhưng
+     * trong mỗi lần duyệt, a[i] ko đổi, chỉ có left và right là thay đổi, do đó:
+     * - Nếu sum < 0 thì left++
+     * - Nếu sum > 0 thì right--
+     */
+    public List<List<Integer>> threeSum(int[] a) {
+        Arrays.sort(a);
+
+        System.out.print("Input: ");
+        Utils.printArray(a);
+
+        List<List<Integer>> res = new ArrayList<>();
+        int left, right, sum;
+        for (int i = 0; i < a.length - 2; i++) {
+            left = i + 1;
+            right = a.length - 1;
+            while (left < right) {
+                sum = a[i] + a[left] + a[right];
+                if (sum == 0) {
+                    res.add(Arrays.asList(a[i], a[left], a[right]));
+
+                    // Skip toàn bộ các phần tử a[left] giống nhau
+                    while (left < right && a[left + 1] == a[left])
+                        left++;
+
+                    // Skip toàn bộ các phần tử a[right] giống nhau
+                    while (left < right && a[right - 1] == a[right])
+                        right--;
+
+                    // Giảm kích thước window để tìm các cặp tiếp theo (tìm triplet nhưng a[i] ko đổi,
+                    // chỉ tìm a[left] và a[right]). Note: phải giảm kích thước windows SAU khi skip các
+                    // duplication, nếu ko sẽ bị skip quá 1 phần tử
+                    left++;
+                    right--;
+                } else if (sum < 0) {
                     left++;
                 } else {
                     right--;
