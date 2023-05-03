@@ -21,8 +21,11 @@ public class MinSubstringContainsCharacters {
      * Bài toán có thể phát biểu lại thành tìm substring nhỏ nhất của S mà chứa các ký tự bên T,
      * nên rõ ràng thứ tự các ký tự của T là ko quan trọng
      * 
-     * Idea: sử dụng sliding window. Đầu tiên cần tìm ký tự đầu tiên của S mà có bên T, đó là vị trí
-     * start của 2 con trỏ left, right (window trong bài này là window bên string S).
+     * Idea: sử dụng sliding window và counting element: Tạo window phía S, sau đó đếm các ký tự trong
+     * window mà tồn tại bên T, nếu như count này = T.length thì window đó là 1 substring cần tìm
+     * 
+     * Đầu tiên cần tìm ký tự đầu tiên của S mà có bên T, đó là vị trí start của 2 con trỏ left, right
+     * (window trong bài này là window bên string S).
      * - Ta dùng mảng hashT để đếm các ký tự xuất hiện bên trong string T, nó khá giống với cntArr trong
      * kỹ thuật counting element
      * - Tương tự, ta dùng mảng hashS để đếm các ký tự xuất hiện bên trong window, chính là
@@ -51,6 +54,7 @@ public class MinSubstringContainsCharacters {
         if (s.length() < t.length())
             return "";
 
+        // Để đơn giản, coi như input chỉ là 2 string gồm các kí tự hoa = tiếng anh từ A -> Z
         int[] hashS = new int[26];
         int[] hashT = new int[26];
         for (int i = 0; i < t.length(); i++) {
@@ -144,5 +148,8 @@ public class MinSubstringContainsCharacters {
         MinSubstringContainsCharacters app = new MinSubstringContainsCharacters();
         System.out.println(app.minSubstring("JJGHIKAKFJDEIDJKEHHHDHHFGECJJIJ", "FKK")); // KAKF
         System.out.println(app.minSubstring("THISISATESTSTRING", "TIST")); // TSTRI
+        System.out.println(app.minSubstring("ADOOOOOBECODEBANC", "ADOBE")); // ODEBA
+        System.out.println(app.minSubstring("TESKTHEREMANGOTEST", "TEST")); // TEST
+        System.out.println(app.minSubstring("NIHARIKA", "IR")); // RI
     }
 }
