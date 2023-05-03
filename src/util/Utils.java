@@ -32,4 +32,13 @@ public class Utils {
         }
         System.out.println("]");
     }
+
+    public static void printSubstring(String s, int start, int end) {
+        System.out.print("Substring: ");
+        StringBuilder builder = new StringBuilder();
+        for (int i = start; i <= end; i++) {
+            builder.append(s.charAt(i));
+        }
+        System.out.println(builder.toString());
+    }
 }
