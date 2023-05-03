@@ -21,7 +21,8 @@ public class MinSubstringContainsCharacters {
      * Bài toán có thể phát biểu lại thành tìm substring nhỏ nhất của S mà chứa các ký tự bên T,
      * nên rõ ràng thứ tự các ký tự của T là ko quan trọng
      * 
-     * Idea: sử dụng sliding window và counting element: Tạo window phía S, sau đó đếm các ký tự trong
+     * Idea: sử dụng sliding window và hashmap (thực ra dùng counting element cũng tương tự, đỡ phải
+     * dùng thư viện, nhưng bản chất 2 cái là như nhau): Tạo window phía S, sau đó đếm các ký tự trong
      * window mà tồn tại bên T, nếu như count này = T.length thì window đó là 1 substring cần tìm
      * 
      * Đầu tiên cần tìm ký tự đầu tiên của S mà có bên T, đó là vị trí start của 2 con trỏ left, right
@@ -135,11 +136,7 @@ public class MinSubstringContainsCharacters {
 
         // return result, it is a substring between [minStartIdx...minEndIdx] of S
         if (minStartIdx != -1) {
-            StringBuilder builder = new StringBuilder();
-            for (int i = minStartIdx; i <= minEndIdx; i++) {
-                builder.append(s.charAt(i));
-            }
-            return builder.toString();
+            return s.substring(minStartIdx, minEndIdx + 1);
         }
         return "";
     }

@@ -131,11 +131,7 @@ public class MinimumWindowSubstring_76 {
 
         // return result, it is a substring between [minStartIdx...minEndIdx] of S
         if (minStartIdx != -1) {
-            StringBuilder builder = new StringBuilder();
-            for (int i = minStartIdx; i <= minEndIdx; i++) {
-                builder.append(s.charAt(i));
-            }
-            return builder.toString();
+            return s.substring(minStartIdx, minEndIdx + 1);
         }
         return "";
     }
