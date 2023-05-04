@@ -37,6 +37,9 @@ import util.Utils;
  * s and t consist of uppercase and lowercase English letters.
  * 
  * Follow up: Could you find an algorithm that runs in O(m + n) time?
+ * 
+ * ===
+ * Nên xem bài {@link practice.leetcode.medium.LongestSubstringWithoutRepeatingCharacters_3} trước
  */
 public class MinimumWindowSubstring_76 {
     /**
@@ -138,8 +141,8 @@ public class MinimumWindowSubstring_76 {
 
     public static void main(String[] args) {
         MinimumWindowSubstring_76 app = new MinimumWindowSubstring_76();
-        // System.out.println(app.minWindow("ADOBECODEBANC", "ABC")); //
-        System.out.println(app.minWindow("a", "a")); //
-        System.out.println(app.minWindow("a", "aa")); //
+        System.out.println(app.minWindow("ADOBECODEBANC", "ABC")); // BANC
+        System.out.println(app.minWindow("a", "a")); // a
+        System.out.println(app.minWindow("a", "aa")); // [nothing, print empty]
     }
 }
