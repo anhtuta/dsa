@@ -6,6 +6,8 @@ Note: các bài nếu ko ghi level thì default là Easy
 
 Cách solution trong file pdf có vẻ như được viết = python
 
+Sau khi học xong codility, hãy chuyển qua [leetcode](../../leetcode/README.md), bởi vì chủ yếu luyện tập trên đó
+
 ## 1 số mẹo:
 
 - Time complexity: dựa vào số lượng input n có thể dùng thuật toán hợp lý mà ko cần tìm thuật toán nhanh hơn cho mệt:

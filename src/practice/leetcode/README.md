@@ -2,6 +2,10 @@
 
 This folder contains leetcode problems organized by level, and some coding patterns
 
+Start studying at **31/3/2023** (includes both codility and leetcode), my leetcode rank at the beginning: >= `3,000,000`
+
+- Rank after 1 month: >= `1,500,000`
+
 Note: memory complexity ở leetcode nhiều khi ko đúng lắm (time complexity cũng tương tự, nhưng chênh lệch nhau ít hơn), bằng chứng là 1 solution submit 2 lần nhưng có 2 kq khác nhau:
 
 ![](./images/leetcode-memory1.png)
@@ -11,6 +15,13 @@ Note: memory complexity ở leetcode nhiều khi ko đúng lắm (time complexit
 Với mỗi bài leetcode, nên vào tab Solutions, dù lời giải đã được accepted. Tại sao? Vì đôi khi sẽ thấy 1 comment rất tâm huyết như này, hướng dẫn cách tiếp cận chi tiết từ naive tới pro:
 
 https://leetcode.com/problems/house-robber/solutions/156523/from-good-to-great-how-to-approach-most-of-dp-problems/
+
+Một số bài input range quá lớn, chẳng hạn trong khoảng [-10^9, 10^9], nếu input đó kiểu `int`, thì các phép toán cộng trừ dễ bị tràn bộ nhớ, cần xét test case mà input = 10^9 xem có sao ko, như bài [FourSum_18](./medium/FourSum_18.java). Cách khắc phục:
+
+- Ép sang kiểu long xong rồi cộng trừ tiếp
+- Không cộng 2 số nữa mà hãy trừ, ex:
+  - `int sum = a[left] + a[right]; if (sum == target) {}` viết lại thành: `if (target - a[left] == a[right])`
+  - Trong binary search: `int mid = (left + right)/2` viết lại thành: `int mid = left + (right - left) / 2`
 
 # Leetcode patterns
 
@@ -43,7 +54,7 @@ https://leetcode.com/explore/interview/card/cheatsheets/720/resources/4725/
 
 Here's a flowchart that can help you figure out which data structure or algorithm should be used. Note that this flowchart is very **general** as it would be impossible to cover every single scenario
 
-![](./flowchart.png)
+![](./images//flowchart.png)
 
 ## 2. Two pointers
 
@@ -92,6 +103,8 @@ Example problems:
 
 - [Two Sum](./easy/TwoSum_1.java)
 - [Is Subsequence](./easy/IsSubsequence_392.java)
+- [ThreeSum_15](./medium/ThreeSum_15.java)
+- [ThreeSumClosest_16](./medium/ThreeSumClosest_16.java)
 
 ## 3. Sliding window
 
@@ -127,7 +140,7 @@ Alternative implementation (my opinion): có thể dùng vòng while thay cho fo
 ```java
 void solution(int[] arr) {
     int left = 0, right = 0;
-    while (right < arr.length) {
+    while (right < arr.length) { // đôi khi cần thêm điều kiện left <= right)
         if condition from problem is met:
             "add" element at arr[right] to window (ex: curr += arr[right])
             Increase window size: right++
@@ -234,9 +247,35 @@ function fn(arr, k):
     return ans // Alternatively, you could do something like return max(ans, curr) if the problem is asking for a maximum value and curr is tracking that.
 ```
 
+Kết hợp sliding window với hashmap (hoặc counting array) cho các bài toán với String (my personal template):
+
+```java
+public int solution(String s) {
+    int[] cntArr = new int[128]; // Bảng ASCII tối đa 127 ký tự
+    int left = 0;
+    int right = 0;
+
+    while (right < s.length()) {
+        if condition from problem is met:
+            "add" element at arr[right] to window (ex: curr += arr[right])
+            Increase window size:
+                cntArr[s.charAt(right)]++ // có thêm đoạn này là khác với các dạng trước đó
+                right++
+            Update the answer
+        else:
+            "remove" element at arr[left] from window (ex: curr -= arr[left])
+            Decrease window size:
+                cntArr[s.charAt(left)]-- // có thêm đoạn này là khác với các dạng trước đó
+                left++
+    }
+    return answer;
+}
+```
+
 Example problems:
 
 - [3. Longest Substring Without Repeating Characters](./medium/LongestSubstringWithoutRepeatingCharacters_3.java)
+- [76. Minimum Window Substring](./hard/MinimumWindowSubstring_76.java)
 
 ## 4. More common patterns
 
