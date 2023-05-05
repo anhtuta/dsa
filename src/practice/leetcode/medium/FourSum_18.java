@@ -143,11 +143,11 @@ public class FourSum_18 {
 
         if (k == 2) {
             // base case
-            List<List<Integer>> res2Sum = new ArrayList<>(4);
+            List<List<Integer>> res2Sum = new ArrayList<>();
             int left = index, right = a.length - 1;
             while (left < right) {
                 if (target - a[left] == a[right]) {
-                    ArrayList<Integer> al = new ArrayList<>(4);
+                    ArrayList<Integer> al = new ArrayList<>();
                     al.add(a[left]);
                     al.add(a[right]);
                     res2Sum.add(al);
@@ -171,10 +171,78 @@ public class FourSum_18 {
 
             return res2Sum;
         } else {
-            List<List<Integer>> resKSum = new ArrayList<>(4);
+            List<List<Integer>> resKSum = new ArrayList<>();
             for (int i = index; i < a.length - k + 1; i++) {
-                // Found k-1 sum for each element of the list
+                // Find k-1 sum for each element of the list
                 List<List<Integer>> lists = kSum_minorOptimized(a, target - a[i], k - 1, i + 1);
+
+                // Add this element to result, so it will become k sum
+                for (List<Integer> ls : lists) {
+                    ls.add(a[i]);
+                }
+
+                resKSum.addAll(lists);
+
+                // Skip toàn bộ các phần tử a[i] giống nhau
+                while (i < a.length - 1 && a[i + 1] == a[i]) {
+                    i++;
+                }
+            }
+            return resKSum;
+        }
+    }
+
+    /**
+     * Thử dùng nhánh cận, check trước khi gọi đệ quy, but still does NOT work!
+     */
+    public List<List<Integer>> kSum_branchAndBound(int[] a, long target, int k, int index) {
+        if (index >= a.length)
+            return new ArrayList<>();
+
+        if (k == 2) {
+            // base case
+            List<List<Integer>> res2Sum = new ArrayList<>();
+            int left = index, right = a.length - 1;
+            while (left < right) {
+                if (target - a[left] == a[right]) {
+                    ArrayList<Integer> al = new ArrayList<>();
+                    al.add(a[left]);
+                    al.add(a[right]);
+                    res2Sum.add(al);
+
+                    // Skip toàn bộ các phần tử a[left] giống nhau
+                    while (left < right && a[left + 1] == a[left])
+                        left++;
+
+                    // Skip toàn bộ các phần tử a[right] giống nhau
+                    while (left < right && a[right - 1] == a[right])
+                        right--;
+
+                    left++;
+                    right--;
+                } else if (target - a[left] > a[right]) {
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+
+            return res2Sum;
+        } else {
+            List<List<Integer>> resKSum = new ArrayList<>();
+            for (int i = index; i < a.length - k + 1; i++) {
+                ////////// Should do some check here to optimize ////////////
+                // check if this `num + last max num * (K-1)` is greater than target
+                if (a[i] + a[a.length - 1] * (k - 1) < target)
+                    continue;
+
+                // checking if smallest number 4 times makes it greater than target
+                if (a[i] * k > target)
+                    break;
+                ////////// End of optimization ////////////
+
+                // Find k-1 sum for each element of the list
+                List<List<Integer>> lists = kSum_branchAndBound(a, target - a[i], k - 1, i + 1);
 
                 // Add this element to result, so it will become k sum
                 for (List<Integer> ls : lists) {
