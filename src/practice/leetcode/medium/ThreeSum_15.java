@@ -186,6 +186,7 @@ public class ThreeSum_15 {
 
     public static void main(String[] args) {
         ThreeSum_15 app = new ThreeSum_15();
+        System.out.println(app.threeSum(new int[] {-3, 0, 0, 1, 2})); // [[-3,1,2]]
         System.out.println(app.threeSum(new int[] {-1, 0, 1, 2, -1, -4})); // [[-1,-1,2],[-1,0,1]]
         System.out.println(app.threeSum(new int[] {0, 0, 0, 0})); // [[0,0,0]]
         System.out.println(app.threeSum(
