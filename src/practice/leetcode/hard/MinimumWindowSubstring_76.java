@@ -48,8 +48,12 @@ public class MinimumWindowSubstring_76 {
      * Vui lòng mở bài đó mà đọc comment
      * 
      * Time complexity: O(m+n)
+     * 
+     * Result:
+     * Runtime 6 ms Beats 83.86%
+     * Memory 42.8 MB Beats 71.75%
      */
-    public String minWindow(String s, String t) {
+    public String minWindow_longButReadable(String s, String t) {
         if (s.length() < t.length())
             return "";
 
@@ -135,6 +139,63 @@ public class MinimumWindowSubstring_76 {
         // return result, it is a substring between [minStartIdx...minEndIdx] of S
         if (minStartIdx != -1) {
             return s.substring(minStartIdx, minEndIdx + 1);
+        }
+        return "";
+    }
+
+    /**
+     * Thử làm theo template này:
+     * https://leetcode.com/problems/minimum-window-substring/solutions/26808/here-is-a-10-line-template-that-can-solve-most-substring-problems/comments/25816
+     * 
+     * Idea: cũng tương tự cách trên, dùng sliding window và counting element (hashmap), nhưng sẽ ngắn
+     * gọn hơn, tối ưu hơn do chỉ dùng 1 hashmap. Mặc dù vậy, vẫn CHƯA hiểu bản chất của cách giải này.
+     * Tại sao lại chỉ dùng 1 hashmap, tại sao lại có 2 chỗ này:
+     * - cntArr[s.charAt(right)]--;
+     * - cntArr[s.charAt(left)]++;
+     * 
+     * Sẽ quay lại tìm hiểu sau nếu có time, hoặc khi nào PRO hơn!
+     * 
+     * Result:
+     * Runtime 5 ms Beats 85.57%
+     * Memory 42.9 MB Beats 64.28%
+     * 
+     * Nhanh hơn cách trên 1 xíu, tuy chỉ dùng 1 map nhưng memory ko cải thiện được
+     */
+    public String minWindow(String s, String t) {
+        int[] cntArr = new int[123];
+        for (int i = 0; i < t.length(); i++) {
+            cntArr[t.charAt(i)]++;
+        }
+
+        int count = 0; // count number of characters of S that are existed in T
+        int left = 0, right = 0; // window boundary
+        int minLen = Integer.MAX_VALUE; // length of smallest substring we need to find
+        int minStartIdx = -1; // start index of smallest substring
+
+        while (right < s.length()) {
+            if (cntArr[s.charAt(right)] > 0) { // this character of S is existed in T
+                count++;
+            }
+            cntArr[s.charAt(right)]--;
+            right++;
+
+            while (count == t.length()) { // window now contains all characters in T
+                // Update answer
+                if (right - left < minLen) {
+                    minLen = right - left; // window size
+                    minStartIdx = left;
+                }
+
+                // Remove left out of window and reduce count if s[left] existed in T
+                cntArr[s.charAt(left)]++;
+                if (cntArr[s.charAt(left)] > 0) { // Don't understand this block!
+                    count--;
+                }
+                left++;
+            }
+        }
+        if (minStartIdx != -1) {
+            return s.substring(minStartIdx, minStartIdx + minLen);
         }
         return "";
     }

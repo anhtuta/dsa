@@ -247,7 +247,9 @@ function fn(arr, k):
     return ans // Alternatively, you could do something like return max(ans, curr) if the problem is asking for a maximum value and curr is tracking that.
 ```
 
-Kết hợp sliding window với hashmap (hoặc counting array) cho các bài toán với String (my personal template):
+Với các bài toán với String, ta có thể kết hợp sliding window với hashmap (hoặc [counting elements](../codility/lessons/README.md#lesson-4-counting-elements)), bởi vì input thường là các ký tự tiếng anh ASCII
+
+Here is my personal template, refer from https://leetcode.com/problems/minimum-window-substring/solutions/26808/here-is-a-10-line-template-that-can-solve-most-substring-problems/, but I modify a little, because I still don't understand logic of that template:
 
 ```java
 public int solution(String s) {
@@ -274,8 +276,14 @@ public int solution(String s) {
 
 Example problems:
 
-- [3. Longest Substring Without Repeating Characters](./medium/LongestSubstringWithoutRepeatingCharacters_3.java)
-- [76. Minimum Window Substring](./hard/MinimumWindowSubstring_76.java)
+- Sliding window:
+
+  - [SubarrayProductLessThanK_713](./medium/SubarrayProductLessThanK_713.java)
+
+- Sliding window + counting elements:
+
+  - [3. Longest Substring Without Repeating Characters](./medium/LongestSubstringWithoutRepeatingCharacters_3.java)
+  - [76. Minimum Window Substring](./hard/MinimumWindowSubstring_76.java)
 
 ## 4. More common patterns
 
