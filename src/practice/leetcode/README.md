@@ -510,6 +510,8 @@ Nếu duyệt từ đầu, quyết định quan trọng nhất là khi duyệt �
 
 This is because the subproblems in divide an conquer approaches are independent of one another (they do NOT overlap) while in dynamic programming, the subproblems do overlap
 
+In my opinion (IMO): overlap ở đây tức là các bài toán con đều phải **cùng giải lại** các bài toán con bé hơn. Việc giải đi giải lại như vậy sẽ bị O(2^n). Chẳng hạn như bài Fibonacci, F(5) và F(7) đều phải tính toán lại các F(4), F(3)... Thay vì giải lại như thế, hãy tối ưu bằng cách lưu lại kq của các bài toán con đó ở lần 1, và lần sau chỉ việc return. Việc làm này giống như việc dùng cache đó
+
 ### From good to great. How to approach most of DP problems
 
 Most of DP problems can be approached using the following sequence:
