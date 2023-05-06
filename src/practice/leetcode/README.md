@@ -527,6 +527,10 @@ So sánh:
 
 - `LongestPalindromicSubsequence_516`, `UniquePaths_62` và `LongestCommonSubsequence_1143` có điểm chung ở chỗ: tại mỗi vị trí i, ta chỉ có 1 case là sẽ lấy i, nên việc tính toán khá đơn giản. Trong khi đó bài `HouseRobber_198` sẽ có 2 case là có lấy i hay ko lấy i, do đó phải xét cả 2 case xong tìm max value giữa chúng
 
+## 11. Recursion
+
+https://leetcode.com/explore/learn/card/recursion-i/
+
 # Ref
 
 - https://levelup.gitconnected.com/dont-just-leetcode-follow-the-coding-patterns-instead-4beb6a197fdb
