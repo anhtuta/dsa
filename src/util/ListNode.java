@@ -25,6 +25,9 @@ public class ListNode {
         next = null;
     }
 
+    /**
+     * Print the whole list, from head to tail
+     */
     public void print() {
         System.out.print("ListNode [");
         ListNode curr = this;
@@ -36,5 +39,29 @@ public class ListNode {
             curr = curr.next;
         }
         System.out.println("]");
+    }
+
+    /**
+     * Print list with arrow between current and next
+     */
+    public void printArrow() {
+        ListNode curr = this;
+        System.out.print("List [");
+        while (curr != null) {
+            System.out.print(curr.val);
+            curr = curr.next;
+            if (curr != null) {
+                System.out.print(" -> ");
+            }
+        }
+        System.out.println("]");
+    }
+
+    /**
+     * Only return current node
+     */
+    @Override
+    public String toString() {
+        return String.format("ListNode [val = %d]", val);
     }
 }

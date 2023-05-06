@@ -2,6 +2,7 @@ package practice.leetcode.medium;
 
 import java.util.HashSet;
 import java.util.Set;
+import util.ListNode;
 
 public class LinkedListCycleII_142 {
     /**
@@ -71,18 +72,4 @@ public class LinkedListCycleII_142 {
         System.out.println("Start of cycle is: " + new LinkedListCycleII_142().detectCycle(head));
     }
 
-    static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
-
-        @Override
-        public String toString() {
-            return String.format("ListNode [val = %d]", val);
-        }
-    }
 }

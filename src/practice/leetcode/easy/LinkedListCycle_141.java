@@ -1,5 +1,7 @@
 package practice.leetcode.easy;
 
+import util.ListNode;
+
 /**
  * https://leetcode.com/problems/linked-list-cycle
  */
@@ -35,15 +37,5 @@ public class LinkedListCycle_141 {
         node3.next = node1;
 
         System.out.println(new LinkedListCycle_141().hasCycle(head)); // true
-    }
-
-    static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
     }
 }

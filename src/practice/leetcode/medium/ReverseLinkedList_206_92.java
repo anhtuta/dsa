@@ -1,5 +1,7 @@
 package practice.leetcode.medium;
 
+import util.ListNode;
+
 /**
  * Class này làm chung cho 2 bài sau:
  * 206. https://leetcode.com/problems/reverse-linked-list/ (Easy)
@@ -132,19 +134,4 @@ public class ReverseLinkedList_206_92 {
         app.printList(newList2);
     }
 
-    static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {}
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
 }
