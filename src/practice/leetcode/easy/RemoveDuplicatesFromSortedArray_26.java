@@ -12,8 +12,12 @@ public class RemoveDuplicatesFromSortedArray_26 {
      * - right dùng để check duplicate
      * Mặc dù 2 con trỏ đều start từ đầu dãy, nhưng đây ko phải là sliding window, bởi vì ta ko làm gì
      * với cái subarray (window) trong khoảng [left...right]
+     * 
+     * Result:
+     * Runtime 1 ms Beats 99.91%
+     * Memory 44.3 MB Beats 39.92%
      */
-    public int removeDuplicates(int[] a) {
+    public int removeDuplicates_old(int[] a) {
         int left = 0, right = 1;
         int cnt = 1;
         while (right < a.length) {
@@ -24,6 +28,20 @@ public class RemoveDuplicatesFromSortedArray_26 {
             right++;
         }
         return cnt;
+    }
+
+    /**
+     * KO cần đến biến cnt, dùng luôn left để tối ưu bộ nhớ, nhưng cũng chả khá hơn mấy!
+     */
+    public int removeDuplicates(int[] a) {
+        int left = 0, right = 1;
+        while (right < a.length) {
+            if (a[right] != a[left]) {
+                a[++left] = a[right];
+            }
+            right++;
+        }
+        return left + 1;
     }
 
     public static void main(String[] args) {
