@@ -99,10 +99,14 @@ function fn(arr1, arr2):
         j++
 ```
 
+Note: có thể 2 con trỏ i, j đều chạy từ đầu của mảng arr[], nhưng đây ko phải là kỹ thuật sliding window, bởi vì ta ko làm gì
+với cái subarray (window) trong khoảng `[left...right]`
+
 Example problems:
 
 - [Two Sum](./easy/TwoSum_1.java)
 - [Is Subsequence](./easy/IsSubsequence_392.java)
+- [RemoveDuplicatesFromSortedArray_26](./easy/RemoveDuplicatesFromSortedArray_26.java)
 - [ThreeSum_15](./medium/ThreeSum_15.java)
 - [ThreeSumClosest_16](./medium/ThreeSumClosest_16.java)
 
