@@ -147,8 +147,8 @@ void solution(int[] arr) {
     while (right < arr.length) { // đôi khi cần thêm điều kiện left <= right)
         if condition from problem is met:
             "add" element at arr[right] to window (ex: curr += arr[right])
-            Increase window size: right++
             Update the answer
+            Increase window size: right++
         else (condition from problem is NOT met):
             "remove" element at arr[left] from window (ex: curr -= arr[left])
             Decrease window size: left++
@@ -264,10 +264,10 @@ public int solution(String s) {
     while (right < s.length()) {
         if condition from problem is met:
             "add" element at arr[right] to window (ex: curr += arr[right])
+            Update the answer
             Increase window size:
                 cntArr[s.charAt(right)]++ // có thêm đoạn này là khác với các dạng trước đó
                 right++
-            Update the answer
         else:
             "remove" element at arr[left] from window (ex: curr -= arr[left])
             Decrease window size:
