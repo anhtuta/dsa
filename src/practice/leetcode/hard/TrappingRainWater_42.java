@@ -6,7 +6,8 @@ package practice.leetcode.hard;
  * Given n non-negative integers representing an elevation map where the width of each bar is 1,
  * compute how much water it can trap after raining
  * 
- * Xem ảnh /images/41_rainwatertrap.png
+ * Xem ảnh /images/41_rainwatertrap.png, hoặc
+ * https://docs.google.com/spreadsheets/d/1ukamQI4D9WXuyLxIo-Wp4OdbiFNZnouhn-54XK_OIrg/edit
  * 
  * Example 1:
  * Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
