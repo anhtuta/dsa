@@ -109,6 +109,7 @@ Example problems:
 - [RemoveDuplicatesFromSortedArray_26](./easy/RemoveDuplicatesFromSortedArray_26.java)
 - [ThreeSum_15](./medium/ThreeSum_15.java)
 - [ThreeSumClosest_16](./medium/ThreeSumClosest_16.java)
+- [TrappingRainWater_42](./hard/TrappingRainWater_42.java)
 
 ## 3. Sliding window
 
