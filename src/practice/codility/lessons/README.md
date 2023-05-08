@@ -175,3 +175,9 @@ public int solution(int[] a) {
 ```
 
 ## Lesson 17: Dynamic programming
+
+Vui lòng xem bên [leetcode](../../leetcode/README.md#10-dynamic-programming)
+
+# Kết luận: hãy học chủ yếu từ leetcode
+
+Tóm lại bên codility này ko có nhiều pattern mới so với leetcode, chỉ có prefix sum thôi, do bên leetcode pattern này yêu cầu account premium mới xem được
