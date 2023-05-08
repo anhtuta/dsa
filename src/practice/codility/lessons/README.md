@@ -106,6 +106,10 @@ private int getSliceSum(int[] p, int left, int right) {
 // a[2...4] = p[4] - p[1] = 18 - 5 = 13
 ```
 
+Tương tự với sum, ta cũng có prefixProduct, là tích của các phần tử đầu tiên, xem ví dụ tại [leetcode 238](../../leetcode/medium/prefixsum/ProductOfArrayExceptSelf_238.java)
+
+Chú ý: ví dụ trên phải dùng kiểu tính toán như trong slide, tức là prefixProduct[i] là tích của i phần tử đầu tiên, chứ ko phải là tích của a[0] -> a[i]. Thế nên mới thấy, slide chuẩn hơn, hay giờ cứ đổi theo cách tính giống như trong slide nhờ!!!
+
 ## Lesson 8: Leader (dominator)
 
 Cho dãy a[] độ dài n, leader của dãy là phần tử xuất hiện NHIỀU HƠN n/2 lần. Dễ thấy mỗi dãy chỉ có tối đa 1 leader, vì nếu có 2, thì tổng số lượng phần tử sẽ nhiều hơn `2*n/2 = n`, mâu thuẫn với điều kiện ban đầu
