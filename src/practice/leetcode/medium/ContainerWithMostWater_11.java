@@ -33,10 +33,13 @@ public class ContainerWithMostWater_11 {
      * - Bắt đầu 2 con trỏ từ 2 phía 0 và n-1, container lúc này có chiều rộng lớn nhất = n-1, đây sẽ là
      * 1 good candidate trong việc tìm diện tích lớn nhất. Tính diện tích container này và di chuyển con
      * trỏ để tiếp tục duyệt các container sau
-     * - Vấn đề là di chuyển con trỏ nào? Giảm chiều rộng thì phải tăng chiều dài
-     * - Sau khi di chuyển 1 con trỏ, chiều rộng container sẽ giảm đi, và để tìm được container có diện
-     * tích lớn hơn container trước đó, ta phải tăng chiều dài lên, tức là phải di chuyển con trỏ nào có
-     * chiều dài thấp hơn
+     * - Vấn đề là di chuyển con trỏ nào? Phải di chuyển sao cho container tiếp theo có thể có diện tích
+     * lớn hơn container trước đó.
+     * - Sau khi di chuyển 1 con trỏ, chiều rộng container sẽ GIẢM đi, và để tìm được container có diện
+     * tích lớn hơn container trước đó, ta phải TĂNG chiều cao lên, tức là phải di chuyển con trỏ nào có
+     * chiều cao thấp hơn. Bởi vì diện tích container tính theo:
+     * min(height[left], height[right]) * chiều_rộng, nên nếu tăng con trỏ phía có chiều cao lớn hơn,
+     * thì diện tích container tiếp theo chắc chắn bé hơn container hiện tại
      * 
      * Bài này khó ở chỗ tìm ra ý tưởng greedy, tìm được rồi thì implement dễ
      */
