@@ -86,6 +86,7 @@ sum(a[x...y]) = p[y] - p[x-1]
 Sample code:
 
 ```java
+// p[i] = tổng của i+1 phần tử đầu tiên (từ a[0] -> a[i])
 private int[] getPrefixSums(int[] a) {
     int[] p = new int[a.length];
     p[0] = a[0];
@@ -94,13 +95,14 @@ private int[] getPrefixSums(int[] a) {
     }
     return p;
 }
+// Tổng từ a[left] -> a[right]
 private int getSliceSum(int[] p, int left, int right) {
     if (left == 0)
         return p[right];
     return p[right] - p[left - 1];
 }
 // ex:
-// a[] = [2, 3, 7, 5, 1, 3, 9]
+// a[] = [2, 3,  7,  5,  1,  3,  9]
 // p[] = [2, 5, 12, 17, 18, 21, 30]
 // a[2...4] = a[2] + a[3] + a[4] = 7 + 5 + 1 = 13
 // a[2...4] = p[4] - p[1] = 18 - 5 = 13
@@ -108,7 +110,40 @@ private int getSliceSum(int[] p, int left, int right) {
 
 Tương tự với sum, ta cũng có prefixProduct, là tích của các phần tử đầu tiên, xem ví dụ tại [leetcode 238](../../leetcode/medium/prefixsum/ProductOfArrayExceptSelf_238.java)
 
-Chú ý: ví dụ trên phải dùng kiểu tính toán như trong slide, tức là prefixProduct[i] là tích của i phần tử đầu tiên, chứ ko phải là tích của a[0] -> a[i]. Thế nên mới thấy, slide chuẩn hơn, hay giờ cứ đổi theo cách tính giống như trong slide nhờ!!!
+Chú ý: ví dụ trên phải dùng kiểu tính toán như trong slide, tức là prefixProduct[i] là tích của i phần tử đầu tiên, chứ ko phải là tích của a[0] -> a[i]. Thế nên mới thấy, slide chuẩn hơn, hay giờ cứ đổi theo cách tính giống như trong slide nhờ!!! Cụ thể
+
+```java
+// p[i] = tổng của i phần tử đầu tiên (từ a[0] -> a[i-1])
+private int[] getPrefixSums(int[] a) {
+    int[] p = new int[a.length];
+    p[0] = 0;
+    for (int i = 1; i < a.length; i++) {
+        p[i] = p[i - 1] + a[i - 1];
+    }
+    return p;
+}
+// Tổng từ a[left] -> a[right]
+private int getSliceSum(int[] p, int left, int right) {
+    if (left == 0)
+        return p[right];
+    return p[right + 1] - p[left];
+}
+// ex:
+// a[] = [2, 3, 7,  5,  1,  3,  9]
+// p[] = [0, 2, 5, 12, 17, 18, 21, 30]
+// a[2...4] = a[2] + a[3] + a[4] = 7 + 5 + 1 = 13
+// a[2...4] = p[5] - p[2] = 18 - 5 = 13
+
+// p[i] = tích của i phần tử đầu tiên (từ a[0] -> a[i-1])
+private int[] getPrefixProducts(int[] a) {
+    int[] p = new int[a.length];
+    p[0] = 1;
+    for (int i = 1; i < a.length; i++) {
+        p[i] = p[i - 1] * a[i - 1];
+    }
+    return p;
+}
+```
 
 ## Lesson 8: Leader (dominator)
 
