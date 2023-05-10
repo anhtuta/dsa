@@ -115,9 +115,9 @@ Chú ý: ví dụ trên phải dùng kiểu tính toán như trong slide, tức 
 ```java
 // p[i] = tổng của i phần tử đầu tiên (từ a[0] -> a[i-1])
 private int[] getPrefixSums(int[] a) {
-    int[] p = new int[a.length];
+    int[] p = new int[a.length + 1];
     p[0] = 0;
-    for (int i = 1; i < a.length; i++) {
+    for (int i = 1; i <= a.length; i++) {
         p[i] = p[i - 1] + a[i - 1];
     }
     return p;
@@ -136,12 +136,25 @@ private int getSliceSum(int[] p, int left, int right) {
 
 // p[i] = tích của i phần tử đầu tiên (từ a[0] -> a[i-1])
 private int[] getPrefixProducts(int[] a) {
-    int[] p = new int[a.length];
-    p[0] = 1;
-    for (int i = 1; i < a.length; i++) {
-        p[i] = p[i - 1] * a[i - 1];
+    int n = a.length;
+    int[] prefixPrd = new int[n + 1];
+    prefixPrd[0] = 1;
+    for (int i = 1; i <= n; i++) {
+        prefixPrd[i] = prefixPrd[i - 1] * a[i - 1];
     }
-    return p;
+    return prefixPrd;
+}
+// s[n-i] = tích của i phần tử cuối cùng (từ a[n-1] -> a[n-i])
+// s[n] = 1, s[n-1] = a[n-1]
+// s[n-2] = a[n-1] * a[n-2] = s[1] * s[n-2]
+private int[] getSuffixProducts(int[] a) {
+    int n = a.length;
+    int[] suffixPrd = new int[n + 1];
+    suffixPrd[n] = 1;
+    for (int i = n - 1; i >= 0; i--) {
+        suffixPrd[i] = suffixPrd[i + 1] * a[i]; // nhân với a[i] chứ ko phải a[i+1]
+    }
+    return suffixPrd;
 }
 ```
 
