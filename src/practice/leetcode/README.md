@@ -324,6 +324,8 @@ Example problems:
 
 - [LinkedListCycle_141](./easy/LinkedListCycle_141.java)
 - [LinkedListCycleII_142](./medium/LinkedListCycleII_142.java)
+- [HappyNumber_202](./easy/HappyNumber_202.java)
+- [MiddleOfTheLinkedList_876](./easy/MiddleOfTheLinkedList_876.java)
 
 ## 6. Merge intervals
 
