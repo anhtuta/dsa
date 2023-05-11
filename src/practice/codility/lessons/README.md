@@ -110,7 +110,7 @@ private int getSliceSum(int[] p, int left, int right) {
 
 Tương tự với sum, ta cũng có prefixProduct, là tích của các phần tử đầu tiên, xem ví dụ tại [leetcode 238](../../leetcode/medium/prefixsum/ProductOfArrayExceptSelf_238.java)
 
-Chú ý: ví dụ trên phải dùng kiểu tính toán như trong slide, tức là prefixProduct[i] là tích của i phần tử đầu tiên, chứ ko phải là tích của a[0] -> a[i]. Thế nên mới thấy, slide chuẩn hơn, hay giờ cứ đổi theo cách tính giống như trong slide nhờ!!! Cụ thể
+Chú ý: ví dụ trên phải dùng kiểu tính toán như trong slide, tức là prefixProduct[i] là tích của i phần tử đầu tiên, chứ ko phải là tích của a[0] -> a[i]. Cụ thể:
 
 ```java
 // p[i] = tổng của i phần tử đầu tiên (từ a[0] -> a[i-1])
@@ -157,6 +157,13 @@ private int[] getSuffixProducts(int[] a) {
     return suffixPrd;
 }
 ```
+
+Nếu như KHÔNG tính theo cách trong slide, thì sẽ đơn giản hơn, bởi vì:
+
+- Mảng prefix sẽ có cùng length với mảng input
+- Có thể tính toán cả prefix và suffix trong cùng 1 vòng for, xem bài [MaximumProductSubarray_152](../../leetcode/medium/prefixsum/MaximumProductSubarray_152.java)
+
+Tóm lại, tính theo cách nào cũng được, tuỳ bài toán
 
 ## Lesson 8: Leader (dominator)
 

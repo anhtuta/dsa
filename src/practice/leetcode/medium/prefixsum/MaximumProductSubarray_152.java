@@ -64,7 +64,7 @@ public class MaximumProductSubarray_152 {
      * Ref:
      * https://leetcode.com/problems/maximum-product-subarray/solutions/183483/java-c-python-it-can-be-more-simple/
      */
-    public int maxProduct(int[] a) {
+    public int maxProduct_readable(int[] a) {
         int n = a.length;
         int maxPrd = a[0];
         int[] prefixPrd = new int[n + 1];
@@ -83,6 +83,53 @@ public class MaximumProductSubarray_152 {
 
         Utils.printArray(prefixPrd);
         Utils.printArray(suffixPrd);
+
+        return maxPrd;
+    }
+
+    /**
+     * Tối ưu tương tự bài {@link ProductOfArrayExceptSelf_238}: thay vì dùng 2 mảng,
+     * ta dùng 2 biến là đủ
+     * 
+     * Result:
+     * Time: O(n)
+     * Runtime 0 ms Beats 100%
+     * Memory 42.8 MB Beats 52.53%
+     * 
+     * Memory vẫn ko đổi dù bỏ đi 2 mảng int[]? Tại sao vậy???
+     */
+    public int maxProduct_noExtraArrays(int[] a) {
+        int n = a.length;
+        int maxPrd = a[0];
+        int prefixPrd = 1;
+        for (int i = 1; i <= n; i++) {
+            prefixPrd = (prefixPrd == 0 ? 1 : prefixPrd) * a[i - 1];
+            maxPrd = Math.max(maxPrd, prefixPrd);
+        }
+
+        int suffixPrd = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            suffixPrd = (suffixPrd == 0 ? 1 : suffixPrd) * a[i];
+            maxPrd = Math.max(maxPrd, suffixPrd);
+        }
+
+        return maxPrd;
+    }
+
+    /**
+     * Tối ưu hơn nữa bằng cách duyệt 1 vòng for, nhưng sửa lại 1 chút cách tính:
+     * prefixPrd[i] = tích từ a[0] -> a[i]
+     * suffixPrd[i] = tích từ a[n-1] -> a[n-1-i]
+     */
+    public int maxProduct(int[] a) {
+        int n = a.length;
+        int maxPrd = a[0];
+        int prefixPrd = 1, suffixPrd = 1;
+        for (int i = 0; i < n; i++) {
+            prefixPrd = (prefixPrd == 0 ? 1 : prefixPrd) * a[i];
+            suffixPrd = (suffixPrd == 0 ? 1 : suffixPrd) * a[n - 1 - i];
+            maxPrd = max(maxPrd, prefixPrd, suffixPrd);
+        }
 
         return maxPrd;
     }
