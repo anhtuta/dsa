@@ -102,6 +102,8 @@ function fn(arr1, arr2):
 Note: có thể 2 con trỏ i, j đều chạy từ đầu của mảng arr[], nhưng đây ko phải là kỹ thuật sliding window, bởi vì ta ko làm gì
 với cái subarray (window) trong khoảng `[left...right]`
 
+2 pattern mở rộng của pattern này: [Sliding window](#3-sliding-window) và [Fast and slow pointers](#5-fast-and-slow-pointers)
+
 Example problems:
 
 - [Two Sum](./easy/TwoSum_1.java)
