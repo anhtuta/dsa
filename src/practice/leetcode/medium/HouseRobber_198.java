@@ -14,10 +14,12 @@ package practice.leetcode.medium;
  * What's next: {@link UniquePaths_62}
  */
 public class HouseRobber_198 {
-    private int[] memo;
+    private int[] memo; // memo[i] = số tiền lớn nhất cướp được từ đầu phố tới nhà i
 
     // [2,7,9,3,1] => 2 + 9 + 1 = 12
     // [2,7,9,3,1,10] => 2 + 9 + 10 = 21
+    // Đây là bài toán đầu tiên giải theo từng bước, muốn test step nào có thể comment các step còn lại
+    // rồi chạy. Từ giờ bài nào làm theo template này cũng có thể test riêng từng step như vậy
     public int rob(int[] a) {
         int ans;
         // Step 1: recursion top down nhưng bị timeout

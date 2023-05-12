@@ -540,6 +540,7 @@ Note: không phải bài nào cũng dùng được tới bước 5, tức là d�
 
 - [HouseRobber_198](./medium/HouseRobber_198.java)
 - [UniquePaths_62](./medium/UniquePaths_62.java)
+- [MinCostClimbingStairs_746](./easy/dp/MinCostClimbingStairs_746.java)
 - [LongestPalindromicSubsequence_516](./medium/LongestPalindromicSubsequence_516.java)
 - [LongestCommonSubsequence_1143](./medium/LongestCommonSubsequence_1143.java)
 
