@@ -477,7 +477,7 @@ https://leetcode.com/explore/featured/card/dynamic-programming/630/an-introducti
 
 Đã từng viết 1 ghi chú về algorithm này rồi, xem thêm [tại đây](../../algorithm/dynamicprogramming/README.md)
 
-### Top-down vs Bottom-up
+### 10.1. Top-down vs Bottom-up
 
 Top-down (Memoization)
 
@@ -494,7 +494,7 @@ Bottom-up (Tabulation)
 
 Chốt lại: **top-down uses recursion, and bottom-up uses iteration**
 
-### When to Use DP
+### 10.2. When to Use DP
 
 Here are some common characteristics of DP problems that are easy to identify:
 
@@ -522,7 +522,7 @@ This is because the subproblems in divide an conquer approaches are independent 
 
 In my opinion (IMO): overlap ở đây tức là các bài toán con đều phải **cùng giải lại** các bài toán con bé hơn. Việc giải đi giải lại như vậy sẽ bị O(2^n). Chẳng hạn như bài Fibonacci, F(5) và F(7) đều phải tính toán lại các F(4), F(3)... Thay vì giải lại như thế, hãy tối ưu bằng cách lưu lại kq của các bài toán con đó ở lần 1, và lần sau chỉ việc return. Việc làm này giống như việc dùng cache đó
 
-### From good to great. How to approach most of DP problems
+### 10.3. From good to great. How to approach most of DP problems
 
 Most of DP problems can be approached using the following sequence:
 
@@ -536,6 +536,69 @@ Hãy xem bài [HouseRobber_198](./medium/HouseRobber_198.java) để hiểu
 
 Note: không phải bài nào cũng dùng được tới bước 5, tức là dùng bottom-up với N biến, mà chỉ tối ưu được đến step 4, dùng bottom up + mảng memo. Cụ thể là bài [UniquePaths_62](./medium/UniquePaths_62.java)
 
+Đôi khi chỉ cần tối ưu tới bước thứ 3 (DP top down + memo) là được rồi, time lúc này thường là O(n). Tất cả các bài trên leetcode tới step 3 là pass rồi
+
+- Nếu muốn tối ưu bộ nhớ bằng cách khử đệ quy thì làm tiếp step 4
+- Nếu muốn tối ưu bộ nhớ nữa bằng cách bỏ mảng memo thì làm tiếp step 5
+
+### 10.4. Cách tính mảng memo khi chuyển từ DP top down sang DP bottom up
+
+Nếu dùng DP top down, ta vẫn phải dùng đệ quy nhưng có thêm mảng memo hỗ trợ. Việc tính memo theo đệ quy khá đơn giản. Nhưng khi chuyển sang bottom up, ko còn đệ quy nữa, ta phải có cách khác để tính memo
+
+Với mảng 1 chiều `a[]`: khá dễ dàng vì phần tử thứ i thường chỉ phụ thuộc vào phần tử trước nó hoặc sau nó. Chẳng hạn với bài Fibonacci, F[i] = F[i-1] + F[i-2], do đó chỉ cần tính các phần tử trước nó trước, tức là dùng vòng for tính từ đầu đến cuối, ex:
+
+```java
+memo[0] = a[0];
+memo[1] = max(a[0], a[1]); // init base case, max could be something else, based on the problem
+for (int i = 2; i < a.length; i++) {
+    memo[i] = max(memo[i - 1], a[i] + memo[i - 2]);
+    // or
+    memo[i] = a[i] + max(memo[i - 1], memo[i - 2]);
+    // or something else, depends on the problem
+}
+```
+
+Ex: [HouseRobber_198](./medium/HouseRobber_198.java)
+
+Với mảng 2 chiều, sẽ phức tạp hơn 1 chút. Ta cần biết memo[i][j] phụ thuộc phần tử trước hay sau nó. Nếu như cả 2 chiều của memo[i][j] đều phụ thuộc vào các phần tử trước đó, thì cũng chỉ cần dùng 2 vòng for tính từ đầu đến cuối, ex:
+
+```java
+for (int i = 0; i < m; i++) {
+    for (int j = 0; j < n; j++) {
+        // base cases
+        if (i == 0 || j == 0)
+            memo[i][j] = 1;
+        else if (i == 0) {
+            // do something...
+        } else if (j == 0) {
+            // do something...
+        } else
+            memo[i][j] = memo[i - 1][j] + memo[i][j - 1]; // could be something else
+    }
+}
+```
+
+Ex: [UniquePaths_62](./medium/UniquePaths_62.java), [MinimumPathSum_64](./medium/dp/MinimumPathSum_64.java)
+
+Nếu 1 chiều của memo phụ thuộc vào các phần tử trước nó, chiều kia phụ thuộc các phần tử sau nó, ex: `memo[i][j] = memo[i+1][j-1] + something`, thì ta cũng cần 2 vòng for, nhưng 1 vòng duyệt từ đầu, vòng kia duyệt từ cuối, ex:
+
+```java
+for (int start = n - 1; start >= 0; start--) {
+    for (int end = start; end < n; end++) {
+        if (start == end) {
+            memo[start][end] = 1;
+            continue;
+        }
+        memo[start][end] = abc + memo[start + 1][end - 1];
+        // or
+        memo[start][end] = Math.max(memo[start][end - 1], memo[start + 1][end]);
+        // or something else, depends on the problem
+    }
+}
+```
+
+Ex: [LongestPalindromicSubsequence_516](./medium/LongestPalindromicSubsequence_516.java)
+
 ### Example problems
 
 - [HouseRobber_198](./medium/HouseRobber_198.java)
@@ -543,6 +606,7 @@ Note: không phải bài nào cũng dùng được tới bước 5, tức là d�
 - [MinCostClimbingStairs_746](./easy/dp/MinCostClimbingStairs_746.java)
 - [LongestPalindromicSubsequence_516](./medium/LongestPalindromicSubsequence_516.java)
 - [LongestCommonSubsequence_1143](./medium/LongestCommonSubsequence_1143.java)
+- [MinimumPathSum_64](./medium/dp/MinimumPathSum_64.java)
 
 So sánh:
 
