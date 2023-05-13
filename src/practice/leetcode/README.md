@@ -477,6 +477,16 @@ https://leetcode.com/explore/featured/card/dynamic-programming/630/an-introducti
 
 Đã từng viết 1 ghi chú về algorithm này rồi, xem thêm [tại đây](../../algorithm/dynamicprogramming/README.md)
 
+Các bài toán DP thường có cả 2 tính chất sau (hoặc ít nhất có tính chất đầu tiên)
+
+- Bài toán có thể được chia nhỏ thành **overlapping subproblems**: các bài toán con nhưng được tính toán lại nhiều lần (recalculation). Overlap ở đây tức là các bài toán con đều phải **cùng giải lại** các bài toán con bé hơn. Việc giải đi giải lại như vậy sẽ bị O(2^n). Chẳng hạn như bài Fibonacci, F(5) và F(7) đều phải tính toán lại các F(4), F(3)...
+- Bài toán có **optimal substructure** (cấu trúc con tối ưu): ví dụ gọi `s[i]` = quãng đường tối thiểu để đi đến `a[i]`, thì `s[i] = s[i-1] + a[i]`. Tức là để giải được bài toán tối ưu tại vị trí `i`, ta có thể dựa vào bài toán tối ưu bé hơn đã giải trước đó là tại `i-1`
+
+So sánh với greedy và divide and conquer (DC):
+
+- Greedy cũng có **optimal substructure**, nhưng ko có **overlapping subproblems**
+- Divide and Conquer cũng break a problem into subproblems, nhưng các subproblem này KHÔNG overlap nhau
+
 ### 10.1. Top-down vs Bottom-up
 
 Top-down (Memoization)
@@ -519,8 +529,6 @@ Nếu duyệt từ đầu, quyết định quan trọng nhất là khi duyệt �
 > Divide and conquer approaches can be parallelized while dynamic programming approaches cannot (actually DP cannot be easily parallelized)
 
 This is because the subproblems in divide an conquer approaches are independent of one another (they do NOT overlap) while in dynamic programming, the subproblems do overlap
-
-In my opinion (IMO): overlap ở đây tức là các bài toán con đều phải **cùng giải lại** các bài toán con bé hơn. Việc giải đi giải lại như vậy sẽ bị O(2^n). Chẳng hạn như bài Fibonacci, F(5) và F(7) đều phải tính toán lại các F(4), F(3)... Thay vì giải lại như thế, hãy tối ưu bằng cách lưu lại kq của các bài toán con đó ở lần 1, và lần sau chỉ việc return. Việc làm này giống như việc dùng cache đó
 
 ### 10.3. From good to great. How to approach most of DP problems
 
