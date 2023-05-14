@@ -568,7 +568,13 @@ for (int i = 2; i < a.length; i++) {
 
 Ex: [HouseRobber_198](./medium/HouseRobber_198.java)
 
-Với mảng 2 chiều, sẽ phức tạp hơn 1 chút. Ta cần biết memo[i][j] phụ thuộc phần tử trước hay sau nó. Nếu như cả 2 chiều của memo[i][j] đều phụ thuộc vào các phần tử trước đó, thì cũng chỉ cần dùng 2 vòng for tính từ đầu đến cuối, ex:
+Với mảng 2 chiều, sẽ phức tạp hơn 1 chút. Ta cần biết memo[i][j] phụ thuộc phần tử trước hay sau nó. Nếu như cả 2 chiều của memo[i][j] đều phụ thuộc vào các phần tử trước đó, thì cũng chỉ cần dùng 2 vòng for tính từ đầu đến cuối. Ta sẽ phải tính toán các ô ở cạnh trên và trái trước, bao gồm:
+
+- memo[0][0]
+- memo[0][1] -> memo[0][j-1]
+- memo[1][0] -> memo[i-1][0]
+
+ex:
 
 ```java
 for (int i = 0; i < m; i++) {

@@ -22,7 +22,7 @@ package practice.leetcode.medium;
 public class ContainerWithMostWater_11 {
     /**
      * Idea: greedy, two pointers (vì leetcode tag vậy). Sau khi làm xong bài
-     * {@link practice.leetcode.hard.FirstMissingPositive_41}, nhận thấy bài này cũng thử dùng 2 con trỏ
+     * {@link practice.leetcode.hard.TrappingRainWater_42}, nhận thấy bài này cũng thử dùng 2 con trỏ
      * và tính diện tích rồi update answer. Sau đó di chuyển con trỏ ở phía mà height của nó bé hơn
      * height tại con trỏ kia. Hoá ra cách làm greedy đó lại đúng :v
      * 
