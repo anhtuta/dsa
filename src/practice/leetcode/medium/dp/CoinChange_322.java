@@ -41,7 +41,6 @@ public class CoinChange_322 {
 
     public int coinChange(int[] coins, int amount) {
         int ans;
-        // hp[0][0] = dungeon[0][0];
 
         // Step 1: recursion top down nhưng bị timeout
         // ans = recursion(coins, amount);
