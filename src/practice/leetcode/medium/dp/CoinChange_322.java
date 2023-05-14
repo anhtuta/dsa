@@ -52,21 +52,21 @@ public class CoinChange_322 {
         // ans = dp_topDown(coins, amount);
 
         // Step 3: khử đệ quy bằng cách dùng DP bottom up + memo
+        // init base case: memo[i] = 1, nếu i là các mệnh giá đã cho
         // memo = new int[amount + 1];
-        // // init base case: memo[i] = 1, nếu i là các mệnh giá đã cho
-        // for (int i = 0; i < coins.length; i++) {
-        // if (coins[i] > amount)
+        // for (int coin : coins) {
+        // if (coin > amount)
         // continue;
-        // memo[coins[i]] = 1;
+        // memo[coin] = 1;
         // }
         // ans = dp_bottomUp_memo(coins, amount);
 
         // Step 3.2: Alternative way...
         memo = new int[amount + 1];
-        for (int i = 0; i < coins.length; i++) {
-            if (coins[i] > amount)
+        for (int coin : coins) {
+            if (coin > amount)
                 continue;
-            memo[coins[i]] = 1;
+            memo[coin] = 1;
         }
         ans = dp_bottomUp_memo_alternative(coins, amount);
 
@@ -78,8 +78,8 @@ public class CoinChange_322 {
 
     /**
      * Đệ quy top down brute-force: thử tất cả các cách chọn mệnh giá rồi return giá trị bé nhất.
-     * Dễ thấy sau khi lấy tờ tiền coins[i] thì tổng số tờ cần thiết sẽ là
-     * 1 + số tờ có thể tạo thành (amount - coins[i])
+     * Dễ thấy sau khi lấy tờ tiền coin thì tổng số tờ cần thiết sẽ là
+     * 1 + số tờ có thể tạo thành (amount - coin)
      * 
      * Result
      * Time Limit Exceeded 15 / 189 testcases passed
@@ -96,10 +96,10 @@ public class CoinChange_322 {
             return -1;
         int min = Integer.MAX_VALUE;
         int temp;
-        // tìm min của các memo trước đó, là các memo[amount - coins[i]]
-        for (int i = 0; i < coins.length; i++) {
-            temp = recursion(coins, amount - coins[i]);
-            // nếu như temp = -1 tức là ko thể dùng các mệnh giá đã cho để tạo thành (amount - coins[i])
+        // tìm min của các memo trước đó, là các memo[amount - coin]
+        for (int coin : coins) {
+            temp = recursion(coins, amount - coin);
+            // nếu như temp = -1 tức là ko thể dùng các mệnh giá đã cho để tạo thành (amount - coin)
             if (temp >= 0 && temp < min) {
                 min = temp;
             }
@@ -124,10 +124,10 @@ public class CoinChange_322 {
             // Bê nguyên từ đệ quy xuống đây, lưu vào biến memo
             int min = Integer.MAX_VALUE;
             int temp;
-            for (int i = 0; i < coins.length; i++) {
-                if (coins[i] > amount)
+            for (int coin : coins) {
+                if (coin > amount)
                     continue;
-                temp = dp_topDown(coins, amount - coins[i]);
+                temp = dp_topDown(coins, amount - coin);
                 if (temp >= 0 && temp < min) {
                     min = temp;
                 }
@@ -172,12 +172,12 @@ public class CoinChange_322 {
         for (int money = 1; money <= amount; money++) {
             if (memo[money] == 0) {
                 min = Integer.MAX_VALUE;
-                // tìm min của các memo trước đó, là các memo[money - coins[i]]
-                for (int i = 0; i < coins.length; i++) {
-                    if (coins[i] > money)
+                // tìm min của các memo trước đó, là các memo[money - coin]
+                for (int coin : coins) {
+                    if (coin > money)
                         continue;
-                    if (memo[money - coins[i]] >= 0 && memo[money - coins[i]] < min) {
-                        min = memo[money - coins[i]];
+                    if (memo[money - coin] >= 0 && memo[money - coin] < min) {
+                        min = memo[money - coin];
                     }
                 }
                 if (min == Integer.MAX_VALUE)
