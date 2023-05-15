@@ -55,4 +55,35 @@ public class ClimbingStairs_70 {
         }
         return f2;
     }
+
+    /**
+     * DP cho beginner: bắt đầu từ đệ quy, nhưng bị timeout
+     * Idea: tại bậc thứ i, sẽ có 2 cách để leo lên bậc này là từ bậc i-1 hoặc bậc i-2, do đó tổng số
+     * cách để leo tới bậc i = steps[i] = steps[i-1] + steps[i-2]
+     */
+    public int climbStairs_recursion(int n) {
+        if (n == 1)
+            return 1;
+        if (n == 2)
+            return 2;
+        return climbStairs(n - 1) + climbStairs(n - 2);
+    }
+
+    private static int[] memo = new int[46]; // n max = 46
+
+    /**
+     * Dùng DP top down + memo, accepted
+     */
+    public int climbStairs_dp_topDown(int n) {
+        if (n == 1)
+            return 1;
+        if (n == 2)
+            return 2;
+        if (memo[n] == 0) {
+            memo[n] = climbStairs_dp_topDown(n - 1) + climbStairs_dp_topDown(n - 2);
+        }
+        return memo[n];
+    }
+
+    // Khử đệ quy = DP bottom up: xem lời giải đầu tiên
 }
