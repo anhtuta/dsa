@@ -23,6 +23,8 @@ Một số bài input range quá lớn, chẳng hạn trong khoảng [-10^9, 10^
   - `int sum = a[left] + a[right]; if (sum == target) {}` viết lại thành: `if (target - a[left] == a[right])`
   - Trong binary search: `int mid = (left + right)/2` viết lại thành: `int mid = left + (right - left) / 2`
 
+How leetcode run testcases: The system executes all testcases using the same program instance. Global/static variables affect the program state from one test case to another.
+
 # Leetcode patterns
 
 Vocab:
