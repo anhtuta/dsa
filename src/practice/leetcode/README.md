@@ -475,6 +475,8 @@ Thực sự chưa từng dùng template II và III, bao giờ dùng sẽ update 
 
 ## 10. Dynamic Programming
 
+Note: nên đọc mục [Recursion](#11-recursion) trước khi đọc phần này
+
 https://leetcode.com/explore/featured/card/dynamic-programming/630/an-introduction-to-dynamic-programming/4035/
 
 Đã từng viết 1 ghi chú về algorithm này rồi, xem thêm [tại đây](../../algorithm/dynamicprogramming/README.md)
@@ -630,7 +632,76 @@ So sánh:
 
 ## 11. Recursion
 
+Nên đọc mục này trước khi đọc [Dynamic Programming](#10-dynamic-programming)
+
 https://leetcode.com/explore/learn/card/recursion-i/
+
+https://leetcode.com/explore/learn/card/recursion-ii/
+
+### Principle of Recursion
+
+> Recursion is an approach to solving problems using a function that **calls itself** as a subroutine
+
+A recursive function should have the following properties so that it does not result in an infinite loop:
+
+- A simple **base case** (or cases) — a terminating scenario that does not use recursion to produce an answer.
+- A set of rules, also known as **recurrence relation** that reduces all other cases towards the base case.
+
+### Recurrence Relation
+
+Let's look at a classic problem, Pascal's Triangle:
+
+Pascal's triangle are a series of numbers arranged in the shape of triangle. In Pascal's triangle, the leftmost and the rightmost numbers of each row are always 1. For the rest, each number is the sum of the two numbers directly above it in the previous row.
+
+![](./images/pascal-triangle.png)
+
+Generate the Pascal's Triangle up to a certain number of rows.
+
+First of all, we define a function `f(i,j)` which returns the number in the Pascal's Triangle in the i-th row and j-th column
+
+- Recurrence Relation: `f(i,j)=f(i−1,j−1)+f(i−1,j)`
+- Base case: `f(i,j)=1` where `j=1` or `j=i`
+
+Here is an example of how we can apply the formula to recursively calculate `f(5,3)`, i.e. the 3rd number in the 5th row of the Pascal Triangle:
+
+- Starting from f(5,3), we can break it down as `f(5,3)=f(4,2)+f(4,3)`, we then call f(4,2) and f(4,3) recursively:
+  - `f(4,2)=f(3,1)+f(3,2)=f(3,1)+(f(2,1)+f(2,2))=1+(1+1)=3`
+  - `f(4,3)=f(3,2)+f(3,3)=(f(2,1)+f(2,2))+f(3,3)=(1+1)+1=3`
+- combine the results of the above subproblems: `f(5,3)=f(4,2)+f(4,3)=3+3=6`
+
+You might have noticed that the recursive solution can incur some **duplicate calculations**. For instance, in order to obtain the result for the number `f(5,3)`, we calculate the number `f(3,2)` twice both in the calls of `f(4,2)` and `f(4,3)`
+
+How to avoid these duplicate calculations? => Dynamic programming
+
+### Duplicate Calculation in Recursion
+
+A common technique called **memoization** that can be used to avoid this problem.
+
+> Memoization is an optimization technique used primarily to speed up computer programs by storing the results of expensive function calls and returning the cached result when the same inputs occur again
+
+### Time Complexity - Recursion
+
+Ví dụ như bài Tam giác Pascal ở trên, ta có function đệ quy như sau:
+
+```java
+public static int pascalTriangle(int row, int col) {
+    if (col == 1 || col == row)
+        return 1;
+    return pascalTriangle(row - 1, col - 1) + pascalTriangle(row - 1, col);
+}
+```
+
+Time: `O(2^n)` (vì nó gọi 2 lần đệ quy tới nó). Tương tự, bài Fibonacci cũng vậy
+
+Nếu dùng memoization thì time chỉ là `O(n)`
+
+### Divide and conquer (D&C)
+
+> A divide-and-conquer algorithm works by **recursively breaking** the problem down into **two or more subproblems** of the same or related type, until these subproblems become simple enough to be solved directly. Then one combines the results of subproblems to form the final solution.
+
+Example problem: [Search a 2D Matrix II](./medium/dc/SearchA2DMatrixII_240.java)
+
+### Backtracking
 
 # Ref
 
