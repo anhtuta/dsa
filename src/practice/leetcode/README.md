@@ -699,7 +699,10 @@ Nếu dùng memoization thì time chỉ là `O(n)`
 
 > A divide-and-conquer algorithm works by **recursively breaking** the problem down into **two or more subproblems** of the same or related type, until these subproblems become simple enough to be solved directly. Then one combines the results of subproblems to form the final solution.
 
-Example problem: [Search a 2D Matrix II](./medium/dc/SearchA2DMatrixII_240.java)
+Example problem:
+
+- [Search a 2D Matrix II](./medium/dc/SearchA2DMatrixII_240.java)
+- [Largest Rectangle](../hackerrank/dc/largestrect/LargestRectangle2.java)
 
 ### Backtracking
 

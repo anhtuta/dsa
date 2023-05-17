@@ -68,6 +68,13 @@ public class SearchA2DMatrixII_240 {
      * - Nếu cell hiện tại > target: target ko thể ở trên toàn bộ col này, vì col này sort tăng dần, nên
      * cell hiện tại là giá trị BÉ nhất rồi => cần chuyển sang col tiếp theo: col--
      * 
+     * Tại sao lại dùng 2 con trỏ duyệt từ cell top right? Giống như 2 con trỏ trên mảng 1 chiều, sau
+     * khi check ta sẽ tăng hoặc giảm 1 con trỏ, nếu start cả 2 con trỏ từ đầu, thì biết tăng hay giảm
+     * con trỏ nào? Tương tự với bài này, nếu start tại ô (0, 0) hoặc (m-1,n-1), thì sau đó sẽ duyệt tới
+     * ô tiếp theo nào? Vì ô (0, 0) nhảy sang ô nào tiếp theo cũng như nhau: đều là ô lớn hơn nó
+     * Nếu bắt đầu duyệt từ ô (0, m-1), thì 2 ô cạnh nó sẽ là 1 ô lớn hơn 1 ô nhỏ hơn, do đó ta có 2
+     * case để duyệt tiếp
+     * 
      * Ref:
      * https://leetcode.com/problems/search-a-2d-matrix-ii/solutions/66140/my-concise-o-m-n-java-solution/
      * 
