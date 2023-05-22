@@ -41,7 +41,7 @@ public class FourSum_18 {
      * 
      * Result:
      * Accepted
-     * Runtime: 25 ms. Beats: 47.1% (chỉ nhan hơn 47% user khác)
+     * Runtime: 25 ms. Beats: 47.1% (chỉ nhanh hơn 47% user khác)
      * Memory: 43.9 MB. Beats: 5.32% (chỉ dùng bộ nhớ ít hơn 5% user khác)
      * 
      * Ko hiểu sao lại chạy chậm và tốn bộ nhớ đến vậy. Có lẽ cần tìm lời giải tối ưu hơn...

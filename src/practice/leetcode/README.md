@@ -120,6 +120,8 @@ Example problems:
 
 https://leetcode.com/explore/interview/card/leetcodes-interview-crash-course-data-structures-and-algorithms/703/arraystrings/4502/
 
+https://emre.me/coding-patterns/sliding-window/
+
 DS involved: Array, String
 
 Idea:
@@ -284,6 +286,13 @@ public int solution(String s) {
 }
 ```
 
+How to identify?
+
+- The problem involves a **data structure that is ordered and iterable** like arrays, strings, etc.
+- The problem is asking to **find a sub-range** in an array/string, contiguous longest, shortest, average or target value.
+
+There is an apparent naive or brute force solution that runs in O(N^2), O(2^N) or some other large time complexity. But using sliding window, it's usually **O(N) time and O(1) space** complexity.
+
 Example problems:
 
 - Sliding window:
@@ -324,6 +333,11 @@ Idea:
 - Dùng 2 con trỏ fast, slow cùng chạy từ đầu list.
 - Con trỏ fast sẽ chạy nhanh hơn slow. Tới khi 2 con trỏ gặp nhau thì chứng tỏ list này là DSLK vòng (cyclic linked list), tức là sẽ detect được **cyclic loop**
 
+How to identify?
+
+- This approach is quite useful when dealing with **cyclic** Linked Lists or Arrays.
+- When the problem involves something related to **cyclic data structures**, you should think about Fast & Slow Pointers pattern
+
 Example problems:
 
 - [LinkedListCycle_141](./easy/LinkedListCycle_141.java)
@@ -360,6 +374,10 @@ Idea:
     - Gán cho A là interval hiện tại và duyệt tới hết dãy
   - Sau khi duyệt tới hết dãy, nhớ add nốt A vào ans
 
+How to identify?
+
+- This approach is quite useful when dealing with **intervals**, **overlapping items** or merging intervals
+
 Example problems:
 
 - [MergeIntervals_56](./medium/MergeIntervals_56.java)
@@ -376,6 +394,10 @@ Idea:
 - Bởi vì các phần tử là unique, ta có thể exchange vị trí của chúng để chúng ở đúng vị trí
 - Ex: [8, 6, 4, 2, 3, 5, 7, 0, 1] -> [0 1 2 3 4 5 6 7 8]
 - Dùng với các bài toán: find missing number, duplicate numbers
+
+How to identify?Permalink
+
+- This approach is quite useful when dealing with numbers in a given range and asking to find the duplicates/missing ones etc
 
 Example problems:
 
@@ -705,6 +727,12 @@ Example problem:
 - [Largest Rectangle](../hackerrank/dc/largestrect/LargestRectangle2.java)
 
 ### Backtracking
+
+Là 1 dạng của recursion
+
+Giống như duyệt cây (tree traversal), Backtracking thường dùng với bài toán tìm tất cả (hoặc 1 vài) solution cho 1 bài toán bằng cách xây dựng dần dần các candidate cho mỗi solution và loại bỏ ngay 1 candidate khi nhận thấy nó KHÔNG thể dẫn tới 1 solution hợp lệ nữa ([Wikipedia](https://en.wikipedia.org/wiki/Backtracking))
+
+> Backtracking algorithms are often much faster than the brute-force search algorithm, since it eliminates many unnecessary exploration
 
 # Ref
 
