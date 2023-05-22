@@ -27,6 +27,8 @@ public class NQueens_51 {
 
         // Backtracking and update answer to res each time we find the solution
         backtracking(0); // Bắt đầu đặt Queen từ hàng đầu tiên, duyệt đến n-1 là xong
+
+        System.out.printf("Total ways: %d%n", res.size());
         return res;
     }
 
@@ -58,8 +60,10 @@ public class NQueens_51 {
      */
     private boolean isValidCandidate(int row, int col) {
         for (int i = 0; i < row; i++) {
+            // Check đường dọc
             if (rows[i] == col)
                 return false;
+            // Check đường chéo, khó nhất đoạn này thôi vì dùng mảng 1D nên hơi khó hiểu
             if (Math.abs(rows[i] - col) == Math.abs(i - row))
                 return false;
         }
@@ -82,5 +86,6 @@ public class NQueens_51 {
     public static void main(String[] args) {
         NQueens_51 app = new NQueens_51();
         System.out.println(app.solveNQueens(4));
+        System.out.println(app.solveNQueens(8));
     }
 }

@@ -728,11 +728,44 @@ Example problem:
 
 ### Backtracking
 
+https://leetcode.com/explore/learn/card/recursion-ii/472/backtracking/2793/
+
 Là 1 dạng của recursion
 
 Giống như duyệt cây (tree traversal), Backtracking thường dùng với bài toán tìm tất cả (hoặc 1 vài) solution cho 1 bài toán bằng cách xây dựng dần dần các candidate cho mỗi solution và loại bỏ ngay 1 candidate khi nhận thấy nó KHÔNG thể dẫn tới 1 solution hợp lệ nữa ([Wikipedia](https://en.wikipedia.org/wiki/Backtracking))
 
 > Backtracking algorithms are often much faster than the brute-force search algorithm, since it eliminates many unnecessary exploration
+
+Template cho backtracking (my personal template, based on [NQueens_51](./hard/backtracking/NQueens_51.java) and leetcode post), biến `candidate` ở đây là 1 giá trị có thể chấp nhận được cho vị trí `currPos`
+
+```java
+// visited is an array, or map, to determine that we've already visited or found a candidate for current position
+private void backtracking(int currPos) {
+    for (candidate : listOfCandidates) {
+        if (isValidCandidate(currPos, candidate)) {
+            // Add this candidate for this position (optional)
+            visited[currPos] = candidate;
+
+            // Check if this is the final position
+            if (currPos == visited.length) {
+                buildSolution(); // found a solution, print it or add it to position list
+            } else {
+                backtracking(currPos + 1); // go to next position and find candidate for it
+            }
+
+            // remove candidate for current position before jump to next candidate (optional)
+            visited[candidate] = -1; // this could be different, ex: visited[candidate = false
+        }
+    }
+}
+
+private void isValidCandidate(currPos, candidate) {
+    // Check with array visited[]...
+    return false;
+}
+```
+
+Thật bất ngờ, khi mà các bài backtracking đơn giản như N-Queen, Sudoku lại thuộc level hard trên leetcode
 
 # Ref
 
