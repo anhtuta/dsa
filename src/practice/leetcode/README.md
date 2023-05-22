@@ -736,14 +736,17 @@ Giống như duyệt cây (tree traversal), Backtracking thường dùng với b
 
 > Backtracking algorithms are often much faster than the brute-force search algorithm, since it eliminates many unnecessary exploration
 
-Template cho backtracking (my personal template, based on [NQueens_51](./hard/backtracking/NQueens_51.java) and leetcode post), biến `candidate` ở đây là 1 giá trị có thể chấp nhận được cho vị trí `currPos`
+Template cho backtracking (my personal template, based on [NQueens_51](./hard/backtracking/NQueens_51.java) and leetcode post)
+
+- Biến `candidate` ở đây là 1 giá trị có thể chấp nhận được cho vị trí `currPos`.
+- There are two symmetric functions that allow us to **mark the decision** (`visited[currPos] = candidate`) and **revert the decision** (`visited[currPos] = -1`).
 
 ```java
 // visited is an array, or map, to determine that we've already visited or found a candidate for current position
 private void backtracking(int currPos) {
     for (candidate : listOfCandidates) {
         if (isValidCandidate(currPos, candidate)) {
-            // Add this candidate for this position (optional)
+            // Add (or mark as visited) this candidate for this position (optional)
             visited[currPos] = candidate;
 
             // Check if this is the final position
@@ -753,8 +756,30 @@ private void backtracking(int currPos) {
                 backtracking(currPos + 1); // go to next position and find candidate for it
             }
 
-            // remove candidate for current position before jump to next candidate (optional)
-            visited[candidate] = -1; // this could be different, ex: visited[candidate = false
+            // remove (or mark as unvisited) candidate for current position before jumping to next candidate (optional)
+            visited[candidate] = -1; // this could be different, ex: visited[candidate] = false
+        }
+    }
+}
+
+// Hoặc có thể đưa build solution lên phía đầu, giống như base case của recursion, cho dễ nhìn
+private void backtracking(int currPos) {
+    // Check if this is the final position
+    if (currPos == visited.length) {
+        buildSolution(); // found a solution, print it or add it to position list
+        return;
+    }
+
+    for (candidate : listOfCandidates) {
+        if (isValidCandidate(currPos, candidate)) {
+            // Add (or mark as visited) this candidate for this position (optional)
+            visited[currPos] = candidate;
+
+            // Go to next position and find candidate for it
+            backtracking(currPos + 1);
+
+            // remove (or mark as unvisited) candidate for current position before jumping to next candidate (optional)
+            visited[candidate] = -1; // this could be different, ex: visited[candidate] = false
         }
     }
 }

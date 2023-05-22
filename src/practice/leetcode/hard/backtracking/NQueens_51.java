@@ -27,6 +27,7 @@ public class NQueens_51 {
 
         // Backtracking and update answer to res each time we find the solution
         backtracking(0); // Bắt đầu đặt Queen từ hàng đầu tiên, duyệt đến n-1 là xong
+        // backtracking2(0);
 
         System.out.printf("Total ways: %d%n", res.size());
         return res;
@@ -38,7 +39,7 @@ public class NQueens_51 {
      * 
      * Tại sao lại chậm hơn nhiều thế nhỉ
      */
-    private void backtracking(int row) {
+    public void backtracking(int row) {
         // System.out.println("Row = " + row);
         for (int col = 0; col < n; col++) { // thử với từng col trên hàng row
             if (isValidCandidate(row, col)) {
@@ -49,6 +50,28 @@ public class NQueens_51 {
                 } else {
                     backtracking(row + 1);
                 }
+                rows[row] = -1; // Bỏ Queen tại cột i của hàng row, để tiếp tục xét cột tiếp theo
+            }
+        }
+    }
+
+    /**
+     * Tách phần build solution lên phía đầu, giống như base case của recursion, cho dễ nhìn
+     * 
+     * Result ngang nhau, chỉ dễ nhìn hơn thôi
+     * Runtime 3 ms Beats 77.54%
+     * Memory 44.5 MB Beats 5.61%
+     */
+    public void backtracking2(int row) {
+        if (row == n) {
+            buildSolution();
+            return;
+        }
+
+        for (int col = 0; col < n; col++) { // thử với từng col trên hàng row
+            if (isValidCandidate(row, col)) {
+                rows[row] = col; // Đặt Queen tại cột col của hàng row
+                backtracking2(row + 1);
                 rows[row] = -1; // Bỏ Queen tại cột i của hàng row, để tiếp tục xét cột tiếp theo
             }
         }
