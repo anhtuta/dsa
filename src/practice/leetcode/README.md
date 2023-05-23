@@ -801,6 +801,14 @@ Example problems:
 - [NQueens_51](./hard/backtracking/NQueens_51.java)
 - [SudokuSolver_37](./hard/backtracking/SudokuSolver_37.java)
 
+### Divide and Conquer VS. Backtracking
+
+https://leetcode.com/explore/learn/card/recursion-ii/507/beyond-recursion/2898/
+
+- DC problem has a **sole solution**, while the backtracking problem has **unknown number of solutions**
+- Each step in the DC problem is **indispensable** to build the final solution (mỗi step là cần thiết để build final solution), while many steps in backtracking problem might **NOT** be useful to build the solution, but serve as **attempts** to search for the potential solutions
+- When building the solution in the DC algorithm, we have a **clear and predefined path**, though there might be several different manners to build the path. While in the backtracking problems, one does not know in advance the exact path to the solution
+
 # Ref
 
 - https://levelup.gitconnected.com/dont-just-leetcode-follow-the-coding-patterns-instead-4beb6a197fdb
