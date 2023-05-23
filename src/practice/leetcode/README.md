@@ -792,6 +792,15 @@ private void isValidCandidate(currPos, candidate) {
 
 Thật bất ngờ, khi mà các bài backtracking đơn giản như N-Queen, Sudoku lại thuộc level hard trên leetcode
 
+Sudoku explain:
+
+![](./images/sudoku_solver.png)
+
+Example problems:
+
+- [NQueens_51](./hard/backtracking/NQueens_51.java)
+- [SudokuSolver_37](./hard/backtracking/SudokuSolver_37.java)
+
 # Ref
 
 - https://levelup.gitconnected.com/dont-just-leetcode-follow-the-coding-patterns-instead-4beb6a197fdb
