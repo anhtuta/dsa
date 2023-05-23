@@ -25,6 +25,9 @@ public class Permutations_46 {
      * 
      * Copy method từ bài {@link NextPermutation_31}, sau đó cứ gen permutation liên tục và add vào
      * result là xong. Tổng hoán vị của 1 tập n phần tử riêng biệt là n!
+     * 
+     * Runtime 1 ms Beats 98.47%
+     * Memory 43 MB Beats 48.92%
      */
     public List<List<Integer>> permute(int[] a) {
         int totalPermutations = factorial(a.length);

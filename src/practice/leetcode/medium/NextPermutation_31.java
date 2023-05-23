@@ -15,6 +15,9 @@ import util.Utils;
  * 
  * Tuy bài này được gán tag là Two pointers, nhưng thực tế chỉ cần dùng công thức từ wikipedia là
  * xong
+ * 
+ * Runtime 0 ms Beats 100%
+ * Memory 42.9 MB Beats 52.4%
  */
 public class NextPermutation_31 {
     private int n;
