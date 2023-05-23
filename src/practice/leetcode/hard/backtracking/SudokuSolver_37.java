@@ -61,6 +61,25 @@ public class SudokuSolver_37 {
 
     /**
      * Check if character c could be placed at position [row][col]
+     * Việc khó nhất là check 3x3 sub-boxes, làm sao để tìm được sub-box mà chứa ô [row][col]?
+     * 
+     * Đầu tiên tìm region của ô đó, nó thuộc 1 trong 9 region sau:
+     * 0 0 0 | 1 1 1 | 2 2 2
+     * 0 0 0 | 1 1 1 | 2 2 2
+     * 0 0 0 | 1 1 1 | 2 2 2
+     * ------+-------+------
+     * 3 3 3 | 4 4 4 | 5 5 5
+     * 3 3 3 | 4 4 4 | 5 5 5
+     * 3 3 3 | 4 4 4 | 5 5 5
+     * ------+-------+------
+     * 6 6 6 | 7 7 7 | 8 8 8
+     * 6 6 6 | 7 7 7 | 8 8 8
+     * 6 6 6 | 7 7 7 | 8 8 8
+     * int regionRow = 3 * (row / 3); //region start row
+     * int regionCol = 3 * (col / 3); //region start col
+     * 
+     * Sau đó, for i from 0 to 8, ta sẽ xác định được vị trí của từng ô trong region đó:
+     * board[regionRow + i / 3][regionCol + i % 3]
      */
     private boolean isValidCandidate(char[][] board, int row, int col, char c) {
         for (int i = 0; i < BOARD_SIZE; i++) {
