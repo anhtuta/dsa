@@ -558,6 +558,8 @@ This is because the subproblems in divide an conquer approaches are independent 
 
 ### 10.3. From good to great. How to approach most of DP problems
 
+https://leetcode.com/problems/house-robber/solutions/156523/from-good-to-great-how-to-approach-most-of-dp-problems/
+
 Most of DP problems can be approached using the following sequence:
 
 1. Find recursive relation
@@ -574,6 +576,8 @@ Note: không phải bài nào cũng dùng được tới bước 5, tức là d�
 
 - Nếu muốn tối ưu bộ nhớ bằng cách khử đệ quy thì làm tiếp step 4
 - Nếu muốn tối ưu bộ nhớ nữa bằng cách bỏ mảng memo thì làm tiếp step 5
+
+Một ví dụ về cách tối ưu đủ tất cả các bước, time giảm từ: **Timeout -> 231 ms -> 125 ms -> 34 ms -> 15 ms**. Đó là bài [KnightDialer_935](./medium/dp/KnightDialer_935.java)
 
 ### 10.4. Cách tính mảng memo khi chuyển từ DP top down sang DP bottom up
 
