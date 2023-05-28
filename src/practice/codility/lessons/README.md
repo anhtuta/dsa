@@ -36,6 +36,7 @@ Sau khi học xong codility, hãy chuyển qua [leetcode](../../leetcode/README.
 - Mảng gồm duy nhất 1 phần tử
 - Mảng gồm duy nhất 1 phần tử = 0
 - Input = max giới hạn cho trong đề bài
+  - Giả sử input là mảng a[], length <= 10^5, thế thì cứ tạo input là mảng gồm 10^5 phần tử. Các phần tử tăng dần từ 0 -> 10^5 (thêm case giảm dần nữa). Hoặc các phần tử bằng MAX_INTEGER
 
 Nếu input là mảng, khi duyệt vòng for cần chú ý các giá trị đầu, cuối dãy (a[0], a[n-1]). Cẩn thận lỗi `ArrayIndexOutOfBoundsException`
 

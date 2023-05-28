@@ -23,6 +23,10 @@ package practice.leetcode.hard;
  * n == height.length
  * 1 <= n <= 2 * 10^4
  * 0 <= height[i] <= 10^5
+ * 
+ * =====
+ * Bài tương tự có thể dùng maxLeft, maxRight để giải:
+ * {@link practice.leetcode.easy.dp.BestTimeToBuyAndSellStock_121}
  */
 public class TrappingRainWater_42 {
     /**
@@ -81,6 +85,9 @@ public class TrappingRainWater_42 {
      * - maxLeft[i] = max(maxLeft[i - 1], height[i - 1]);
      * - maxRight[i] = Math.max(maxRight[i + 1], height[i + 1]);
      * Từ giờ thì việc tìm maxLeft hay maxRight bất kỳ chỉ tốn O(1)
+     * 
+     * Note: maxLeft[i] = max(height[0...i-1]), là thanh bar cao nhất bên trái thanh bar i, tập con này
+     * KHÔNG chứa thanh bar i nhé. Tương tự với maxRight
      * 
      * Tiếp theo, cần check nếu như cả 2 thanh bar maxLeft[i] và maxRight[i] đều lớn hơn thanh bar hiện
      * tại, thì thanh bar này chứa được nước
