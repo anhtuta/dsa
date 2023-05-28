@@ -643,6 +643,10 @@ for (int start = n - 1; start >= 0; start--) {
 
 Ex: [LongestPalindromicSubsequence_516](./medium/LongestPalindromicSubsequence_516.java)
 
+### 10.5. Dynamic Programming Patterns
+
+https://leetcode.com/discuss/general-discussion/458695/dynamic-programming-patterns
+
 ### Example problems
 
 - [HouseRobber_198](./medium/HouseRobber_198.java)
