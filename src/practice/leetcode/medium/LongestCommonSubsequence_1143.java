@@ -94,6 +94,9 @@ public class LongestCommonSubsequence_1143 {
      * Chú ý là memo[n-1][m-1] sẽ phụ thuộc vào memo[n][m], vượt quá index của text1, và text2, nên ta
      * sẽ tăng kích thước của memo lúc init: memo = new int[n+1][m+1], và hiển nhiên, memo[n][m] = 0,
      * và toàn bộ các memo[n][x1] = 0, memo[x2][m] = 0, với x1 < n, x2 < m
+     * 
+     * Runtime 30 ms Beats 68.93%
+     * Memory 50.5 MB Beats 48.29%
      */
     public int longestCommonSubsequence_DP_bottomUp_memo(String text1, String text2) {
         for (int i1 = text1.length() - 1; i1 >= 0; i1--) {
