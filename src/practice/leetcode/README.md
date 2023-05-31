@@ -5,6 +5,7 @@ This folder contains leetcode problems organized by level, and some coding patte
 Start studying at **31/3/2023** (includes both codility and leetcode), my leetcode rank at the beginning: >= `3,000,000`
 
 - Rank after 1 month: >= `1,500,000`
+- Rank after 2 months: `950,531`
 
 Note: memory complexity ở leetcode nhiều khi ko đúng lắm (time complexity cũng tương tự, nhưng chênh lệch nhau ít hơn), bằng chứng là 1 solution submit 2 lần nhưng có 2 kq khác nhau:
 
