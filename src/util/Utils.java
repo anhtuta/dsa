@@ -1,6 +1,9 @@
 package util;
 
 public class Utils {
+    private Utils() {
+    }
+
     public static void printArray(int[] a) {
         System.out.print("Array [");
         for (int i = 0; i < a.length - 1; i++) {
@@ -52,5 +55,61 @@ public class Utils {
             builder.append(s.charAt(i));
         }
         System.out.println(builder.toString());
+    }
+
+    /**
+     * Tìm phần tử lớn nhất mà NHỎ HƠN HOẶC BẰNG key
+     * Note: input a must be a SORTED array
+     * 
+     * Note: this method is NOT fully tested yet
+     * 
+     * Ref:
+     * https://github.com/anhtuta/aps/blob/master/DSA/BinarySearch/BinarySearch.cpp
+     * 
+     * @return index của phần tử đó
+     */
+    public static int binarySearchGreatestLesserOrEqual(int[] a, int key) {
+        int start = 0;
+        int end = a.length - 1;
+        int mid;
+        int ans = -1;
+        while (start <= end) {
+            mid = start + (end - start) / 2;
+            if (a[mid] <= key) {
+                start = mid + 1;
+                ans = mid;
+            } else {
+                end = mid - 1;
+            }
+        }
+        return ans;
+    }
+
+    /**
+     * Tìm phần tử nhỏ nhất mà LỚN HƠN key
+     * Note: input a must be a SORTED array
+     * 
+     * Note: this method is NOT fully tested yet
+     * 
+     * Ref:
+     * https://github.com/anhtuta/aps/blob/master/DSA/BinarySearch/BinarySearch.cpp
+     * 
+     * @return index của phần tử đó
+     */
+    public static int binarySearchSmallestGreater(int[] a, int key) {
+        int start = 0;
+        int end = a.length - 1;
+        int mid;
+        int ans = -1;
+        while (start <= end) {
+            mid = start + (end - start) / 2;
+            if (a[mid] > key) {
+                end = mid - 1;
+                ans = mid;
+            } else {
+                start = mid + 1;
+            }
+        }
+        return ans;
     }
 }
