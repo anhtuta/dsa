@@ -648,6 +648,12 @@ Ex: [LongestPalindromicSubsequence_516](./medium/LongestPalindromicSubsequence_5
 
 https://leetcode.com/discuss/general-discussion/458695/dynamic-programming-patterns
 
+Updating... Sẽ note sau khi đọc hết link trên
+
+### 10.6. Recursion nhanh hơn DP
+
+Bài [LongestPalindromicSubstring_5](./medium/LongestPalindromicSubstring_5.java), dù nghĩ ra được công thứ recursion, nhưng khi dùng memo thì vẫn chậm hơn, lý do là vì phải init memo quá nhiều lần, hoặc phải khởi tạo mảng memo 2D, 3D tốn bộ nhớ hơn nhiều so với việc call recursion.
+
 ### Example problems
 
 - [HouseRobber_198](./medium/HouseRobber_198.java)
