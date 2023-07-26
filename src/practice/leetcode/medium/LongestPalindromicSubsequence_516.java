@@ -15,6 +15,7 @@ public class LongestPalindromicSubsequence_516 {
         int ans;
         // Step 1: recursion top down nhưng bị timeout
         // ans = longestPalindromeSubseq_recursion(s, 0, s.length() - 1);
+        // ans = recursion(s, 0, s.length() - 1);
 
         // Step 2: tối ưu recursion bằng cách dùng DP top down + memo
         // memo = new int[s.length()][s.length()];
@@ -24,10 +25,12 @@ public class LongestPalindromicSubsequence_516 {
         // }
         // }
         // ans = longestPalindromeSubseq_DP_topDown(s, 0, s.length() - 1);
+        // ans = dp_topDown(s, 0, s.length() - 1);
 
         // Step 3: khử đệ quy bằng cách dùng DP bottom up + memo
         memo = new int[s.length()][s.length()];
-        ans = longestPalindromeSubseq_DP_bottomUp_memo_noLog(s);
+        // ans = longestPalindromeSubseq_DP_bottomUp_memo_noLog(s);
+        ans = dP_bottomUp_memo(s);
 
         // Step 4: tối ưu hơn nữa (tối ưu memory) bằng việc dùng DP bottom up without memo
         // Khả năng cao bài này cũng ko làm được bằng bottom up + N variables, giống bài UniquePaths_62
@@ -139,6 +142,50 @@ public class LongestPalindromicSubsequence_516 {
                     memo[start][end] = 2 + memo[start + 1][end - 1];
                 } else {
                     memo[start][end] = Math.max(memo[start][end - 1], memo[start + 1][end]);
+                }
+            }
+        }
+        return memo[0][s.length() - 1];
+    }
+
+    /**
+     * Re-practice
+     */
+    public int recursion(String s, int start, int end) {
+        if (start == end)
+            return 1;
+        if (start > end)
+            return 0;
+        if (s.charAt(start) == s.charAt(end)) {
+            return 2 + recursion(s, start + 1, end - 1);
+        } else {
+            return Math.max(recursion(s, start + 1, end), recursion(s, start, end - 1));
+        }
+    }
+
+    public int dp_topDown(String s, int start, int end) {
+        if (start == end)
+            return 1;
+        if (start > end)
+            return 0;
+        if (memo[start][end] == -1) {
+            if (s.charAt(start) == s.charAt(end)) {
+                memo[start][end] = 2 + dp_topDown(s, start + 1, end - 1);
+            } else {
+                memo[start][end] = Math.max(dp_topDown(s, start + 1, end), dp_topDown(s, start, end - 1));
+            }
+        }
+        return memo[start][end];
+    }
+
+    public int dP_bottomUp_memo(String s) {
+        for (int i = s.length() - 1; i >= 0; i--) {
+            memo[i][i] = 1;
+            for (int j = i + 1; j < s.length(); j++) {
+                if (s.charAt(i) == s.charAt(j)) {
+                    memo[i][j] = 2 + memo[i + 1][j - 1];
+                } else {
+                    memo[i][j] = Math.max(memo[i][j - 1], memo[i + 1][j]);
                 }
             }
         }

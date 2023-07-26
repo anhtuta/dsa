@@ -59,8 +59,29 @@ public class ContainerWithMostWater_11 {
         return max;
     }
 
+    /**
+     * Re-practice
+     */
+    public int maxArea2(int[] height) {
+        int res = -1;
+        int i = 0, j = height.length - 1;
+        int area;
+        while (i < j) {
+            if (height[i] > height[j]) {
+                area = height[j] * (j - i);
+                j--;
+            } else {
+                area = height[i] * (j - i);
+                i++;
+            }
+            res = Math.max(res, area);
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
         ContainerWithMostWater_11 app = new ContainerWithMostWater_11();
         System.out.println(app.maxArea(new int[] {1, 8, 6, 2, 5, 4, 8, 3, 7})); // 49
+        System.out.println(app.maxArea2(new int[] {1, 8, 6, 2, 5, 4, 8, 3, 7})); // 49
     }
 }
