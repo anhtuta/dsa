@@ -319,6 +319,8 @@ https://leetcode.com/explore/interview/card/leetcodes-interview-crash-course-dat
     - Do ko quan tâm đến order nên có thể **sort** input
     - Sau khi sort có thể dùng các pattern: two pointers, sliding window, greedy, backtracking...
 
+Note: về pattern prefix sum, xem thêm bên [Codility](../codility/lessons/README.md#lesson-5-prefix-sums)
+
 ## 5. Fast and slow pointers
 
 Do pattern này ở leetcode yêu cầu account premium, nên từ nay về sau, pattern nào trên đó premium thì sẽ dùng link khác để tham khảo

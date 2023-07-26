@@ -166,6 +166,40 @@ Nếu như KHÔNG tính theo cách trong slide, thì sẽ đơn giản hơn, b�
 
 Tóm lại, tính theo cách nào cũng được, tuỳ bài toán
 
+### Prefix max
+
+Một biến thể của prefix sum có thể gọi là prefix max (do t tự đặt tên :v), vẫn mảng input a[] ở trên, ta sẽ tính toán 2 mảng maxLeft[] và maxRight[] như sau:
+
+- maxLeft[i] = biggest element on the left of element a[i]
+- maxRight[i] = biggest element on the right of element a[i]
+
+Nói cách khác:
+
+- maxLeft[i] = max(a[0], a[1], ... , a[i-1])
+- maxRight[i] = max(a[i+1], a[i+2], ... , a[n-1])
+
+Hiển nhiên ta sẽ ko quan tâm đến 2 giá trị maxLeft[0] và maxRight[n-1] (vì bên trái a[0] và bên phải a[n-1] làm gì còn phần tử nào nữa). Để tính toán 2 mảng này, chỉ cần 1 vòng for thôi, vì ta có thể thấy: `maxLeft[i] = max(maxLeft[i - 1], a[i - 1]);`. Cụ thể:
+
+```java
+int n = a.length;
+int[] maxLeft = new int[n]; // maxLeft[i] = highest bar on the left of bar a[i]
+int[] maxRight = new int[n];
+
+maxLeft[1] = a[0];
+maxRight[n - 2] = a[n - 1];
+int i = 2, j = n - 3;
+
+// Definitely, i and j will reach n-1 and 0 respectively and simultaneously
+while (i <= n - 1 && j >= 0) {
+    maxLeft[i] = Math.max(maxLeft[i - 1], a[i - 1]);
+    maxRight[j] = Math.max(maxRight[j + 1], a[j + 1]);
+    i++;
+    j--;
+}
+```
+
+Example problem: [TrappingRainWater_42](../../leetcode/hard/TrappingRainWater_42.java)
+
 ## Lesson 8: Leader (dominator)
 
 Cho dãy a[] độ dài n, leader của dãy là phần tử xuất hiện NHIỀU HƠN n/2 lần. Dễ thấy mỗi dãy chỉ có tối đa 1 leader, vì nếu có 2, thì tổng số lượng phần tử sẽ nhiều hơn `2*n/2 = n`, mâu thuẫn với điều kiện ban đầu

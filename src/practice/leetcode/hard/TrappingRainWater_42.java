@@ -92,6 +92,9 @@ public class TrappingRainWater_42 {
      * Tiếp theo, cần check nếu như cả 2 thanh bar maxLeft[i] và maxRight[i] đều lớn hơn thanh bar hiện
      * tại, thì thanh bar này chứa được nước
      * 
+     * Optimize: we can use single for loop to calculate both maxLeft and maxRight. See method trap2
+     * below
+     * 
      * Result:
      * Runtime 1 ms Beats 99.13%
      * Memory 43.1 MB Beats 55.65%
@@ -169,9 +172,46 @@ public class TrappingRainWater_42 {
         return water;
     }
 
+    /**
+     * Re-practice
+     * Idea: similar to trap_extraSpace, but use only single for loop to calculate both maxLeft and
+     * maxRight
+     */
+    public int trap2(int[] height) {
+        int n = height.length;
+        if (n < 3)
+            return 0;
+        int water = 0;
+
+        // Of course, we NOT care about maxLeft[0] and maxHeight[n-1]
+        int[] maxLeft = new int[n]; // maxLeft[i] = highest bar on the left of bar height[i]
+        int[] maxRight = new int[n];
+
+        maxLeft[1] = height[0];
+        maxRight[n - 2] = height[n - 1];
+        int i = 2, j = n - 3;
+
+        // Definitely, i and j will reach n-1 and 0 respectively and simultaneously
+        while (i <= n - 1 && j >= 0) {
+            maxLeft[i] = Math.max(maxLeft[i - 1], height[i - 1]);
+            maxRight[j] = Math.max(maxRight[j + 1], height[j + 1]);
+            i++;
+            j--;
+        }
+
+        for (i = 1; i < n - 1; i++) {
+            if (maxLeft[i] > height[i] && maxRight[i] > height[i])
+                water += Math.min(maxLeft[i], maxRight[i]) - height[i];
+        }
+
+        return water;
+    }
+
     public static void main(String[] args) {
         TrappingRainWater_42 app = new TrappingRainWater_42();
         System.out.println(app.trap(new int[] {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1})); // 6
         System.out.println(app.trap(new int[] {4, 2, 0, 3, 2, 5})); // 9
+        System.out.println(app.trap2(new int[] {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1})); // 6
+        System.out.println(app.trap2(new int[] {4, 2, 0, 3, 2, 5})); // 9
     }
 }
