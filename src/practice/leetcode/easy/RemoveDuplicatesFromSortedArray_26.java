@@ -4,6 +4,8 @@ import util.Utils;
 
 /**
  * https://leetcode.com/problems/remove-duplicates-from-sorted-array/
+ * 
+ * What's next: {@link practice.leetcode.medium.twopointers.RemoveDuplicatesFromSortedArrayII_80}
  */
 public class RemoveDuplicatesFromSortedArray_26 {
     /**
