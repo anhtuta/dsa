@@ -398,13 +398,14 @@ Idea:
 - Ex: [8, 6, 4, 2, 3, 5, 7, 0, 1] -> [0 1 2 3 4 5 6 7 8]
 - Dùng với các bài toán: find missing number, duplicate numbers
 
-How to identify?Permalink
+How to identify?
 
 - This approach is quite useful when dealing with numbers in a given range and asking to find the duplicates/missing ones etc
 
 Example problems:
 
 - [MissingNumber_268](./easy/MissingNumber_268.java)
+- [FindDuplicateNumber_287](./medium/sort/FindDuplicateNumber_287.java)
 
 ## 8. In-place Reversal of a Linked List
 
