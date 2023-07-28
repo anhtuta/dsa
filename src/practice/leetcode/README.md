@@ -768,7 +768,7 @@ private void backtracking(int currPos) {
             visited[currPos] = candidate;
 
             // Check if this is the final position
-            if (currPos == visited.length) {
+            if (currPos == visited.length - 1) {
                 buildSolution(); // found a solution, print it or add it to position list
             } else {
                 backtracking(currPos + 1); // go to next position and find candidate for it
