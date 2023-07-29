@@ -16,8 +16,10 @@ public class HappyNumber_202 {
         int slow = n, fast = n;
         while (true) {
             slow = sumOfSquareDigits(slow);
-            fast = sumOfSquareDigits(fast);
-            fast = sumOfSquareDigits(fast);
+
+            // fast = sumOfSquareDigits(fast);
+            // fast = sumOfSquareDigits(fast);
+            fast = sumOfSquareDigits(sumOfSquareDigits(fast)); // more concise
             if (fast == 1 || slow == fast)
                 break;
         }
