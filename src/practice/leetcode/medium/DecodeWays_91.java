@@ -60,16 +60,15 @@ public class DecodeWays_91 {
         // ans = recursion(s, 0);
 
         // Step 2: tối ưu recursion bằng cách dùng DP top down + memo
-        memo = new int[s.length()];
-        for (int i = 0; i < s.length(); i++) {
-            memo[i] = -1;
-        }
-        ans = dp_topDown(s, 0);
-
-        //////// Mệt quá, chưa muốn nghĩ ra các bottom up, bao giờ rảnh sẽ làm tiếp...
-        // Step 3: khử đệ quy bằng cách dùng DP bottom up + memo
         // memo = new int[s.length()];
-        // ans = dp_bottomUp_memo(s);
+        // for (int i = 0; i < s.length(); i++) {
+        // memo[i] = -1;
+        // }
+        // ans = dp_topDown(s, 0);
+
+        // Step 3: khử đệ quy bằng cách dùng DP bottom up + memo
+        memo = new int[s.length() + 2];
+        ans = dp_bottomUp_memo(s);
 
         // Step 4: tối ưu hơn nữa (tối ưu memory) bằng việc dùng DP bottom up without memo
         // Khả năng bài này ko làm được theo cách này
@@ -176,6 +175,38 @@ public class DecodeWays_91 {
         }
 
         return memo[pos];
+    }
+
+    /**
+     * Runtime 1 ms Beats 95.10%
+     * Memory 40.5 MB Beats 95.59%
+     * 
+     * Ko cải thiện hơn là mấy, chắc do input bé nên vậy, chứ nếu input lớn thì việc khử đệ quy sẽ nhanh
+     * hơn nhiều
+     */
+    public int dp_bottomUp_memo(String s) {
+        // we have traversed all characters of s, this is a decode way (an answer)
+        memo[s.length()] = 1;
+
+        // Out of range
+        memo[s.length() + 1] = 0;
+
+        for (int pos = s.length() - 1; pos >= 0; pos--) {
+            // Invalid, no character encoded to a number that starts with 0
+            if (s.charAt(pos) == '0')
+                continue;
+
+            if (s.charAt(pos) > '2')
+                memo[pos] = memo[pos + 1];
+
+            else if (s.charAt(pos) == '2' && pos <= s.length() - 2 && s.charAt(pos + 1) >= '7')
+                memo[pos] = memo[pos + 2];
+
+            else
+                memo[pos] = memo[pos + 1] + memo[pos + 2];
+        }
+
+        return memo[0];
     }
 
     public static void main(String[] args) {
